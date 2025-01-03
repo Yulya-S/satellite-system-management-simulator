@@ -1,9 +1,10 @@
+Button
+Label
 VSlider
 Node3D
 RigidBody3D
 CollisionShape3D
 Sprite3D
-Label
 CanvasLayer
 Camera3D
 Area3D

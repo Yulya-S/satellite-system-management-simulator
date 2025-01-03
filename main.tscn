@@ -28,7 +28,7 @@ shadow_enabled = true
 environment = SubResource("Environment_j3te8")
 
 [node name="CameraNode" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0127945, 0)
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0.0127945, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.22155e-06, 27.9458)
@@ -77,11 +77,36 @@ text = "0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VSlider" type="VSlider" parent="CameraNode/Camera3D/CanvasLayer"]
-offset_left = 1115.0
-offset_top = 16.0
-offset_right = 1131.0
-offset_bottom = 585.0
+[node name="Button" type="Button" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1108.0
+offset_top = 8.0
+offset_right = 1141.0
+offset_bottom = 41.0
+text = "X"
+
+[node name="Label" type="Label" parent="CameraNode/Camera3D/CanvasLayer/Button"]
+layout_mode = 0
+offset_left = -276.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = 26.0
+text = "Изменение поворота камеры по:"
+horizontal_alignment = 2
+
+[node name="Plane_values" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 804.0
+offset_top = 617.0
+offset_right = 1142.0
+offset_bottom = 640.0
+text = "x: 270, y: 0"
+horizontal_alignment = 2
+
+[node name="center" type="Button" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1015.0
+offset_top = 46.0
+offset_right = 1141.0
+offset_bottom = 77.0
+text = "Центрировать"
 
 [node name="starlink" parent="." instance=ExtResource("2_08oux")]
 
@@ -90,4 +115,5 @@ script = ExtResource("3_na1ii")
 
 [connection signal="drag_ended" from="CameraNode/Camera3D/CanvasLayer/count" to="system" method="_on_count_drag_ended"]
 [connection signal="drag_ended" from="CameraNode/Camera3D/CanvasLayer/speed" to="system" method="_on_speed_drag_ended"]
-[connection signal="value_changed" from="CameraNode/Camera3D/CanvasLayer/VSlider" to="." method="_on_v_slider_value_changed"]
+[connection signal="button_down" from="CameraNode/Camera3D/CanvasLayer/Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="CameraNode/Camera3D/CanvasLayer/center" to="." method="_on_center_button_down"]
