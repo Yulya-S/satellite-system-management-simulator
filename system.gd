@@ -1,18 +1,23 @@
 extends Node3D
 @onready var count = $"../CameraNode/Camera3D/CanvasLayer/count"
 @onready var speed_multiplier = $"../CameraNode/Camera3D/CanvasLayer/speed"
+@export var mod: bool = false # создание объектов в одной точке или в рандомных
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var cubsat = load("res://objects/cubsat.tscn")
-	for i in range(count.value):
-		add_child(cubsat.instantiate())
-		get_children()[-1].speed_multiplier = speed_multiplier.value
+	
+	if not mod:
+		for i in range(count.value):
+			add_child(cubsat.instantiate())
+			get_children()[-1].speed_multiplier = speed_multiplier.value
+	else:
+		pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
 	pass
 
+# изменение количества объектов
 func _on_count_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		if len(get_children()) < count.value:
@@ -23,7 +28,8 @@ func _on_count_drag_ended(value_changed: bool) -> void:
 		else:
 			while len(get_children()) > count.value:
 				remove_child(get_children()[-1])
-			
+
+# изменение скорости симуляции
 func _on_speed_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		for i in get_children():
