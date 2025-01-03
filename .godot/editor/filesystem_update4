@@ -1,0 +1,5 @@
+res://main.tscn
+res://objects/cubsat.tscn
+res://system.gd
+res://main.gd
+res://objects/objects.gd

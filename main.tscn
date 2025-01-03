@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://dl17otaftrv5k"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_h7kb4"]
+[ext_resource type="PackedScene" uid="uid://jlmq31ufbh3h" path="res://models/starlink.glb" id="2_08oux"]
+[ext_resource type="Script" path="res://system.gd" id="3_na1ii"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e1nrf"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_26ko1"]
+sky_material = SubResource("ProceduralSkyMaterial_e1nrf")
+
+[sub_resource type="Environment" id="Environment_j3te8"]
+background_mode = 2
+sky = SubResource("Sky_26ko1")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="main" type="Node3D"]
+script = ExtResource("1_h7kb4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j3te8")
+
+[node name="CameraNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0127945, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.22155e-06, 27.9458)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CameraNode/Camera3D"]
+
+[node name="FPS" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="count" type="VSlider" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 48.0
+offset_top = 59.0
+offset_right = 64.0
+offset_bottom = 518.0
+min_value = 5.0
+value = 5.0
+
+[node name="Label" type="Label" parent="CameraNode/Camera3D/CanvasLayer/count"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = 464.0
+offset_right = 29.0
+offset_bottom = 487.0
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="speed" type="VSlider" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 19.0
+offset_top = 59.0
+offset_right = 35.0
+offset_bottom = 518.0
+max_value = 10.0
+value = 1.0
+
+[node name="Label" type="Label" parent="CameraNode/Camera3D/CanvasLayer/speed"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = 464.0
+offset_right = 29.0
+offset_bottom = 487.0
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSlider" type="VSlider" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1115.0
+offset_top = 16.0
+offset_right = 1131.0
+offset_bottom = 585.0
+
+[node name="starlink" parent="." instance=ExtResource("2_08oux")]
+
+[node name="system" type="Node3D" parent="."]
+script = ExtResource("3_na1ii")
+
+[connection signal="drag_ended" from="CameraNode/Camera3D/CanvasLayer/count" to="system" method="_on_count_drag_ended"]
+[connection signal="drag_ended" from="CameraNode/Camera3D/CanvasLayer/speed" to="system" method="_on_speed_drag_ended"]
+[connection signal="value_changed" from="CameraNode/Camera3D/CanvasLayer/VSlider" to="." method="_on_v_slider_value_changed"]
