@@ -3,3 +3,6 @@ res://objects/cubsat.tscn
 res://system.gd
 res://main.gd
 res://objects/objects.gd
+res://camera_3d.gd
+res://developer_console.tscn
+res://developer_console.gd

@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dee16gr00twp"]
+
+[ext_resource type="Script" path="res://developer_console.gd" id="1_pk84t"]
+
+[node name="developerConsole" type="CanvasLayer"]
+script = ExtResource("1_pk84t")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.458824)
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 1162.0
+offset_bottom = 661.0
+color = Color(0.133196, 0.133196, 0.133196, 1)
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 14.0
+offset_top = 18.0
+offset_right = 1140.0
+offset_bottom = 53.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 60.0
+offset_right = 1140.0
+offset_bottom = 633.0

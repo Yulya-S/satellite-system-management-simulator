@@ -1,11 +1,14 @@
-Button
+RichTextLabel
 Label
+TextEdit
+ColorRect
+CanvasLayer
+CollisionShape3D
+Button
 VSlider
 Node3D
 RigidBody3D
-CollisionShape3D
 Sprite3D
-CanvasLayer
 Camera3D
 Area3D
 Area2D

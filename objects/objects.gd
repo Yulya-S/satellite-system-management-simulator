@@ -9,13 +9,12 @@ func _ready() -> void:
 	calculation_parameters()
 
 # расчеты параметров
-func calculation_parameters(new_radius: int = -1):
-	if new_radius < 0:
-		radius = randi_range(50, 200)
-		t = randf_range(0.0, 2.3)
-		speed = randf_range(0.001, 0.01)
-	else:
-		pass
+func calculation_parameters(new_radius: int = -1, new_t: int = -1):
+	if new_radius < 0: radius = randi_range(50, 200)
+	else: radius = new_radius
+	if new_t < 0: t = randf_range(0.0, 2.3)
+	else: t = new_t
+	speed = randf_range(0.001, 0.01)		
 
 
 func _process(delta: float) -> void:

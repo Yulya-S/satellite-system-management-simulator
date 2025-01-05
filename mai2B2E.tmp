@@ -44,6 +44,25 @@ process_mode = 1
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="count" type="VSlider" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 48.0
+offset_top = 59.0
+offset_right = 64.0
+offset_bottom = 518.0
+min_value = 5.0
+value = 5.0
+
+[node name="Label" type="Label" parent="CameraNode/Camera3D/CanvasLayer/count"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = 464.0
+offset_right = 29.0
+offset_bottom = 487.0
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="speed" type="VSlider" parent="CameraNode/Camera3D/CanvasLayer"]
 offset_left = 19.0
 offset_top = 59.0
@@ -99,6 +118,7 @@ text = "Центрировать"
 [node name="system" type="Node3D" parent="."]
 script = ExtResource("3_na1ii")
 
+[connection signal="drag_ended" from="CameraNode/Camera3D/CanvasLayer/count" to="system" method="_on_count_drag_ended"]
 [connection signal="drag_ended" from="CameraNode/Camera3D/CanvasLayer/speed" to="system" method="_on_speed_drag_ended"]
 [connection signal="button_down" from="CameraNode/Camera3D/CanvasLayer/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="CameraNode/Camera3D/CanvasLayer/center" to="." method="_on_center_button_down"]

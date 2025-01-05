@@ -7,7 +7,7 @@ func _ready() -> void:
 	# изначальный поворот камеры над системой
 	$CameraNode.rotation_degrees.x = 270
 	$CameraNode.rotation_degrees.y = 0
-	CameraNode.get_child(4).text = "x: " + str($CameraNode.rotation_degrees.x)\
+	CameraNode.get_child(3).text = "x: " + str($CameraNode.rotation_degrees.x)\
 									+ ", y: " + str($CameraNode.rotation_degrees.y)
 
 func _input(event: InputEvent) -> void:
@@ -19,14 +19,13 @@ func _input(event: InputEvent) -> void:
 		$CameraNode.rotation_degrees[plane] -=  turning_speed
 		if $CameraNode.rotation_degrees[plane] < 0:
 			$CameraNode.rotation_degrees[plane] = 360
-	CameraNode.get_child(4).text = "x: " + str($CameraNode.rotation_degrees.x)\
+	CameraNode.get_child(3).text = "x: " + str($CameraNode.rotation_degrees.x)\
 									+ ", y: " + str($CameraNode.rotation_degrees.y)
 
 func _process(delta: float) -> void:
 	var fps = Performance.get_monitor(Performance.TIME_FPS)
 	CameraNode.get_child(0).text = "FPS: " + str(fps)
 	CameraNode.get_child(1).get_child(0).text = str(CameraNode.get_child(1).value)
-	CameraNode.get_child(2).get_child(0).text = str(CameraNode.get_child(2).value)
 
 # переключение
 func _on_button_button_down() -> void:
