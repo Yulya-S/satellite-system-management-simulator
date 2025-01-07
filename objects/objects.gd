@@ -14,7 +14,7 @@ func calculation_parameters(new_radius: int = -1, new_t: int = -1):
 	else: radius = new_radius
 	if new_t < 0: t = randf_range(0.0, 2.3)
 	else: t = new_t
-	speed = randf_range(0.001, 0.01)		
+	#speed = randf_range(0.001, 0.01)		
 
 
 func _process(delta: float) -> void:
@@ -23,6 +23,10 @@ func _process(delta: float) -> void:
 	var y = radius * sin(t) + radius
 	var x1 = radius * cos(t + 0.1) + radius
 	var y1 = radius * sin(t + 0.1) + radius
+	
+	var MG = 1.
+	var e = 1
+	speed = sqrt(2 * ((MG / radius) * 10 + e)) / 100
 	
 	# изменение поворота объекта
 	t += speed_multiplier * speed
