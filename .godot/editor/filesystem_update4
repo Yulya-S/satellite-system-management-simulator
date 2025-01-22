@@ -1,4 +1,6 @@
-res://main.tscn
-res://objects/objects.gd
-res://objects/cubsat.tscn
-res://developer_console.tscn
+res://scenes/main.tscn
+res://scenes/objects/cubsat.tscn
+res://scenes/interface/developer_console.tscn
+res://scenes/system.tscn
+res://scenes/interface/video_options.tscn
+res://scripts/video_options.gd

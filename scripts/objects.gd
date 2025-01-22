@@ -2,7 +2,6 @@ extends Node3D
 
 var radius = 100 # растояние от центра
 var t = 0.0 # текущий поворот
-var speed_multiplier = 1 # множитель скорости движения
 var speed = 0.0 # скорость движения объекта
 
 func _ready() -> void:
@@ -29,7 +28,7 @@ func _process(delta: float) -> void:
 	speed = sqrt(2 * ((MG / radius) * 10 + e)) / 100
 	
 	# изменение поворота объекта
-	t += speed_multiplier * speed
+	t += Settings.VideoSimulation_speed * speed
 	if t > 2 * PI:
 		t = 0
 	

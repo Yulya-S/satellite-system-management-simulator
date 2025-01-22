@@ -34,7 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0.012
 
 [node name="Camera3D" type="Camera3D" parent="CameraNode"]
 process_mode = 3
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.22155e-06, 27.9458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 script = ExtResource("2_r47gv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="CameraNode/Camera3D"]
@@ -64,27 +64,34 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="CameraNode/Camera3D/CanvasLayer"]
-offset_left = 1108.0
-offset_top = 8.0
+offset_left = 858.0
+offset_top = 9.0
 offset_right = 1141.0
-offset_bottom = 41.0
-text = "X"
+offset_bottom = 42.0
+text = "Изменить значение X"
 
-[node name="Label" type="Label" parent="CameraNode/Camera3D/CanvasLayer/Button"]
-layout_mode = 0
-offset_left = -276.0
-offset_top = 3.0
-offset_right = -6.0
-offset_bottom = 26.0
-text = "Изменение поворота камеры по:"
+[node name="Plane_x" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1035.0
+offset_top = 575.0
+offset_right = 1142.0
+offset_bottom = 598.0
+text = "x = 270"
 horizontal_alignment = 2
 
-[node name="Plane_values" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
-offset_left = 804.0
+[node name="Plane_y" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1035.0
+offset_top = 596.0
+offset_right = 1142.0
+offset_bottom = 619.0
+text = "y = 0"
+horizontal_alignment = 2
+
+[node name="Plane_zoom" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1035.0
 offset_top = 617.0
 offset_right = 1142.0
 offset_bottom = 640.0
-text = "x: 270, y: 0"
+text = "zoom = 20"
 horizontal_alignment = 2
 
 [node name="center" type="Button" parent="CameraNode/Camera3D/CanvasLayer"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://djag35xl6v5pk"]
+
+[ext_resource type="Script" path="res://scripts/objects.gd" id="1_5svsh"]
+[ext_resource type="PackedScene" uid="uid://dgb7klefls7ww" path="res://models/cubsat.glb" id="2_8n8h5"]
+
+[node name="Cubsat" type="Node3D"]
+script = ExtResource("1_5svsh")
+
+[node name="cubsat" parent="." instance=ExtResource("2_8n8h5")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://dl17otaftrv5k"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_h7kb4"]
+[ext_resource type="PackedScene" uid="uid://jlmq31ufbh3h" path="res://models/starlink.glb" id="2_08oux"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="2_r47gv"]
+[ext_resource type="Script" path="res://system.gd" id="3_na1ii"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e1nrf"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_26ko1"]
+sky_material = SubResource("ProceduralSkyMaterial_e1nrf")
+
+[sub_resource type="Environment" id="Environment_j3te8"]
+background_mode = 2
+sky = SubResource("Sky_26ko1")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="main" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_h7kb4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_j3te8")
+
+[node name="CameraNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0.0127945, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraNode"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+script = ExtResource("2_r47gv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CameraNode/Camera3D"]
+process_mode = 1
+
+[node name="FPS" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="speed" type="VSlider" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 19.0
+offset_top = 59.0
+offset_right = 35.0
+offset_bottom = 518.0
+max_value = 10.0
+value = 1.0
+
+[node name="Label" type="Label" parent="CameraNode/Camera3D/CanvasLayer/speed"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = 464.0
+offset_right = 29.0
+offset_bottom = 487.0
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 858.0
+offset_top = 9.0
+offset_right = 1141.0
+offset_bottom = 42.0
+text = "Изменить значение X"
+
+[node name="Plane_x" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1035.0
+offset_top = 575.0
+offset_right = 1142.0
+offset_bottom = 598.0
+text = "x = 270"
+horizontal_alignment = 2
+
+[node name="Plane_y" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1035.0
+offset_top = 596.0
+offset_right = 1142.0
+offset_bottom = 619.0
+text = "y = 0"
+horizontal_alignment = 2
+
+[node name="Plane_zoom" type="Label" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1035.0
+offset_top = 617.0
+offset_right = 1142.0
+offset_bottom = 640.0
+text = "zoom = 20"
+horizontal_alignment = 2
+
+[node name="center" type="Button" parent="CameraNode/Camera3D/CanvasLayer"]
+offset_left = 1015.0
+offset_top = 46.0
+offset_right = 1141.0
+offset_bottom = 77.0
+text = "Центрировать"
+
+[node name="starlink" parent="." instance=ExtResource("2_08oux")]
+
+[node name="system" type="Node3D" parent="."]
+script = ExtResource("3_na1ii")
+
+[connection signal="drag_ended" from="CameraNode/Camera3D/CanvasLayer/speed" to="system" method="_on_speed_drag_ended"]
+[connection signal="button_down" from="CameraNode/Camera3D/CanvasLayer/Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="CameraNode/Camera3D/CanvasLayer/center" to="." method="_on_center_button_down"]

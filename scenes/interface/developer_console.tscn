@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dee16gr00twp"]
 
-[ext_resource type="Script" path="res://developer_console.gd" id="1_pk84t"]
+[ext_resource type="Script" path="res://scripts/developer_console.gd" id="1_vfbvu"]
 
 [node name="developerConsole" type="CanvasLayer"]
-script = ExtResource("1_pk84t")
+script = ExtResource("1_vfbvu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0.458824)

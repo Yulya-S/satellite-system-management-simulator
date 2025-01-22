@@ -1,0 +1,446 @@
+[gd_scene load_steps=2 format=3 uid="uid://c581h6fd8bwbu"]
+
+[ext_resource type="Script" path="res://scripts/video_options.gd" id="1_cvdff"]
+
+[node name="Video_options" type="VBoxContainer"]
+offset_right = 347.0
+offset_bottom = 325.0
+theme_override_constants/separation = 40
+script = ExtResource("1_cvdff")
+
+[node name="Video" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Label" type="Label" parent="Video"]
+layout_mode = 0
+offset_top = -21.0
+offset_right = 177.0
+offset_bottom = 2.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Настройки отображения"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 20.0
+offset_right = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="SimulationSpeed" type="HSlider" parent="Video/VBoxContainer"]
+modulate = Color(0.368627, 0.156863, 0.109804, 1)
+layout_mode = 2
+max_value = 10.0
+value = 1.0
+
+[node name="value" type="Label" parent="Video/VBoxContainer/SimulationSpeed"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "10"
+vertical_alignment = 1
+
+[node name="name" type="Label" parent="Video/VBoxContainer/SimulationSpeed"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_top = -15.0
+offset_right = 85.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Скорость симуляции"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RotationX" type="HSlider" parent="Video/VBoxContainer"]
+modulate = Color(0.368468, 0.158817, 0.111436, 1)
+layout_mode = 2
+max_value = 360.0
+step = 5.0
+value = 270.0
+
+[node name="value" type="Label" parent="Video/VBoxContainer/RotationX"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "10"
+vertical_alignment = 1
+
+[node name="name" type="Label" parent="Video/VBoxContainer/RotationX"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_top = -15.0
+offset_right = 85.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Поворот по X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RotationY" type="HSlider" parent="Video/VBoxContainer"]
+modulate = Color(0.368627, 0.156863, 0.109804, 1)
+layout_mode = 2
+max_value = 360.0
+step = 5.0
+
+[node name="value" type="Label" parent="Video/VBoxContainer/RotationY"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "10"
+vertical_alignment = 1
+
+[node name="name" type="Label" parent="Video/VBoxContainer/RotationY"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_top = -15.0
+offset_right = 85.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Поворот по Y"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scale" type="HSlider" parent="Video/VBoxContainer"]
+modulate = Color(0.368627, 0.156863, 0.109804, 1)
+layout_mode = 2
+min_value = 10.0
+max_value = 200.0
+step = 5.0
+value = 20.0
+
+[node name="value" type="Label" parent="Video/VBoxContainer/Scale"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "10"
+vertical_alignment = 1
+
+[node name="name" type="Label" parent="Video/VBoxContainer/Scale"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_top = -15.0
+offset_right = 85.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Расстояние до центра"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reset_turn" type="Button" parent="Video"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.5
+offset_top = -35.0
+offset_right = 114.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Сбросить поворот"
+
+[node name="Adding" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Label" type="Label" parent="Adding"]
+layout_mode = 0
+offset_top = -21.0
+offset_right = 177.0
+offset_bottom = 2.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Добавление объекта"
+
+[node name="Message" type="Label" parent="Adding"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -143.0
+offset_top = -46.0
+offset_right = 145.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.592157, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Adding"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 19.0
+offset_right = 290.0
+offset_bottom = 100.0
+theme_override_constants/separation = 5
+
+[node name="Radius" type="TextEdit" parent="Adding/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "20"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Adding/VBoxContainer/Radius"]
+layout_mode = 0
+offset_left = -101.0
+offset_right = -3.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Радиус"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PositionOnCircle" type="TextEdit" parent="Adding/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "0"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Adding/VBoxContainer/PositionOnCircle"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -6.0
+offset_right = -3.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 10
+text = "Положение на окружности"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Adding"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -33.0
+offset_right = 115.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Добавить"
+
+[node name="Add_pack" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 141)
+layout_mode = 2
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Label" type="Label" parent="Add_pack"]
+layout_mode = 0
+offset_top = -21.0
+offset_right = 177.0
+offset_bottom = 2.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Добавить несколько объектов"
+
+[node name="Message" type="Label" parent="Add_pack"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -143.0
+offset_top = -46.0
+offset_right = 145.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.592157, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Add_pack"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 19.0
+offset_right = 290.0
+offset_bottom = 100.0
+theme_override_constants/separation = 5
+
+[node name="Count" type="TextEdit" parent="Add_pack/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "10"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Add_pack/VBoxContainer/Count"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -4.0
+offset_right = -3.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 10
+text = "Количество объектов"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Start_value" type="TextEdit" parent="Add_pack/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "100"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Add_pack/VBoxContainer/Start_value"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -4.0
+offset_right = -3.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 10
+text = "Отступ от центра"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Step" type="TextEdit" parent="Add_pack/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "100"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Add_pack/VBoxContainer/Step"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -6.0
+offset_right = -3.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 10
+text = "Расстояние между объектами"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Add_pack"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -33.0
+offset_right = 115.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Добавить"
+
+[connection signal="value_changed" from="Video/VBoxContainer/SimulationSpeed" to="." method="_on_simulation_speed_value_changed"]
+[connection signal="value_changed" from="Video/VBoxContainer/RotationX" to="." method="_on_rotation_x_value_changed"]
+[connection signal="value_changed" from="Video/VBoxContainer/RotationY" to="." method="_on_rotation_y_value_changed"]
+[connection signal="value_changed" from="Video/VBoxContainer/Scale" to="." method="_on_scale_value_changed"]
+[connection signal="button_down" from="Video/Reset_turn" to="." method="_on_reset_turn_button_down"]
+[connection signal="button_down" from="Adding/Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="Add_pack/Button" to="." method="_on_add_pack_button_down"]

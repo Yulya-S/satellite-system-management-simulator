@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://douqqili8ko0o"]
+
+[ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_ywrwi"]
+[ext_resource type="PackedScene" uid="uid://jlmq31ufbh3h" path="res://models/starlink.glb" id="2_7brio"]
+[ext_resource type="Script" path="res://scripts/system.gd" id="3_nbpqv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xy3sf"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_26ko1"]
+sky_material = SubResource("ProceduralSkyMaterial_xy3sf")
+
+[sub_resource type="Environment" id="Environment_xokhl"]
+background_mode = 2
+sky = SubResource("Sky_26ko1")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="System" type="Node3D"]
+script = ExtResource("3_nbpqv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xokhl")
+
+[node name="CameraNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0.0127945, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraNode"]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+script = ExtResource("1_ywrwi")
+
+[node name="starlink" parent="." instance=ExtResource("2_7brio")]
+
+[node name="System" type="Node3D" parent="."]
