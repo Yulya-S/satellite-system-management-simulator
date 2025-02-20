@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	# изменение поворота объекта
 	t += Settings.VideoSimulation_speed * speed
 	if t > 2 * PI:
-		t = 0
+		t -= 2 * PI
 	
 	# применение новой позиции относительно старой
 	position.x = x1 - x
