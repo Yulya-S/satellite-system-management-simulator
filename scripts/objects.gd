@@ -1,21 +1,22 @@
 extends Node3D
 
 var radius: int = 100 # растояние от центра
-var t: float = 0.0 # текущий поворот
+var t: float = deg_to_rad(90) # текущий поворот
 var speed: float = 0.0 # скорость движения объекта
-var sphere_pos_y: float = PI / 2 # 90 градусов # высота расположения объекта вокруг сферы
+var sphere_pos_y: float = deg_to_rad(90) # высота расположения объекта вокруг сферы
 
 func _ready() -> void:
 	calculation_parameters()
 
 
 # расчеты параметров
-func calculation_parameters(new_radius: int = -1, new_t: int = -1, new_sphere_pos_y: int = 90):
+func calculation_parameters(new_radius: int = -1, new_t: float = -1, new_sphere_pos_y: float = -1):
 	if new_radius < 0: radius = randi_range(50, 200)
 	else: radius = new_radius
-	if new_t < 0: t = randf_range(0.0, 2.3)
-	else: t = new_t
-	sphere_pos_y = deg_to_rad(new_sphere_pos_y)
+	if new_t < 0: t = deg_to_rad(randi_range(0, 360))
+	else: t = deg_to_rad(new_t)
+	if new_sphere_pos_y < 0: sphere_pos_y = deg_to_rad(90)
+	else: sphere_pos_y = deg_to_rad(new_sphere_pos_y)
 	#speed = randf_range(0.001, 0.01)
 
 
@@ -32,6 +33,6 @@ func _process(delta: float) -> void:
 	speed = sqrt(2 * ((MG / radius) * 10 + e)) / 100
 	
 	# следующий шаг
-	t += Settings.VideoSimulation_speed * speed
+	t += Settings.VideoSimulation_speed / 2. * speed
 	if t > 2 * PI:
 		t -= 2 * PI

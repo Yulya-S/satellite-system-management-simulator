@@ -1,3 +1,4 @@
+HSlider
 CollisionShape3D
 Node3D
 Node
@@ -10,6 +11,4 @@ VBoxContainer
 TextEdit
 ItemList
 Container
-HSlider
 VSlider
-HBoxContainer

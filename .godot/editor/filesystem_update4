@@ -9,3 +9,7 @@ res://scenes/objects/cubsat.tscn
 res://scripts/satelate_group.gd
 res://scripts/objects.gd
 res://scripts/settings.gd
+res://scripts/video_options.gd
+res://scripts/system.gd
+res://scenes/satelite_group.tscn
+res://scripts/satelite_group.gd

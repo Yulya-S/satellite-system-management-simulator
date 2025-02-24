@@ -38,7 +38,7 @@ text = "FPS"
 offset_left = 765.0
 offset_top = 41.0
 offset_right = 1147.0
-offset_bottom = 648.0
+offset_bottom = 628.0
 
 [node name="videoOptions" parent="CanvasLayer/ScrollContainer" instance=ExtResource("3_eyyyf")]
 custom_minimum_size = Vector2(347, 0)
