@@ -35,9 +35,9 @@ offset_bottom = 32.0
 text = "FPS"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
-offset_left = 757.0
+offset_left = 765.0
 offset_top = 41.0
-offset_right = 1139.0
+offset_right = 1147.0
 offset_bottom = 648.0
 
 [node name="videoOptions" parent="CanvasLayer/ScrollContainer" instance=ExtResource("3_eyyyf")]

@@ -1,0 +1,11 @@
+res://scenes/main.tscn
+res://scenes/interface/video_options.tscn
+res://scenes/system.tscn
+res://scenes/satelate_group.tscn
+res://scripts/main.gd
+res://scenes/satelate_group.gd
+res://scenes/objects/starlink.tscn
+res://scenes/objects/cubsat.tscn
+res://scripts/satelate_group.gd
+res://scripts/objects.gd
+res://scripts/settings.gd

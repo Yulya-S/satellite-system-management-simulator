@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://douqqili8ko0o"]
+[gd_scene load_steps=8 format=3 uid="uid://douqqili8ko0o"]
 
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_ywrwi"]
-[ext_resource type="PackedScene" uid="uid://jlmq31ufbh3h" path="res://models/starlink.glb" id="2_7brio"]
 [ext_resource type="Script" path="res://scripts/system.gd" id="3_nbpqv"]
+[ext_resource type="PackedScene" uid="uid://dgb7klefls7ww" path="res://models/cubsat.glb" id="3_uvf8w"]
+[ext_resource type="PackedScene" uid="uid://c38utydrd2i85" path="res://scenes/satelate_group.tscn" id="4_w0di6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xy3sf"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -35,6 +36,8 @@ process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 script = ExtResource("1_ywrwi")
 
-[node name="starlink" parent="." instance=ExtResource("2_7brio")]
+[node name="cubsat" parent="." instance=ExtResource("3_uvf8w")]
 
 [node name="System" type="Node3D" parent="."]
+
+[node name="Group" parent="System" instance=ExtResource("4_w0di6")]
