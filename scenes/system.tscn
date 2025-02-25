@@ -20,6 +20,19 @@ sky = SubResource("Sky_dekka")
 [node name="System" type="Node3D"]
 script = ExtResource("3_nbpqv")
 
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 114.585)
+light_energy = 2.517
+spot_range = 141.2
+spot_attenuation = 0.03
+spot_angle = 43.38
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 213.578)
+visible = false
+light_energy = 3.412
+sky_mode = 1
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_82g7u")
 

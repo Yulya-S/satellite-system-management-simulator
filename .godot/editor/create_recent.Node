@@ -1,6 +1,6 @@
-DirectionalLight3D
 SpotLight3D
 OmniLight3D
+DirectionalLight3D
 WorldEnvironment
 HSlider
 CollisionShape3D

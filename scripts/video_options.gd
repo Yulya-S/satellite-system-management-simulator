@@ -28,6 +28,10 @@ func _ready() -> void:
 	RotationY.value = Settings.VideoRotation_y
 	Scale.value = Settings.VideoScale
 	
+	CameraNode.rotation_degrees.x = RotationX.value
+	CameraNode.rotation_degrees.y = RotationY.value
+	Camera.position.z = Scale.value
+	
 	# Изменение текстовых значений параметров
 	SimulationSpeed.get_child(0).text = str(SimulationSpeed.value)
 	RotationX.get_child(0).text = str(RotationX.value)
@@ -88,8 +92,8 @@ func _on_sphere_pos_y_value_changed(value: float) -> void:
 func _on_button_button_down() -> void:
 	var Radius = $Adding/VBoxContainer/Radius.text
 	var AddingMessage = $Adding/Message
-	if not Radius.is_valid_int() or int(Radius) < 10:
-		AddingMessage.text = "Радиус должен быть числом больше 10!"
+	if not Radius.is_valid_int() or int(Radius) < 20:
+		AddingMessage.text = "Радиус должен быть числом больше 20!"
 		return
 	System.add_new_object_in_system(int(Radius), int(AddingPositionOnCircle.value),
 									int(AddingSpherePosY.value))
@@ -109,8 +113,11 @@ func _on_add_pack_button_down() -> void:
 	if int(Count) <= 0 or int(StartValue) <= 0 or int(Step) <= 0:
 		AddPackMessage.text = "Значения должны быть больше нуля!"
 		return	
-	if int(StartValue) < 10 or int(Step) < 5:
-		AddPackMessage.text = "Значения должны быть больше или равны 10!"
+	if int(StartValue) < 20:
+		AddPackMessage.text = "Растояние от центра должно быть больше или равно 10!"
+		return
+	if int(Step) < 5:
+		AddPackMessage.text = "Шаг должн быть больше или равен 5!"
 		return
 	for i in int(Count):
 		var r: int = int(StartValue) + i * int(Step)
@@ -127,8 +134,8 @@ func _on_add_satelite_groupe_button_down() -> void:
 	var StartValue = $Add_satelite_groupe/VBoxContainer/Start_value.text
 	var Message = $Add_satelite_groupe/Message
 	
-	if not StartValue.is_valid_int() or int(StartValue) < 10:
-		Message.text = "Отступ от центра должен быть числом больше 10!"
+	if not StartValue.is_valid_int() or int(StartValue) < 20:
+		Message.text = "Отступ от центра должен быть числом больше 20!"
 		return
 		
 	var scene = load("res://scenes/satelite_group.tscn")

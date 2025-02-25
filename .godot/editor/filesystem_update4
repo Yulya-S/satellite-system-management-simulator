@@ -5,4 +5,7 @@ res://scenes/satelite_group.tscn
 res://scenes/objects/cubsat.tscn
 res://scenes/objects/starlink.tscn
 res://scenes/earth.tscn
+res://scenes/earth.gd
 res://scripts/video_options.gd
+res://scripts/settings.gd
+res://scripts/satelite_group.gd

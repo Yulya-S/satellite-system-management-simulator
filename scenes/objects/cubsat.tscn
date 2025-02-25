@@ -7,20 +7,4 @@
 script = ExtResource("1_5svsh")
 
 [node name="cubsat" parent="." instance=ExtResource("2_8n8h5")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="cubsat"]
-transform = Transform3D(10, 0, 0, 0, -0.32283, 9.99479, 0, -9.99479, -0.32283, -0.164795, 5.40527, 0)
-light_color = Color(0.88853, 0, 0.24449, 1)
-light_energy = 16.0
-spot_range = 0.655
-spot_attenuation = 18.67
-spot_angle = 35.85
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="cubsat"]
-transform = Transform3D(10, 0, 0, 0, -0.331551, -9.9945, 0, 9.9945, -0.331551, -0.164795, -5.9375, 0)
-light_color = Color(0.88853, 0, 0.24449, 1)
-light_energy = 16.0
-spot_range = 0.655
-spot_attenuation = 18.67
-spot_angle = 35.85
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
