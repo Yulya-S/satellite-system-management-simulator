@@ -316,7 +316,8 @@ autowrap_mode = 3
 [node name="SpherePosY" type="HSlider" parent="Adding/VBoxContainer"]
 modulate = Color(0.368627, 0.156863, 0.109804, 1)
 layout_mode = 2
-max_value = 360.0
+min_value = 10.0
+max_value = 350.0
 value = 90.0
 
 [node name="value" type="Label" parent="Adding/VBoxContainer/SpherePosY"]
@@ -538,7 +539,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "10"
+text = "20"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Add_satelite_groupe/VBoxContainer/Start_value"]

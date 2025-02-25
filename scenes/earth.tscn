@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://8spdcfr48xg2"]
+
+[ext_resource type="PackedScene" uid="uid://dyh4wpl225wha" path="res://models/Earth.glb" id="1_acm6s"]
+
+[node name="Earth" type="Node3D"]
+
+[node name="Earth" parent="." instance=ExtResource("1_acm6s")]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Earth"]
+transform = Transform3D(0.142857, 0, 0, 0, -6.24448e-09, -0.142857, 0, 0.142857, -6.24448e-09, 0, 0, 0)
+light_energy = 0.515
+sky_mode = 1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Earth"]
+light_energy = 0.515
+sky_mode = 1
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_energy = 0.515
+sky_mode = 1
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Earth"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+light_energy = 0.515

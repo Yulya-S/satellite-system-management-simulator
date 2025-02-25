@@ -109,8 +109,8 @@ func _on_add_pack_button_down() -> void:
 	if int(Count) <= 0 or int(StartValue) <= 0 or int(Step) <= 0:
 		AddPackMessage.text = "Значения должны быть больше нуля!"
 		return	
-	if int(StartValue) < 5 or int(Step) < 5:
-		AddPackMessage.text = "Значения должны быть больше или равны 5!"
+	if int(StartValue) < 10 or int(Step) < 5:
+		AddPackMessage.text = "Значения должны быть больше или равны 10!"
 		return
 	for i in int(Count):
 		var r: int = int(StartValue) + i * int(Step)
@@ -128,10 +128,10 @@ func _on_add_satelite_groupe_button_down() -> void:
 	var Message = $Add_satelite_groupe/Message
 	
 	if not StartValue.is_valid_int() or int(StartValue) < 10:
-		Message.text = "Радиус должен быть числом больше 10!"
+		Message.text = "Отступ от центра должен быть числом больше 10!"
 		return
 		
 	var scene = load("res://scenes/satelite_group.tscn")
 	System.add_child(scene.instantiate())
-	System.get_child(-1).calculate_group(int(StartValue), int(AddSateliteGroupeStep.value))
+	System.get_child(-1).calculate_group(int(AddSateliteGroupeStep.value), int(StartValue))
 	Message.text = ""
