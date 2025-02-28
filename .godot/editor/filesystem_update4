@@ -11,3 +11,4 @@ res://scenes/interface/Earth_options.tscn
 res://scenes/interface/earth_options.gd
 res://scripts/settings.gd
 res://scenes/earth.gd
+res://scripts/objects.gd
