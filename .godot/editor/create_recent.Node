@@ -1,3 +1,5 @@
+Button
+Label
 SpotLight3D
 OmniLight3D
 DirectionalLight3D
@@ -9,6 +11,4 @@ Node
 Window
 ScrollContainer
 Control
-Button
-Label
 VBoxContainer

@@ -28,9 +28,8 @@ func _process(delta: float) -> void:
 	position = Vector3(x, y, z)
 	
 	# скорость движения объекта
-	var MG = 1.
 	var e = 1
-	speed = sqrt(2 * ((MG / radius) * 10 + e)) / 100
+	speed = sqrt(2 * ((Settings.EarthGravity * Settings.EarthWeight / radius) * 10 + e)) / 100
 	
 	# следующий шаг
 	t += Settings.VideoSimulation_speed / 2. * speed

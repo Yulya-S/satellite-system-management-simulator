@@ -1,11 +1,13 @@
+res://scenes/main.tscn
+res://scripts/main.gd
 res://scenes/interface/video_options.tscn
 res://scenes/system.tscn
-res://scenes/main.tscn
 res://scenes/satelite_group.tscn
 res://scenes/objects/cubsat.tscn
 res://scenes/objects/starlink.tscn
 res://scenes/earth.tscn
-res://scenes/earth.gd
 res://scripts/video_options.gd
+res://scenes/interface/Earth_options.tscn
+res://scenes/interface/earth_options.gd
 res://scripts/settings.gd
-res://scripts/satelite_group.gd
+res://scenes/earth.gd

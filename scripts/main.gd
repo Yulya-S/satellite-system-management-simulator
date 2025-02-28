@@ -1,13 +1,41 @@
 extends Node2D
 
 @onready var FPS = $CanvasLayer/FPS
+@onready var PageName = $CanvasLayer/PageName/Label
+@onready var InterfaceContainer = $CanvasLayer/InterfaceContainer
+
+var page_index: int = 0
+var pages = [load("res://scenes/interface/video_options.tscn"),
+			load("res://scenes/interface/Earth_options.tscn")]
+var page_names = ["Основное", "Настройки Земли"]
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_set_page()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	FPS.text = "FPS: {0}".format([Performance.get_monitor(Performance.TIME_FPS)])
+
+
+# смена страницы настроек
+func _set_page():
+	if len(InterfaceContainer.get_children()) > 0:
+		pass
+		InterfaceContainer.get_child(0).queue_free()
+		InterfaceContainer.remove_child(InterfaceContainer.get_child(0))
+	PageName.text = page_names[page_index]
+	InterfaceContainer.add_child(pages[page_index].instantiate())
+	InterfaceContainer.get_child(-1).custom_minimum_size.x = 347
+
+
+func _on_left_button_down() -> void:
+	page_index -= 1
+	if page_index < 0: page_index = len(pages) - 1
+	_set_page()
+
+
+func _on_right_button_down() -> void:
+	page_index += 1
+	if page_index >= len(pages): page_index = 0
+	_set_page()
