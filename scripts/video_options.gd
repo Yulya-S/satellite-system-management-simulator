@@ -132,5 +132,5 @@ func _on_add_satelite_groupe_button_down() -> void:
 	else:
 		Settings.set_error(Message)
 		var scene = load("res://scenes/satelite_group.tscn")
-		System.add_child(scene.instantiate())
-		System.get_child(-1).calculate_group(int(AddSateliteGroupeStep.value), int(StartValue))
+		System.get_child(-1).add_child(scene.instantiate())
+		System.get_child(-1).get_child(-1).calculate_group(int(AddSateliteGroupeStep.value), int(StartValue))

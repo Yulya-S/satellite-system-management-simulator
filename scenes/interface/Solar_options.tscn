@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://bygtlix3nnv1r"]
 
-[ext_resource type="Script" path="res://scenes/interface/earth_options.gd" id="1_j6wps"]
+[ext_resource type="Script" path="res://scenes/interface/Sloar_options.gd" id="1_gouf5"]
 
-[node name="Earth_options" type="VBoxContainer"]
+[node name="Solar_options" type="VBoxContainer"]
 offset_right = 347.0
 offset_bottom = 521.0
 theme_override_constants/separation = 40
-script = ExtResource("1_j6wps")
+script = ExtResource("1_gouf5")
 
 [node name="Main" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 130)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 0
 color = Color(0.877616, 0.877616, 0.877616, 1)
@@ -54,7 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Gravitation" type="TextEdit" parent="Main/VBoxContainer"]
+[node name="Activity" type="TextEdit" parent="Main/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
@@ -63,34 +63,14 @@ theme_override_font_sizes/font_size = 10
 text = "1"
 scroll_past_end_of_file = true
 
-[node name="Label" type="Label" parent="Main/VBoxContainer/Gravitation"]
+[node name="Label" type="Label" parent="Main/VBoxContainer/Activity"]
 layout_mode = 0
 offset_left = -101.0
 offset_right = -3.0
 offset_bottom = 17.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 11
-text = "Сила гравитации"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Weight" type="TextEdit" parent="Main/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(0, 17)
-layout_mode = 2
-theme_override_constants/line_spacing = 0
-theme_override_font_sizes/font_size = 10
-text = "1"
-scroll_past_end_of_file = true
-
-[node name="Label" type="Label" parent="Main/VBoxContainer/Weight"]
-layout_mode = 0
-offset_left = -101.0
-offset_right = -3.0
-offset_bottom = 17.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 12
-text = "Масса"
+text = "Активность"
 horizontal_alignment = 2
 vertical_alignment = 1
 

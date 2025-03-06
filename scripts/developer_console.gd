@@ -1,8 +1,9 @@
 extends CanvasLayer
-@onready var system = $"../../../system"
+@onready var system = $"../TextureRect/SubViewport/System/System"
 
 func _ready() -> void:
 	$TextEdit.grab_focus()
+
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("enter"):
@@ -12,15 +13,17 @@ func _process(delta: float) -> void:
 			$TextEdit.text = ""
 			run_command(command)	
 
+
+# Запуск команд
 func run_command(command):
 	match command[0]:
-		"add": add_objects(command)
+		"clear": clear_system()
 		_: $RichTextLabel.text += "Попытка вызова несуществующей команды!\n"
+		
 
-func add_objects(data):
-	var radius = -1
-	if len(data) > 1 and data[1].is_valid_int() and int(data[1]) >= 50: radius = int(data[1])
-	var t = -1
-	if len(data) > 2 and data[2].is_valid_int(): t = int(data[2])
-	system.new_child(radius, t)
-	$RichTextLabel.text += "Был добавлен новый объект!\n"
+# очистка системы
+func clear_system():
+	for i in system.get_children():
+		i.queue_free()
+		system.remove_child(i)
+	$RichTextLabel.text += "Орбитальная система была очищена!\n"
