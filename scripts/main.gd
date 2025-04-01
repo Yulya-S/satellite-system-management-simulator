@@ -8,7 +8,7 @@ var page_index: int = 0
 var pages = [load("res://scenes/interface/video_options.tscn"),
 			load("res://scenes/interface/Earth_options.tscn"),
 			load("res://scenes/interface/Solar_options.tscn")]
-var page_names = ["Основное", "Настройки Земли", "Настройки Солнца"]
+var page_names = ["Основное", "Настройки планеты", "Настройки звезды"]
 
 
 func _ready() -> void:

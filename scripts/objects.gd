@@ -10,8 +10,6 @@ var sphere_pos_y: float = deg_to_rad(90) # высота расположения
 
 var speed: float = 0. # скорость движения объекта
 
-#atmospheric braking
-
 
 func _ready() -> void:
 	calculation_parameters()
@@ -42,7 +40,7 @@ func _process(delta: float) -> void:
 		
 	# следующий шаг
 	t += Settings.VideoSimulation_speed / 2. * speed
-	if t > 2 * PI:
+	while t > 2 * PI:
 		t -= 2 * PI
 
 

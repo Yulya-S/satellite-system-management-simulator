@@ -1,16 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://douqqili8ko0o"]
 
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_ywrwi"]
-[ext_resource type="Texture2D" uid="uid://wc81km8d355" path="res://fon.jpg" id="2_6stea"]
+[ext_resource type="Texture2D" uid="uid://wc81km8d355" path="res://fon.jpg" id="2_rt15f"]
 [ext_resource type="Script" path="res://scripts/system.gd" id="3_nbpqv"]
 [ext_resource type="PackedScene" uid="uid://8spdcfr48xg2" path="res://scenes/earth.tscn" id="3_pfbuv"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_l80s5"]
-panorama = ExtResource("2_6stea")
-energy_multiplier = 0.5
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_82gl7"]
+panorama = ExtResource("2_rt15f")
 
 [sub_resource type="Sky" id="Sky_dekka"]
-sky_material = SubResource("PanoramaSkyMaterial_l80s5")
+sky_material = SubResource("PanoramaSkyMaterial_82gl7")
 
 [sub_resource type="Environment" id="Environment_82g7u"]
 background_mode = 2
@@ -26,12 +25,6 @@ light_energy = 2.517
 spot_range = 141.2
 spot_attenuation = 0.03
 spot_angle = 43.38
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 213.578)
-visible = false
-light_energy = 3.412
-sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_82g7u")
