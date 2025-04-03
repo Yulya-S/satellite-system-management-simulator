@@ -3,6 +3,8 @@ extends VBoxContainer
 @onready var MainGravitation = $Main/VBoxContainer/Gravitation
 @onready var MainWeight = $Main/VBoxContainer/Weight
 
+const page_name: String = "Настройки планеты"
+
 
 func _ready() -> void:
 	MainGravitation.text = str(Settings.EarthGravity)

@@ -4,6 +4,7 @@ extends VBoxContainer
 @onready var ImageBrightness = $Image/VBoxContainer/Brightness
 @onready var ImageFOV = $Image/VBoxContainer/FOV
 
+const page_name: String = "окружение"
 
 func _ready() -> void:
 	MainImage.selected = Settings.Environment_idx
@@ -24,7 +25,7 @@ func _on_fov_value_changed(value: int) -> void:
 	ImageFOV.get_child(0).text = str(ceil(value))
 	Settings.emit_signal("сhanging_environment_FOV", int(value))
 
-func _Image_button_down() -> void:
+func _on_Image_button_down() -> void:
 	ImageBrightness.value = 1.0
 	ImageFOV.value = 0
 	

@@ -3,6 +3,8 @@ extends VBoxContainer
 @onready var Solar = $"../../../TextureRect/SubViewport/System/SpotLight3D"
 @onready var MainActivity = $Main/VBoxContainer/Activity
 
+const page_name: String = "Настройки звезды"
+
 func _ready() -> void:
 	MainActivity.text = str(Settings.SolarActivity)
 

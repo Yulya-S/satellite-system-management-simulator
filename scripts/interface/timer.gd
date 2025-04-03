@@ -22,13 +22,13 @@ func _process(delta: float) -> void:
 	# изменение значения текста
 	Text.text = ""
 	create_text(hour)
-	create_text(minute, Settings.VideoSimulation_speed < 6)
-	if Settings.VideoSimulation_speed < 6: create_text(second, false)
+	create_text(minute, Settings.Video_speed < 6)
+	if Settings.Video_speed < 6: create_text(second, false)
 
 	# шаг времени
-	if Settings.VideoSimulation_speed != 0:
+	if Settings.Video_speed != 0:
 		wait_time += delta
-		var wait_time_max = 1. / (time_factor ** (Settings.VideoSimulation_speed - 1))
+		var wait_time_max = 1. / (time_factor ** (Settings.Video_speed - 1))
 		
 		if wait_time >= wait_time_max:
 			second += floor(wait_time / wait_time_max)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cvkf4oq01aqhf" path="res://scripts/interface/camera_3d.gd" id="1_ywrwi"]
 [ext_resource type="Texture2D" uid="uid://wc81km8d355" path="res://img/environment_1.jpg" id="2_rt15f"]
 [ext_resource type="Script" uid="uid://dgx5w1tnl1cl6" path="res://scripts/system.gd" id="3_nbpqv"]
-[ext_resource type="PackedScene" uid="uid://8spdcfr48xg2" path="res://scenes/earth.tscn" id="3_pfbuv"]
+[ext_resource type="PackedScene" uid="uid://8spdcfr48xg2" path="res://scenes/objects/earth.tscn" id="3_pfbuv"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_82gl7"]
 panorama = ExtResource("2_rt15f")
@@ -15,6 +15,10 @@ sky_material = SubResource("PanoramaSkyMaterial_82gl7")
 background_mode = 2
 background_color = Color(0.454524, 0.454524, 0.454524, 1)
 sky = SubResource("Sky_dekka")
+fog_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
+fog_density = 0.0
+fog_sky_affect = 0.0
 
 [node name="System" type="Node3D"]
 script = ExtResource("3_nbpqv")

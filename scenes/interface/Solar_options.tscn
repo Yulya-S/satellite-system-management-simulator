@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cty8vyivtiux8" path="res://scripts/interface/Sloar_options.gd" id="1_gouf5"]
 
 [node name="Solar_options" type="VBoxContainer"]
+custom_minimum_size = Vector2(347, 0)
 offset_right = 347.0
 offset_bottom = 521.0
 theme_override_constants/separation = 20
