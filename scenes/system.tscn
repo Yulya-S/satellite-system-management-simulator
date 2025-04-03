@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://douqqili8ko0o"]
 
-[ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_ywrwi"]
+[ext_resource type="Script" uid="uid://cvkf4oq01aqhf" path="res://scripts/camera_3d.gd" id="1_ywrwi"]
 [ext_resource type="Texture2D" uid="uid://wc81km8d355" path="res://fon.jpg" id="2_rt15f"]
-[ext_resource type="Script" path="res://scripts/system.gd" id="3_nbpqv"]
+[ext_resource type="Script" uid="uid://dgx5w1tnl1cl6" path="res://scripts/system.gd" id="3_nbpqv"]
 [ext_resource type="PackedScene" uid="uid://8spdcfr48xg2" path="res://scenes/earth.tscn" id="3_pfbuv"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_82gl7"]

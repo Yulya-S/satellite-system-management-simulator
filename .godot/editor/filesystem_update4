@@ -1,0 +1,10 @@
+res://scenes/main.tscn
+res://scenes/earth.tscn
+res://scenes/interface/Solar_options.tscn
+res://scenes/interface/video_options.tscn
+res://scenes/objects/cubsat.tscn
+res://scenes/interface/Earth_options.tscn
+res://scenes/system.tscn
+res://scenes/interface/developer_console.tscn
+res://scenes/objects/starlink.tscn
+res://scenes/interface/timer.tscn

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://8spdcfr48xg2"]
 
 [ext_resource type="PackedScene" uid="uid://dyh4wpl225wha" path="res://models/Earth.glb" id="1_acm6s"]
-[ext_resource type="Script" path="res://scenes/earth.gd" id="1_p3v7n"]
+[ext_resource type="Script" uid="uid://o07jqs1b03by" path="res://scenes/earth.gd" id="1_p3v7n"]
 
 [node name="Earth" type="Node3D"]
 script = ExtResource("1_p3v7n")

@@ -1,5 +1,7 @@
-Button
+Timer
+Node
 Label
+Button
 SpotLight3D
 OmniLight3D
 DirectionalLight3D
@@ -7,7 +9,6 @@ WorldEnvironment
 HSlider
 CollisionShape3D
 Node3D
-Node
 Window
 ScrollContainer
 Control

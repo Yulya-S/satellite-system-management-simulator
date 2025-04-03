@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bygtlix3nnv1r"]
 
-[ext_resource type="Script" path="res://scenes/interface/Sloar_options.gd" id="1_gouf5"]
+[ext_resource type="Script" uid="uid://cty8vyivtiux8" path="res://scenes/interface/Sloar_options.gd" id="1_gouf5"]
 
 [node name="Solar_options" type="VBoxContainer"]
 offset_right = 347.0

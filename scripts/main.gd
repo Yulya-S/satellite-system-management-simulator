@@ -12,6 +12,7 @@ var page_names = ["Основное", "Настройки планеты", "На
 
 
 func _ready() -> void:
+	#var result = OS.execute("python3", ["path/to/your_script.py"], true)
 	_set_page()
 
 

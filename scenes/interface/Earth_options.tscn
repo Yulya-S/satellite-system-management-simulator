@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bygtlix3nnv1r"]
 
-[ext_resource type="Script" path="res://scenes/interface/earth_options.gd" id="1_j6wps"]
+[ext_resource type="Script" uid="uid://bdgmmmamio0ra" path="res://scenes/interface/earth_options.gd" id="1_j6wps"]
 
 [node name="Earth_options" type="VBoxContainer"]
 offset_right = 347.0
