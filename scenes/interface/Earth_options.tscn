@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bygtlix3nnv1r"]
 
-[ext_resource type="Script" uid="uid://bdgmmmamio0ra" path="res://scenes/interface/earth_options.gd" id="1_j6wps"]
+[ext_resource type="Script" uid="uid://bdgmmmamio0ra" path="res://scripts/interface/earth_options.gd" id="1_j6wps"]
 
 [node name="Earth_options" type="VBoxContainer"]
 offset_right = 347.0
 offset_bottom = 521.0
-theme_override_constants/separation = 40
+theme_override_constants/separation = 20
 script = ExtResource("1_j6wps")
 
 [node name="Main" type="ColorRect" parent="."]

@@ -1,0 +1,164 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmvtgssrdfxdn"]
+
+[ext_resource type="Script" uid="uid://d4iwvt481cxj8" path="res://scripts/interface/environment_options.gd" id="1_vuh3w"]
+
+[node name="Environment_options" type="VBoxContainer"]
+offset_right = 347.0
+offset_bottom = 521.0
+theme_override_constants/separation = 20
+script = ExtResource("1_vuh3w")
+
+[node name="Main" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Image" type="OptionButton" parent="Main"]
+layout_mode = 2
+offset_left = 117.0
+offset_top = 9.0
+offset_right = 290.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 10
+selected = 0
+item_count = 4
+popup/item_0/text = "Светлый"
+popup/item_0/id = 0
+popup/item_1/text = "Темный"
+popup/item_1/id = 1
+popup/item_2/text = "Бежевый"
+popup/item_2/id = 2
+popup/item_3/text = "Серебро"
+popup/item_3/id = 3
+
+[node name="Label" type="Label" parent="Main/Image"]
+layout_mode = 0
+offset_left = -101.0
+offset_right = -3.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Изображение"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Image" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Label" type="Label" parent="Image"]
+layout_mode = 2
+offset_left = 3.0
+offset_right = 350.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Настройки изображения"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Image"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 117.0
+offset_top = 28.0
+offset_right = -57.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Brightness" type="HSlider" parent="Image/VBoxContainer"]
+layout_mode = 2
+min_value = 0.5
+max_value = 10.0
+step = 0.5
+value = 1.0
+
+[node name="value" type="Label" parent="Image/VBoxContainer/Brightness"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "10"
+vertical_alignment = 1
+
+[node name="label" type="Label" parent="Image/VBoxContainer/Brightness"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = 0.5
+offset_right = -3.0
+offset_bottom = 17.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Масса"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="FOV" type="HSlider" parent="Image/VBoxContainer"]
+layout_mode = 2
+max_value = 180.0
+
+[node name="value" type="Label" parent="Image/VBoxContainer/FOV"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "10"
+vertical_alignment = 1
+
+[node name="label" type="Label" parent="Image/VBoxContainer/FOV"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = 0.5
+offset_right = -3.0
+offset_bottom = 17.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "FOV"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Image"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.5
+offset_top = -35.0
+offset_right = 114.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Вернуть к стандартным"
+
+[connection signal="item_selected" from="Main/Image" to="." method="_on_image_item_selected"]
+[connection signal="value_changed" from="Image/VBoxContainer/Brightness" to="." method="_on_brightness_value_changed"]
+[connection signal="value_changed" from="Image/VBoxContainer/FOV" to="." method="_on_fov_value_changed"]
+[connection signal="button_down" from="Image/Button" to="." method="_Image_button_down"]
