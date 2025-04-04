@@ -1,7 +1,5 @@
 extends Node
 
-@onready var Text = $"."
-
 var hour: int = 0
 var minute: int = 0
 var second: int = 0
@@ -20,7 +18,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# изменение значения текста
-	Text.text = ""
+	self.text = ""
 	create_text(hour)
 	create_text(minute, Settings.Video_speed < 6)
 	if Settings.Video_speed < 6: create_text(second, false)
@@ -34,18 +32,17 @@ func _process(delta: float) -> void:
 			second += floor(wait_time / wait_time_max)
 			wait_time -= wait_time_max * floor(wait_time / wait_time_max)
 		if second >= 60:
-			minute += floor(second / 60)
-			second -= second * floor(second / 60)
-			if second < 0: second = 0
+			minute += floor(second / 60.)
+			second -= second * floor(second / 60.)
 		if minute >= 60:
-			hour += floor(minute / 60)
-			minute -= minute * floor(minute / 60)
+			hour += floor(minute / 60.)
+			minute -= minute * floor(minute / 60.)
 		if hour >= 24: hour = 0
-	
+
 
 # создание значения текста
-func create_text(value: int, double_dots: bool = true):
-	if value < 10: Text.text += "0"
-	Text.text += str(value)
-	if double_dots: Text.text += ":"
+func create_text(value: int, dots: bool = true):
+	if value < 10: self.text += "0"
+	self.text += str(value)
+	if dots: self.text += ":"
 	

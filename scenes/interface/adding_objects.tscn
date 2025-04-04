@@ -49,7 +49,7 @@ offset_right = 290.0
 offset_bottom = 113.0
 theme_override_constants/separation = 15
 
-[node name="Image" type="OptionButton" parent="Unit/VBoxContainer"]
+[node name="Type" type="OptionButton" parent="Unit/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 selected = 0
@@ -59,13 +59,14 @@ popup/item_0/id = 0
 popup/item_1/text = "OneWeb"
 popup/item_1/id = 1
 
-[node name="Label" type="Label" parent="Unit/VBoxContainer/Image"]
+[node name="Label" type="Label" parent="Unit/VBoxContainer/Type"]
 layout_mode = 0
 offset_left = -101.0
+offset_top = 2.0
 offset_right = -3.0
-offset_bottom = 17.0
+offset_bottom = 19.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 text = "вид спутника"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -131,14 +132,14 @@ horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="SpherePosY" type="HSlider" parent="Unit/VBoxContainer"]
+[node name="Y" type="HSlider" parent="Unit/VBoxContainer"]
 modulate = Color(0.368627, 0.156863, 0.109804, 1)
 layout_mode = 2
 min_value = 10.0
 max_value = 350.0
 value = 90.0
 
-[node name="value" type="Label" parent="Unit/VBoxContainer/SpherePosY"]
+[node name="value" type="Label" parent="Unit/VBoxContainer/Y"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -156,7 +157,7 @@ theme_override_font_sizes/font_size = 10
 text = "10"
 vertical_alignment = 1
 
-[node name="name" type="Label" parent="Unit/VBoxContainer/SpherePosY"]
+[node name="name" type="Label" parent="Unit/VBoxContainer/Y"]
 layout_mode = 0
 offset_left = -101.0
 offset_top = -6.0
@@ -226,7 +227,7 @@ offset_right = 290.0
 offset_bottom = 113.0
 theme_override_constants/separation = 15
 
-[node name="Image" type="OptionButton" parent="Unique/VBoxContainer"]
+[node name="Type" type="OptionButton" parent="Unique/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 selected = 0
@@ -236,13 +237,14 @@ popup/item_0/id = 0
 popup/item_1/text = "Лемур"
 popup/item_1/id = 1
 
-[node name="Label" type="Label" parent="Unique/VBoxContainer/Image"]
+[node name="Label" type="Label" parent="Unique/VBoxContainer/Type"]
 layout_mode = 0
 offset_left = -101.0
+offset_top = 2.0
 offset_right = -3.0
-offset_bottom = 17.0
+offset_bottom = 19.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 text = "вид спутника"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -308,14 +310,14 @@ horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="SpherePosY" type="HSlider" parent="Unique/VBoxContainer"]
+[node name="Y" type="HSlider" parent="Unique/VBoxContainer"]
 modulate = Color(0.368627, 0.156863, 0.109804, 1)
 layout_mode = 2
 min_value = 10.0
 max_value = 350.0
 value = 90.0
 
-[node name="value" type="Label" parent="Unique/VBoxContainer/SpherePosY"]
+[node name="value" type="Label" parent="Unique/VBoxContainer/Y"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -333,7 +335,7 @@ theme_override_font_sizes/font_size = 10
 text = "10"
 vertical_alignment = 1
 
-[node name="name" type="Label" parent="Unique/VBoxContainer/SpherePosY"]
+[node name="name" type="Label" parent="Unique/VBoxContainer/Y"]
 layout_mode = 0
 offset_left = -101.0
 offset_top = -6.0
@@ -364,7 +366,7 @@ theme_override_font_sizes/font_size = 12
 text = "Добавить"
 
 [node name="Pack" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 141)
+custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
 color = Color(0.877616, 0.877616, 0.877616, 1)
 
@@ -401,7 +403,7 @@ offset_left = 117.0
 offset_top = 33.0
 offset_right = 290.0
 offset_bottom = 114.0
-theme_override_constants/separation = 5
+theme_override_constants/separation = 15
 
 [node name="Count" type="TextEdit" parent="Pack/VBoxContainer"]
 clip_contents = false
@@ -415,18 +417,18 @@ scroll_past_end_of_file = true
 [node name="Label" type="Label" parent="Pack/VBoxContainer/Count"]
 layout_mode = 0
 offset_left = -101.0
-offset_top = -4.0
+offset_top = -7.0
 offset_right = -3.0
-offset_bottom = 19.0
+offset_bottom = 22.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
-theme_override_font_sizes/font_size = 10
-text = "Количество объектов"
+theme_override_font_sizes/font_size = 12
+text = "количество объектов"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Start_value" type="TextEdit" parent="Pack/VBoxContainer"]
+[node name="Start" type="TextEdit" parent="Pack/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
@@ -435,16 +437,16 @@ theme_override_font_sizes/font_size = 10
 text = "20"
 scroll_past_end_of_file = true
 
-[node name="Label" type="Label" parent="Pack/VBoxContainer/Start_value"]
+[node name="Label" type="Label" parent="Pack/VBoxContainer/Start"]
 layout_mode = 0
-offset_left = -101.0
+offset_left = -120.0
 offset_top = -4.0
 offset_right = -3.0
 offset_bottom = 19.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
-theme_override_font_sizes/font_size = 10
-text = "Отступ от центра"
+theme_override_font_sizes/font_size = 12
+text = "отступ от центра"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -460,14 +462,14 @@ scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Pack/VBoxContainer/Step"]
 layout_mode = 0
-offset_left = -101.0
+offset_left = -51.0
 offset_top = -6.0
 offset_right = -3.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
-theme_override_font_sizes/font_size = 10
-text = "Расстояние между объектами"
+theme_override_font_sizes/font_size = 12
+text = "шаг"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -489,7 +491,7 @@ theme_override_font_sizes/font_size = 12
 text = "Добавить"
 
 [node name="Net" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 color = Color(0.877616, 0.877616, 0.877616, 1)
 
@@ -526,9 +528,9 @@ offset_left = 117.0
 offset_top = 33.0
 offset_right = 290.0
 offset_bottom = 114.0
-theme_override_constants/separation = 5
+theme_override_constants/separation = 15
 
-[node name="Start_value" type="TextEdit" parent="Net/VBoxContainer"]
+[node name="Start" type="TextEdit" parent="Net/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
@@ -537,16 +539,16 @@ theme_override_font_sizes/font_size = 10
 text = "20"
 scroll_past_end_of_file = true
 
-[node name="Label" type="Label" parent="Net/VBoxContainer/Start_value"]
+[node name="Label" type="Label" parent="Net/VBoxContainer/Start"]
 layout_mode = 0
-offset_left = -101.0
+offset_left = -115.0
 offset_top = -4.0
 offset_right = -3.0
 offset_bottom = 19.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
-theme_override_font_sizes/font_size = 10
-text = "Отступ от центра"
+theme_override_font_sizes/font_size = 12
+text = "отступ от центра"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -578,14 +580,14 @@ vertical_alignment = 1
 
 [node name="name" type="Label" parent="Net/VBoxContainer/Step"]
 layout_mode = 0
-offset_left = -101.0
+offset_left = -120.0
 offset_top = -6.0
 offset_right = -3.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
-theme_override_font_sizes/font_size = 10
-text = "Расстояние между объектами"
+theme_override_font_sizes/font_size = 12
+text = "размер квадрата"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -606,12 +608,12 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 12
 text = "Добавить"
 
-[connection signal="value_changed" from="Unit/VBoxContainer/PositionOnCircle" to="." method="_on_position_on_circle_value_changed"]
-[connection signal="value_changed" from="Unit/VBoxContainer/SpherePosY" to="." method="_on_sphere_pos_y_value_changed"]
-[connection signal="button_down" from="Unit/Button" to="." method="_on_button_button_down"]
-[connection signal="value_changed" from="Unique/VBoxContainer/PositionOnCircle" to="." method="_on_position_on_circle_value_changed"]
-[connection signal="value_changed" from="Unique/VBoxContainer/SpherePosY" to="." method="_on_sphere_pos_y_value_changed"]
-[connection signal="button_down" from="Unique/Button" to="." method="_on_button_button_down"]
-[connection signal="button_down" from="Pack/Button" to="." method="_on_add_pack_button_down"]
-[connection signal="value_changed" from="Net/VBoxContainer/Step" to="." method="_on_step_value_changed"]
-[connection signal="button_down" from="Net/Button" to="." method="_on_add_satelite_groupe_button_down"]
+[connection signal="value_changed" from="Unit/VBoxContainer/PositionOnCircle" to="." method="_on_unit_position_on_circle_value_changed"]
+[connection signal="value_changed" from="Unit/VBoxContainer/Y" to="." method="_on_unit_y_value_changed"]
+[connection signal="button_down" from="Unit/Button" to="." method="_on_unit_button_down"]
+[connection signal="value_changed" from="Unique/VBoxContainer/PositionOnCircle" to="." method="_on_unique_position_on_circle_value_changed"]
+[connection signal="value_changed" from="Unique/VBoxContainer/Y" to="." method="_on_unique_y_value_changed"]
+[connection signal="button_down" from="Unique/Button" to="." method="_on_unique_button_down"]
+[connection signal="button_down" from="Pack/Button" to="." method="_on_pack_button_down"]
+[connection signal="value_changed" from="Net/VBoxContainer/Step" to="." method="_on_net_step_value_changed"]
+[connection signal="button_down" from="Net/Button" to="." method="_on_net_button_down"]

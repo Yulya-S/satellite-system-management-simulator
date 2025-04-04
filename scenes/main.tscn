@@ -3,15 +3,17 @@
 [ext_resource type="Script" uid="uid://b37wsovxwu6km" path="res://scripts/main.gd" id="1_8ddfb"]
 [ext_resource type="PackedScene" uid="uid://douqqili8ko0o" path="res://scenes/system.tscn" id="2_rqwli"]
 [ext_resource type="PackedScene" uid="uid://c581h6fd8bwbu" path="res://scenes/interface/video_options.tscn" id="3_eyyyf"]
-[ext_resource type="PackedScene" uid="uid://bs5wkrkr33uvp" path="res://scenes/interface/timer.tscn" id="3_rv2ty"]
+[ext_resource type="Script" uid="uid://5ofajpb7qdqm" path="res://scripts/interface/timer.gd" id="4_jyhfs"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ha4fm"]
 viewport_path = NodePath("TextureRect/SubViewport")
 
 [node name="Node2D" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_8ddfb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+process_mode = 1
 offset_right = 725.0
 offset_bottom = 648.0
 texture = SubResource("ViewportTexture_ha4fm")
@@ -22,6 +24,7 @@ texture = SubResource("ViewportTexture_ha4fm")
 transform = Transform3D(1.07603, 0, 0, 0, 1.07603, 0, 0, 0, 1.07603, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_left = 725.0
@@ -78,13 +81,20 @@ offset_left = 8.0
 offset_top = 9.0
 offset_right = 270.0
 offset_bottom = 32.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 text = "FPS"
 
-[node name="Timer" parent="CanvasLayer" instance=ExtResource("3_rv2ty")]
-offset_left = 7.0
-offset_top = 593.0
-offset_right = 168.0
-offset_bottom = 648.0
+[node name="Timer" type="Label" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 596.0
+offset_right = 270.0
+offset_bottom = 651.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 40
+text = "00:00:00"
+script = ExtResource("4_jyhfs")
 
 [connection signal="button_down" from="CanvasLayer/ColorRect/PageName/Left" to="." method="_on_left_button_down"]
 [connection signal="button_down" from="CanvasLayer/ColorRect/PageName/Right" to="." method="_on_right_button_down"]

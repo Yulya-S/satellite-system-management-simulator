@@ -118,23 +118,22 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 selected = 0
-item_count = 4
-popup/item_0/text = "Светлый"
+item_count = 3
+popup/item_0/text = "Классика"
 popup/item_0/id = 0
-popup/item_1/text = "Темный"
+popup/item_1/text = "Бежевый"
 popup/item_1/id = 1
-popup/item_2/text = "Бежевый"
+popup/item_2/text = "Серебро"
 popup/item_2/id = 2
-popup/item_3/text = "Серебро"
-popup/item_3/id = 3
 
 [node name="name" type="Label" parent="Video/VBoxContainer/Image"]
 layout_mode = 0
 offset_left = -101.0
+offset_top = 2.0
 offset_right = -3.0
-offset_bottom = 17.0
+offset_bottom = 19.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 12
 text = "фон"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -266,7 +265,7 @@ theme_override_font_sizes/font_size = 12
 text = "Сбросить настройки"
 
 [node name="Image" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_vertical = 0
 color = Color(0.877616, 0.877616, 0.877616, 1)
@@ -281,20 +280,20 @@ theme_override_font_sizes/font_size = 16
 text = "настройки фона"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Image"]
-modulate = Color(0.368627, 0.156863, 0.109804, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 117.0
-offset_top = 29.0
-offset_right = -38.0
-offset_bottom = -44.0
+offset_top = 27.0
+offset_right = -36.0
+offset_bottom = -55.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
 [node name="Brightness" type="HSlider" parent="Image/VBoxContainer"]
+modulate = Color(0.368627, 0.156863, 0.109804, 1)
 layout_mode = 2
 min_value = 0.5
 max_value = 10.0
@@ -332,6 +331,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Fog" type="HSlider" parent="Image/VBoxContainer"]
+modulate = Color(0.368627, 0.156863, 0.109804, 1)
 layout_mode = 2
 max_value = 1.0
 step = 0.1
@@ -366,6 +366,23 @@ text = "сила тумана"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="Color" type="ColorPickerButton" parent="Image/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+color = Color(1, 1, 1, 1)
+
+[node name="name" type="Label" parent="Image/VBoxContainer/Color"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -2.0
+offset_right = -3.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "цвет тумана"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="reset" type="Button" parent="Image"]
 layout_mode = 1
 anchors_preset = 7
@@ -390,4 +407,5 @@ text = "Сбросить настройки"
 [connection signal="button_down" from="Camera/reset" to="." method="_on_camera_button_down"]
 [connection signal="value_changed" from="Image/VBoxContainer/Brightness" to="." method="_on_image_brightness_value_changed"]
 [connection signal="value_changed" from="Image/VBoxContainer/Fog" to="." method="_on_image_fog_value_changed"]
+[connection signal="color_changed" from="Image/VBoxContainer/Color" to="." method="_on_image_color_changed"]
 [connection signal="button_down" from="Image/reset" to="." method="_on_image_button_down"]

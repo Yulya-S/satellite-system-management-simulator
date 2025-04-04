@@ -9,11 +9,14 @@ extends VBoxContainer
 
 @onready var ImageBrightness = $Image/VBoxContainer/Brightness
 @onready var ImageFog = $Image/VBoxContainer/Fog
+@onready var ImageColor = $Image/VBoxContainer/Color
 
 const page_name: String = "Основное"
 const factor: int = 5
 
 func _ready() -> void:
+	_set_picker()
+	
 	# применение шага изменения параметров отображения симуляции
 	VideoScale.step = factor
 	CameraX.step = factor
@@ -35,6 +38,16 @@ func _ready() -> void:
 		i.get_child(0).set_text(str(int(i.value)))
 
 
+# настройка окна выбора цвета
+func _set_picker():
+	var picker = ImageColor.get_picker()
+	ImageColor.color = Settings.VideoImage_color
+	picker.picker_shape = 1
+	picker.color_modes_visible = false
+	picker.sliders_visible = false
+	picker.presets_visible = false
+
+
 # изменение скорости симуляции
 func _on_video_speed_value_changed(value: int) -> void:
 	VideoSpeed.get_child(0).set_text(str(value))
@@ -44,23 +57,23 @@ func _on_video_speed_value_changed(value: int) -> void:
 func _on_video_scale_value_changed(value: int) -> void:
 	VideoScale.get_child(0).set_text(str(value))
 	Settings.Video_scale = value
-	Settings.emit_signal("сhanging_Video_scale", value)
+	Settings.emit_signal("changing_Video_scale", value)
 
 # изменение изображения окружения
-func _on_video_image_item_selected(index: int) -> void: Settings.emit_signal("сhanging_Video_image_idx", index)
+func _on_video_image_item_selected(index: int) -> void: Settings.emit_signal("changing_Video_image_idx", index)
 
 
 # изменение поворота камеры по X
 func _on_camera_x_value_changed(value: int) -> void:
 	CameraX.get_child(0).set_text(str(value))
 	Settings.VideoCamera_x = value
-	Settings.emit_signal("сhanging_VideoCamera_x", value)
+	Settings.emit_signal("changing_VideoCamera_x", value)
 
 # изменение поворота камеры по Y
 func _on_camera_y_value_changed(value: int) -> void:
 	CameraY.get_child(0).set_text(str(value))
 	Settings.VideoCamera_y = value
-	Settings.emit_signal("сhanging_VideoCamera_y", value)
+	Settings.emit_signal("changing_VideoCamera_y", value)
 
 # сброс настроек поворота камеры
 func _on_camera_button_down() -> void:
@@ -72,16 +85,22 @@ func _on_camera_button_down() -> void:
 # изменение яркости окружения
 func _on_image_brightness_value_changed(value: float) -> void:
 	ImageBrightness.get_child(0).set_text(str(value))
-	Settings.emit_signal("сhanging_VideoImage_brightness", value)
+	Settings.emit_signal("changing_VideoImage_brightness", value)
 
 # изменение силы тумана
 func _on_image_fog_value_changed(value: float) -> void:
 	ImageFog.get_child(0).set_text(str(value))
-	Settings.emit_signal("сhanging_VideoImage_fog", value)
+	Settings.emit_signal("changing_VideoImage_fog", value)
+
+func _on_image_color_changed(color: Color) -> void:
+	ImageColor.color = color
+	Settings.emit_signal("changing_VideoImage_color", color)
 
 # сброс настроек изображения
 func _on_image_button_down() -> void:
 	ImageBrightness.value = 1.0
 	ImageFog.value = 0.0
-	_on_image_brightness_value_changed(1.0)
-	_on_image_fog_value_changed(0.0)
+	ImageColor.color = Color.WHITE
+	_on_image_brightness_value_changed(ImageBrightness.value)
+	_on_image_fog_value_changed(ImageFog.value)
+	_on_image_color_changed(ImageColor.color)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c46myhi8faehg"]
+
+[ext_resource type="Script" uid="uid://15cq8wsc4u7w" path="res://scripts/objects/objects.gd" id="1_roscl"]
+[ext_resource type="PackedScene" uid="uid://bvad4uinuexm1" path="res://models/lemur.glb" id="2_roscl"]
+
+[node name="Lemur" type="Node3D"]
+script = ExtResource("1_roscl")
+
+[node name="lemur" parent="." instance=ExtResource("2_roscl")]

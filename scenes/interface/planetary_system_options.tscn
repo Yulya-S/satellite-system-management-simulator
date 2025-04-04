@@ -1,0 +1,255 @@
+[gd_scene load_steps=2 format=3 uid="uid://muieif0hyuyq"]
+
+[ext_resource type="Script" uid="uid://c8t5ntus236v4" path="res://scripts/interface/planetary_system_options.gd" id="1_kr863"]
+
+[node name="Planetary_system_options" type="VBoxContainer"]
+custom_minimum_size = Vector2(347, 0)
+offset_right = 347.0
+offset_bottom = 521.0
+theme_override_constants/separation = 20
+script = ExtResource("1_kr863")
+
+[node name="Preset" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Label" type="Label" parent="Preset"]
+layout_mode = 2
+offset_left = 3.0
+offset_right = 350.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "пресеты"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Preset"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 117.0
+offset_top = 27.0
+offset_right = -36.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Planet" type="OptionButton" parent="Preset/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+selected = 0
+item_count = 2
+popup/item_0/text = "Земля"
+popup/item_0/id = 0
+popup/item_1/text = "Марс"
+popup/item_1/id = 0
+
+[node name="name" type="Label" parent="Preset/VBoxContainer/Planet"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "планета"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Planet" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 135)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Label" type="Label" parent="Planet"]
+layout_mode = 2
+offset_left = 3.0
+offset_right = 350.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "наcтройки планеты"
+
+[node name="Error" type="Label" parent="Planet"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -145.5
+offset_top = -48.0
+offset_right = 142.5
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.592157, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Planet"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 117.0
+offset_top = 28.0
+offset_right = -36.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Gravitation" type="TextEdit" parent="Planet/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "1"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Planet/VBoxContainer/Gravitation"]
+layout_mode = 0
+offset_left = -107.0
+offset_right = -3.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "сила гравитации"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Weight" type="TextEdit" parent="Planet/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "1"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Planet/VBoxContainer/Weight"]
+layout_mode = 0
+offset_left = -101.0
+offset_right = -3.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "масса"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="reset" type="Button" parent="Planet"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.5
+offset_top = -35.0
+offset_right = 114.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Сбросить настройки"
+
+[node name="Star" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Label" type="Label" parent="Star"]
+layout_mode = 2
+offset_left = 3.0
+offset_right = 350.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "настройки звезды"
+
+[node name="Error" type="Label" parent="Star"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -145.5
+offset_top = -48.0
+offset_right = 142.5
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.592157, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Star"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 117.0
+offset_top = 34.0
+offset_right = -36.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Activity" type="TextEdit" parent="Star/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "1"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Star/VBoxContainer/Activity"]
+layout_mode = 0
+offset_left = -101.0
+offset_right = -3.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "активность"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="reset" type="Button" parent="Star"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.5
+offset_top = -35.0
+offset_right = 114.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Сбросить настройки"
+
+[connection signal="item_selected" from="Preset/VBoxContainer/Planet" to="." method="_on_preset_planet_item_selected"]
+[connection signal="text_changed" from="Planet/VBoxContainer/Gravitation" to="." method="_on_planet_gravitation_text_changed"]
+[connection signal="text_set" from="Planet/VBoxContainer/Gravitation" to="." method="_on_planet_gravitation_text_set"]
+[connection signal="text_changed" from="Planet/VBoxContainer/Weight" to="." method="_on_planet_weight_text_changed"]
+[connection signal="text_set" from="Planet/VBoxContainer/Weight" to="." method="_on_planet_weight_text_set"]
+[connection signal="button_down" from="Planet/reset" to="." method="_on_planet_button_down"]
+[connection signal="lines_edited_from" from="Star/VBoxContainer/Activity" to="." method="_on_activity_lines_edited_from"]
+[connection signal="text_changed" from="Star/VBoxContainer/Activity" to="." method="_on_star_activity_text_changed"]
+[connection signal="text_set" from="Star/VBoxContainer/Activity" to="." method="_on_star_activity_text_set"]
+[connection signal="button_down" from="Star/reset" to="." method="_on_star_button_down"]

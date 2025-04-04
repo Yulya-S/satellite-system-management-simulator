@@ -1,29 +1,34 @@
 extends CanvasLayer
-@onready var system = $"../TextureRect/SubViewport/System/System"
 
-func _ready() -> void:
-	$TextEdit.grab_focus()
+@onready var System = $"../TextureRect/SubViewport/System/System"
+@onready var Text = $TextEdit
+@onready var Message = $Message
 
 
-func _process(delta: float) -> void:
+func _ready() -> void: Text.grab_focus() # ставим фокус на текстовый контейнер
+
+
+func _process(_delta: float) -> void:
+	# ппроверяем ввод команды
 	if Input.is_action_just_pressed("enter"):
-		if $TextEdit.text != "":
-			var command = $TextEdit.text.split(" ")
+		if Text.text != "":
+			var command = Text.get_text().split(" ")
 			command[-1] = command[-1].replace("\n", "")
-			$TextEdit.text = ""
-			run_command(command)	
+			Text.text = ""
+			run_command(command)
 
 
 # Запуск команд
 func run_command(command):
+	Message.text += command[0] + "\t\t"
 	match command[0]:
 		"clear": clear_system()
-		_: $RichTextLabel.text += "Попытка вызова несуществующей команды!\n"
+		_: Message.text += "Попытка вызова несуществующей команды\n"
 		
 
-# очистка системы
+# команда удаления всех объектов системы
 func clear_system():
-	for i in system.get_children():
+	for i in System.get_children():
 		i.queue_free()
-		system.remove_child(i)
-	$RichTextLabel.text += "Орбитальная система была очищена!\n"
+		System.remove_child(i)
+	Message.text += "Орбитальная система была очищена\n"

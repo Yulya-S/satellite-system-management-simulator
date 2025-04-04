@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://idkb7t61laet"]
 
 [ext_resource type="Script" uid="uid://15cq8wsc4u7w" path="res://scripts/objects/objects.gd" id="1_3lolr"]
-[ext_resource type="PackedScene" uid="uid://jlmq31ufbh3h" path="res://models/starlink.glb" id="1_41jbm"]
+[ext_resource type="PackedScene" uid="uid://dedy4r5c0sdhc" path="res://models/starlink.glb" id="1_41jbm"]
 
 [node name="Starlink" type="Node3D"]
 script = ExtResource("1_3lolr")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://clcgnq1ponwlq"]
+
+[ext_resource type="Script" uid="uid://15cq8wsc4u7w" path="res://scripts/objects/objects.gd" id="1_k48j2"]
+[ext_resource type="PackedScene" uid="uid://c3vpyd7a16esd" path="res://models/MKS.glb" id="2_k48j2"]
+
+[node name="MKS" type="Node3D"]
+script = ExtResource("1_k48j2")
+
+[node name="MKS" parent="." instance=ExtResource("2_k48j2")]

@@ -5,7 +5,7 @@ extends Node2D
 @onready var InterfaceContainer = $CanvasLayer/ColorRect/InterfaceContainer
 
 # страницы настроек
-const pages = ["video_options", "adding_objects", "Earth_options", "Solar_options"]
+const pages = ["video_options", "adding_objects", "planetary_system_options"]
 var page_index: int = 0
 
 
@@ -15,6 +15,15 @@ func _ready() -> void: PageName.set_text(InterfaceContainer.get_child(0).page_na
 func _process(_delta: float) -> void:
 	# отображение количества кадров в секунду
 	FPS.set_text("FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)))
+	
+	# обработка запука консоли разработчика
+	if Input.is_action_just_pressed("developer_console"):
+		get_tree().paused = not get_tree().paused
+		if get_tree().paused == true:
+			add_child(load("res://scenes/interface/developer_console.tscn").instantiate())
+		else:
+			get_child(-1).queue_free()
+			remove_child(get_child(-1))
 
 
 # смена страницы настроек

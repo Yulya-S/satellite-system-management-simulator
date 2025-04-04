@@ -1,28 +1,24 @@
 extends Node3D
-var obj = load("res://scenes/objects/starlink.tscn") # добавить возможность выбора модели
-
-var cube_size: int = 10 # размер квадрата между спутниками
-var radius: int = 20 # растояние от центральной точки (не влияет на плотность сетки!)
+var obj = load("res://scenes/objects/starlink.tscn")
 
 
 # расчет сетки
-func calculate_group(new_cube_size: int, new_radius: int):
-	cube_size = new_cube_size
-	radius = new_radius
+func calculate_group(radius: int, cube_size: int):
+	# расчет первого кольца
+	var count: int = floor(360. / cube_size)
+	_add_ring(radius, count, 360. / count)
+	var ring_count = floor((count - 1) / 2.)
 	
-	var count: int = floor(360. / new_cube_size)
-	__add_ring(count, 360 / count)
-	var ring_count = floor((count - 1) / 2)
-	
+	# раставление колец по всей высоте планеты
 	for i in range(ring_count):
-		__add_ring(count, 360 / count, i * (90 / ring_count))
-		__add_ring(count, 360 / count, -(i * (90 / ring_count)))
+		_add_ring(radius, count, 360. / count, i * (90. / ring_count))
+		_add_ring(radius, count, 360. / count, -(i * (90. / ring_count)))
 	
 
-# добавление одного кольца
-func __add_ring(count_in_ring: int, t_step: float, sphere_pos_y: float = 0):
-	var t: int = 0
-	for i in range(count_in_ring):
+# создание кольца
+func _add_ring(radius: int, count: int, t_step: float, y: float = 0):
+	var t: float = 0.
+	for i in range(count):
 		add_child(obj.instantiate())
-		get_child(-1).calculation_parameters(radius, t, 90 + sphere_pos_y)
+		get_child(-1).calculation_parameters(radius, t, 90 + y)
 		t += t_step

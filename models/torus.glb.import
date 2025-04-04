@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cg44wmg03noix"
-path="res://.godot/imported/cubsat.glb-924e24a6fabf9e67b91bbb1c65aae3b6.scn"
+uid="uid://cgxn4cvys8u1i"
+path="res://.godot/imported/torus.glb-dda2ee00f6d87dd4efbe152e6640be8b.scn"
 
 [deps]
 
-source_file="res://models/cubsat.glb"
-dest_files=["res://.godot/imported/cubsat.glb-924e24a6fabf9e67b91bbb1c65aae3b6.scn"]
+source_file="res://models/torus.glb"
+dest_files=["res://.godot/imported/torus.glb-dda2ee00f6d87dd4efbe152e6640be8b.scn"]
 
 [params]
 
