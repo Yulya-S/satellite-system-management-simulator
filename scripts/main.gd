@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var FPS = $CanvasLayer/FPS
-@onready var PageName = $CanvasLayer/ColorRect/PageName/Label
-@onready var InterfaceContainer = $CanvasLayer/ColorRect/InterfaceContainer
+@onready var PageName = $CanvasLayer/Interface/PageName/Label
+@onready var InterfaceContainer = $CanvasLayer/Interface/InterfaceContainer
 
 # страницы настроек
 const pages = ["video_options", "adding_objects", "planetary_system_options"]

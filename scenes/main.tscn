@@ -14,9 +14,10 @@ script = ExtResource("1_8ddfb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 process_mode = 1
-offset_right = 725.0
+offset_right = 644.0
 offset_bottom = 648.0
 texture = SubResource("ViewportTexture_ha4fm")
+stretch_mode = 5
 
 [node name="SubViewport" type="SubViewport" parent="TextureRect"]
 
@@ -26,18 +27,18 @@ transform = Transform3D(1.07603, 0, 0, 0, 1.07603, 0, 0, 0, 1.07603, 0, 0, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-offset_left = 725.0
-offset_right = 1152.0
+[node name="Interface" type="ColorRect" parent="CanvasLayer"]
+offset_left = 644.0
+offset_right = 1048.0
 offset_bottom = 648.0
 
-[node name="PageName" type="ColorRect" parent="CanvasLayer/ColorRect"]
+[node name="PageName" type="ColorRect" parent="CanvasLayer/Interface"]
 layout_mode = 0
-offset_right = 427.0
+offset_right = 404.0
 offset_bottom = 32.0
 color = Color(0.368627, 0.207843, 0.172549, 0.329412)
 
-[node name="Left" type="Button" parent="CanvasLayer/ColorRect/PageName"]
+[node name="Left" type="Button" parent="CanvasLayer/Interface/PageName"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 3.0
@@ -46,19 +47,19 @@ offset_bottom = 29.0
 theme_override_font_sizes/font_size = 13
 text = "<"
 
-[node name="Right" type="Button" parent="CanvasLayer/ColorRect/PageName"]
+[node name="Right" type="Button" parent="CanvasLayer/Interface/PageName"]
 layout_mode = 0
-offset_left = 386.0
+offset_left = 362.0
 offset_top = 3.0
-offset_right = 419.0
+offset_right = 395.0
 offset_bottom = 29.0
 theme_override_font_sizes/font_size = 13
 text = ">"
 
-[node name="Label" type="Label" parent="CanvasLayer/ColorRect/PageName"]
+[node name="Label" type="Label" parent="CanvasLayer/Interface/PageName"]
 layout_mode = 0
 offset_left = 40.0
-offset_right = 387.0
+offset_right = 363.0
 offset_bottom = 32.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 19
@@ -66,15 +67,37 @@ text = "Название страницы"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InterfaceContainer" type="ScrollContainer" parent="CanvasLayer/ColorRect"]
+[node name="InterfaceContainer" type="ScrollContainer" parent="CanvasLayer/Interface"]
 layout_mode = 0
-offset_left = 40.0
+offset_left = 25.0
 offset_top = 41.0
-offset_right = 414.0
+offset_right = 399.0
 offset_bottom = 628.0
 
-[node name="videoOptions" parent="CanvasLayer/ColorRect/InterfaceContainer" instance=ExtResource("3_eyyyf")]
+[node name="videoOptions" parent="CanvasLayer/Interface/InterfaceContainer" instance=ExtResource("3_eyyyf")]
 layout_mode = 2
+
+[node name="Tracking" type="ColorRect" parent="CanvasLayer"]
+offset_left = 1048.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.878431, 0.878431, 0.878431, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Tracking"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 97.0
+offset_bottom = 639.0
+
+[node name="Tracking" type="VBoxContainer" parent="CanvasLayer/Tracking/ScrollContainer"]
+custom_minimum_size = Vector2(65, 22)
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="CanvasLayer/Tracking"]
+points = PackedVector2Array(0, 0, 0, 648)
+width = 2.0
+default_color = Color(0.411765, 0.411765, 0.411765, 1)
 
 [node name="FPS" type="Label" parent="CanvasLayer"]
 offset_left = 8.0
@@ -84,6 +107,16 @@ offset_bottom = 32.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "FPS"
+
+[node name="Count" type="Label" parent="CanvasLayer"]
+offset_left = 454.0
+offset_top = 9.0
+offset_right = 635.0
+offset_bottom = 54.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
 
 [node name="Timer" type="Label" parent="CanvasLayer"]
 offset_left = 8.0
@@ -96,5 +129,5 @@ theme_override_font_sizes/font_size = 40
 text = "00:00:00"
 script = ExtResource("4_jyhfs")
 
-[connection signal="button_down" from="CanvasLayer/ColorRect/PageName/Left" to="." method="_on_left_button_down"]
-[connection signal="button_down" from="CanvasLayer/ColorRect/PageName/Right" to="." method="_on_right_button_down"]
+[connection signal="button_down" from="CanvasLayer/Interface/PageName/Left" to="." method="_on_left_button_down"]
+[connection signal="button_down" from="CanvasLayer/Interface/PageName/Right" to="." method="_on_right_button_down"]

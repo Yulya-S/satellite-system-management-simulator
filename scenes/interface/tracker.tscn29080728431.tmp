@@ -1,0 +1,149 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbt7vqa66nexo"]
+
+[ext_resource type="Script" uid="uid://ckjt5d5jk5me6" path="res://scripts/interface/tracker.gd" id="1_4u4yt"]
+[ext_resource type="Texture2D" uid="uid://dypit1abalt4f" path="res://img/cubsat.jpg" id="2_xmj2w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u4yt"]
+bg_color = Color(0.453588, 0.0138666, 0.0996207, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmj2w"]
+bg_color = Color(0.694318, 0, 0.141849, 0.85098)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Theme" id="Theme_e8ajb"]
+Button/styles/hover = SubResource("StyleBoxFlat_4u4yt")
+Button/styles/normal = SubResource("StyleBoxFlat_xmj2w")
+
+[sub_resource type="SystemFont" id="SystemFont_xmj2w"]
+font_names = PackedStringArray("Sans-Serif")
+font_weight = 700
+
+[node name="Tracker" type="ColorRect"]
+custom_minimum_size = Vector2(65, 22)
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 64.0
+offset_bottom = 21.0
+color = Color(0.411765, 0.411765, 0.411765, 1)
+script = ExtResource("1_4u4yt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -10.0
+offset_right = 31.5
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+mouse_filter = 1
+
+[node name="Marker" type="ColorRect" parent="ColorRect"]
+clip_contents = true
+layout_mode = 0
+offset_left = 58.0
+offset_right = 65.0
+offset_bottom = 20.0
+mouse_filter = 1
+color = Color(6.54578e-06, 0.716402, 0.813987, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 59.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "id"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 1.0
+offset_right = 81.0
+offset_bottom = 21.0
+tooltip_text = "Удалить"
+theme = SubResource("Theme_e8ajb")
+theme_override_font_sizes/font_size = 8
+
+[node name="Message" type="PopupPanel" parent="."]
+position = Vector2i(228, 84)
+size = Vector2i(400, 146)
+
+[node name="ColorRect" type="ColorRect" parent="Message"]
+clip_contents = true
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 396.0
+offset_bottom = 142.0
+
+[node name="ColorRect" type="ColorRect" parent="Message/ColorRect"]
+clip_contents = true
+layout_mode = 0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 176.0
+offset_bottom = 127.0
+color = Color(0.303233, 0.303233, 0.303233, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Message/ColorRect/ColorRect"]
+layout_mode = 0
+offset_right = 161.0
+offset_bottom = 114.0
+texture = ExtResource("2_xmj2w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Type" type="Label" parent="Message/ColorRect"]
+offset_left = 184.0
+offset_top = 8.0
+offset_right = 346.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_xmj2w")
+theme_override_font_sizes/font_size = 30
+text = "Кубсат"
+
+[node name="ID" type="Label" parent="Message/ColorRect"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 43.0
+offset_right = 380.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Id:"
+
+[node name="Radius" type="Label" parent="Message/ColorRect"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 78.0
+offset_right = 380.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "радиус:      1"
+
+[node name="Speed" type="Label" parent="Message/ColorRect"]
+offset_left = 185.0
+offset_top = 98.0
+offset_right = 380.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "скорость:  1"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

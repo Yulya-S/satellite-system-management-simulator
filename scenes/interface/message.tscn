@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2qxxdmdwwtib"]
+
+[ext_resource type="Script" uid="uid://r2ggef3hoch8" path="res://scripts/interface/message.gd" id="1_fil47"]
+[ext_resource type="Texture2D" uid="uid://dypit1abalt4f" path="res://img/cubsat.jpg" id="1_m6i3o"]
+
+[sub_resource type="SystemFont" id="SystemFont_fil47"]
+font_names = PackedStringArray("Sans-Serif")
+font_weight = 700
+
+[node name="Message" type="PopupPanel"]
+auto_translate_mode = 1
+position = Vector2i(228, 84)
+size = Vector2i(400, 146)
+visible = true
+script = ExtResource("1_fil47")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+clip_contents = true
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 396.0
+offset_bottom = 142.0
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+clip_contents = true
+layout_mode = 0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 176.0
+offset_bottom = 127.0
+color = Color(0.303233, 0.303233, 0.303233, 1)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/ColorRect"]
+layout_mode = 0
+offset_right = 161.0
+offset_bottom = 114.0
+texture = ExtResource("1_m6i3o")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Type" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 8.0
+offset_right = 346.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_fil47")
+theme_override_font_sizes/font_size = 30
+text = "Кубсат"
+
+[node name="ID" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 43.0
+offset_right = 380.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Id:"
+
+[node name="Radius" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 78.0
+offset_right = 380.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "радиус:      1"
+
+[node name="Speed" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 98.0
+offset_right = 380.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "скорость:  1"

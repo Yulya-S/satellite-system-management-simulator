@@ -11,31 +11,38 @@ var speed: float = 0. # скорость движения объекта
 
 const distance_multiplier: int = 1000
 
-
 # расчеты параметров
 func calculation_parameters(new_radius: int, new_t: float, y: float):
 	radius = float(new_radius)
 	t = deg_to_rad(new_t)
 	sphere_pos_y = deg_to_rad(y)
 	speed = sqrt(2 * ((Settings.SystemPlanet_gravitation * Settings.SystemPlanet_weight) / (radius / 1000)) + Settings.e) / 170
+	update_rotation()
 
 
 func _process(_delta: float) -> void:
+	# расчеты по формулам
+	var x = radius * sin(sphere_pos_y) * cos(t)
+	var y = radius * cos(sphere_pos_y)
+	var z = radius * sin(sphere_pos_y) * sin(t)
+	position = Vector3(x, y, z)
+	
 	if Settings.Video_speed > 0:
-		# расчеты по формулам
-		var x = radius * sin(sphere_pos_y) * cos(t)
-		var y = radius * cos(sphere_pos_y)
-		var z = radius * sin(sphere_pos_y) * sin(t)
-		position = Vector3(x, y, z)
-		
 		# изменение параметров
+		update_rotation()
 		update_speed()
 		update_radius()
 		
 		# следующий шаг
 		t += speed * (1.3 ** (Settings.Video_speed - 1))
 		while t > 2 * PI: t -= 2 * PI
+		
 
+# поворот объекта к планете	
+func update_rotation():
+	get_child(0).rotation_degrees.y = -rad_to_deg(t) + 90
+	get_child(0).rotation_degrees.x = rad_to_deg(sphere_pos_y) + 90
+	
 
 # скорость движения объекта
 func update_speed():

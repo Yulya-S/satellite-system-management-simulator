@@ -1,15 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://djag35xl6v5pk"]
+[gd_scene load_steps=3 format=3 uid="uid://djag35xl6v5pk"]
 
 [ext_resource type="Script" uid="uid://15cq8wsc4u7w" path="res://scripts/objects/objects.gd" id="1_5svsh"]
 [ext_resource type="PackedScene" uid="uid://cg44wmg03noix" path="res://models/cubsat.glb" id="2_8n8h5"]
-[ext_resource type="Script" uid="uid://b2xqwlppfr2x2" path="res://models/torus.gd" id="3_16qo3"]
-[ext_resource type="PackedScene" uid="uid://cgxn4cvys8u1i" path="res://models/torus.glb" id="3_m01fj"]
 
 [node name="Cubsat" type="Node3D"]
 script = ExtResource("1_5svsh")
-
-[node name="torus" parent="." instance=ExtResource("3_m01fj")]
-script = ExtResource("3_16qo3")
 
 [node name="cubsat" parent="." instance=ExtResource("2_8n8h5")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
