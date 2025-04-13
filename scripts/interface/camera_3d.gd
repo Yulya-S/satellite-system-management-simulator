@@ -14,7 +14,8 @@ func _ready() -> void:
 			
 			
 # изменение приближения камеры
-func _changing_Video_scale(value: int): position.z = value
+func _changing_Video_scale(value: int):
+	position.z = value
 
 # изменение поворота камеры по x
 func _changing_VideoCamera_x(value: int): get_parent().rotation_degrees.x = value

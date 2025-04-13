@@ -3,6 +3,7 @@ extends VBoxContainer
 @onready var VideoSpeed = $Video/VBoxContainer/Speed
 @onready var VideoScale = $Video/VBoxContainer/Scale
 @onready var VideoImage = $Video/VBoxContainer/Image
+@onready var VideoSaturation = $Video/Saturation
 
 @onready var CameraX = $Camera/VBoxContainer/X
 @onready var CameraY = $Camera/VBoxContainer/Y
@@ -26,12 +27,14 @@ func _ready() -> void:
 	VideoSpeed.value = Settings.Video_speed
 	VideoScale.value = Settings.Video_scale
 	VideoImage.selected = Settings.Video_image_idx
+	VideoSaturation.button_pressed = Settings.Video_show_saturation
 	
 	CameraX.value = Settings.VideoCamera_x
 	CameraY.value = Settings.VideoCamera_y
 	
 	ImageBrightness.value = Settings.VideoImage_brightness
 	ImageFog.value = Settings.VideoImage_fog
+	ImageColor.color = Settings.VideoImage_color
 	
 	# Изменение текстовых значений параметров
 	for i in [VideoSpeed, VideoScale, CameraX, CameraY, ImageBrightness, ImageFog]:
@@ -58,9 +61,15 @@ func _on_video_scale_value_changed(value: int) -> void:
 	VideoScale.get_child(0).set_text(str(value))
 	Settings.Video_scale = value
 	Settings.emit_signal("changing_Video_scale", value)
+	Settings.emit_signal("changing_Video_show_saturation")
 
 # изменение изображения окружения
 func _on_video_image_item_selected(index: int) -> void: Settings.emit_signal("changing_Video_image_idx", index)
+
+# изменение видимости плотности воздуха
+func _on_video_saturation_toggled(toggled_on: bool) -> void:
+	Settings.Video_show_saturation = toggled_on
+	Settings.emit_signal("changing_Video_show_saturation")
 
 
 # изменение поворота камеры по X
@@ -77,8 +86,9 @@ func _on_camera_y_value_changed(value: int) -> void:
 
 # сброс настроек поворота камеры
 func _on_camera_button_down() -> void:
-	CameraX.value = 270
-	CameraY.value = 0
+	Settings.read_config_file("Camera")
+	CameraX.value = Settings.VideoCamera_x
+	CameraY.value = Settings.VideoCamera_y
 	_on_camera_x_value_changed(CameraX.value)
 	_on_camera_y_value_changed(CameraY.value)
 	
@@ -98,9 +108,10 @@ func _on_image_color_changed(color: Color) -> void:
 
 # сброс настроек изображения
 func _on_image_button_down() -> void:
-	ImageBrightness.value = 1.0
-	ImageFog.value = 0.0
-	ImageColor.color = Color.WHITE
+	Settings.read_config_file("Image")
+	ImageBrightness.value = Settings.VideoImage_brightness
+	ImageFog.value = Settings.VideoImage_fog
+	ImageColor.color = Settings.VideoImage_color
 	_on_image_brightness_value_changed(ImageBrightness.value)
 	_on_image_fog_value_changed(ImageFog.value)
 	_on_image_color_changed(ImageColor.color)

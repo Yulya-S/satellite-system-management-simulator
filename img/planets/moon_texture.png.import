@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rw1qqyjtx0kk"
-path.s3tc="res://.godot/imported/Earth_earth_texture.png-15d6a26e1f014deb29662a7827d99fb9.s3tc.ctex"
+uid="uid://tfgo1c8ugae8"
+path.s3tc="res://.godot/imported/moon_texture.png-da11bee25daacd64156bf938a1000157.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/Earth_earth_texture.png"
-dest_files=["res://.godot/imported/Earth_earth_texture.png-15d6a26e1f014deb29662a7827d99fb9.s3tc.ctex"]
+source_file="res://img/planets/moon_texture.png"
+dest_files=["res://.godot/imported/moon_texture.png-da11bee25daacd64156bf938a1000157.s3tc.ctex"]
 
 [params]
 

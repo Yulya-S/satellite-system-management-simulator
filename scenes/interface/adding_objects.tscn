@@ -53,11 +53,13 @@ theme_override_constants/separation = 15
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 selected = 0
-item_count = 2
+item_count = 3
 popup/item_0/text = "Кубсат"
 popup/item_0/id = 0
 popup/item_1/text = "OneWeb"
 popup/item_1/id = 1
+popup/item_2/text = "Луна"
+popup/item_2/id = 2
 
 [node name="Label" type="Label" parent="Unit/VBoxContainer/Type"]
 layout_mode = 0

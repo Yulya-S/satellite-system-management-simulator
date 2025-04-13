@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl17otaftrv5k"]
+[gd_scene load_steps=7 format=3 uid="uid://dl17otaftrv5k"]
 
 [ext_resource type="Script" uid="uid://b37wsovxwu6km" path="res://scripts/main.gd" id="1_8ddfb"]
 [ext_resource type="PackedScene" uid="uid://douqqili8ko0o" path="res://scenes/system.tscn" id="2_rqwli"]
-[ext_resource type="Script" uid="uid://dk1xcwu67bdpt" path="res://scripts/objects/saturation.gd" id="4_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://c581h6fd8bwbu" path="res://scenes/interface/video_options.tscn" id="3_eyyyf"]
+[ext_resource type="Script" uid="uid://5ofajpb7qdqm" path="res://scripts/interface/timer.gd" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://dk1xcwu67bdpt" path="res://scripts/saturation.gd" id="4_tbgi4"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ha4fm"]
 viewport_path = NodePath("TextureRect/SubViewport")
@@ -76,6 +78,9 @@ offset_top = 41.0
 offset_right = 399.0
 offset_bottom = 628.0
 
+[node name="videoOptions" parent="CanvasLayer/Interface/InterfaceContainer" instance=ExtResource("3_eyyyf")]
+layout_mode = 2
+
 [node name="Tracking" type="ColorRect" parent="CanvasLayer"]
 offset_left = 1048.0
 offset_right = 1152.0
@@ -117,7 +122,7 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
 
-[node name="DayCounter" type="Label" parent="CanvasLayer"]
+[node name="Timer" type="Label" parent="CanvasLayer"]
 offset_left = 8.0
 offset_top = 596.0
 offset_right = 270.0
@@ -126,6 +131,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 40
 text = "день:"
+script = ExtResource("4_jyhfs")
 
 [connection signal="button_down" from="CanvasLayer/Interface/PageName/Left" to="." method="_on_left_button_down"]
 [connection signal="button_down" from="CanvasLayer/Interface/PageName/Right" to="." method="_on_right_button_down"]

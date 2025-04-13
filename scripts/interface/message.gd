@@ -8,8 +8,8 @@ extends PopupPanel
 
 
 func set_data(tracker_owner):
-	position.x = 644.0 - size.x - 10
-	position.y = 648.0 - size.y - 10
+	position.x = 644 - size.x - 10
+	position.y = 648 - size.y - 10
 	
 	# сохраняем ссылку на объект
 	ID.set_text("id: " + str(tracker_owner.get_instance_id()))
@@ -18,8 +18,9 @@ func set_data(tracker_owner):
 	var type = tracker_owner.scene_file_path.split("/")[-1].split(".")[0]
 	if type == "satelite_group":
 		type = tracker_owner.get_child(0).scene_file_path.split("/")[-1].split(".")[0]
-		
-	TrackerImage.texture = load("res://img/" + type + ".jpg") # замена изображения
+	
+	if FileAccess.file_exists("res://img/" + type + ".jpg"):
+		TrackerImage.texture = load("res://img/" + type + ".jpg") # замена изображения
 	
 	# смена названия объекта
 	match type:

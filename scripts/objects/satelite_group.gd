@@ -22,3 +22,6 @@ func _add_ring(radius: int, count: int, t_step: float, y: float = 0):
 		add_child(obj.instantiate())
 		get_child(-1).calculation_parameters(radius, t, 90 + y)
 		t += t_step
+		
+
+func save_data(): if get_child_count() > 0: get_child(0).save_data

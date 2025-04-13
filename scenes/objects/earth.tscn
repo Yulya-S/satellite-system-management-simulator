@@ -1,40 +1,40 @@
 [gd_scene load_steps=3 format=3 uid="uid://8spdcfr48xg2"]
 
 [ext_resource type="Script" uid="uid://o07jqs1b03by" path="res://scripts/objects/earth.gd" id="1_t1d2g"]
-[ext_resource type="PackedScene" uid="uid://c58lq5cwfvmsr" path="res://models/Earth.glb" id="2_vuhev"]
+[ext_resource type="PackedScene" uid="uid://1frjmu1tihff" path="res://scenes/objects/sphere.tscn" id="2_wqfbo"]
 
 [node name="Earth" type="Node3D"]
 script = ExtResource("1_t1d2g")
 
-[node name="Earth" parent="." instance=ExtResource("2_vuhev")]
-transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
+[node name="Sphere" parent="." instance=ExtResource("2_wqfbo")]
+transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, 0, 0, 0)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Earth"]
-transform = Transform3D(0.142857, 0, 0, 0, 0.142857, 0, 0, 0, 0.142857, 0.600102, 0.723721, -0.607544)
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.60163, 11.5795, -9.7207)
 light_energy = 1.828
 omni_range = 10.206
 omni_attenuation = -0.64
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Earth"]
-transform = Transform3D(0.142857, 0, 0, 0, 0.13121, 0.0564996, 0, -0.0564996, 0.13121, -0.484303, 0.684746, -0.735561)
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.918468, 0.395496, 0, -0.395496, 0.918468, -7.74885, 10.9559, -11.769)
 light_energy = 1.828
 omni_range = 13.904
 omni_attenuation = -0.64
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="Earth"]
-transform = Transform3D(0.142857, 0, 0, 0, 0.13121, 0.0564996, 0, -0.0564996, 0.13121, 0.72522, -0.201931, -0.819413)
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.918468, 0.395496, 0, -0.395496, 0.918468, 11.6035, -3.2309, -13.1106)
 light_energy = 1.828
 omni_range = 8.627
 omni_attenuation = -0.64
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="Earth"]
-transform = Transform3D(0.142857, 0, 0, 0, 0.13121, 0.0564996, 0, -0.0564996, 0.13121, -0.238373, 0.862165, 0.760042)
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.918468, 0.395496, 0, -0.395496, 0.918468, -3.81397, 13.7946, 12.1607)
 light_energy = 1.828
 omni_range = 9.236
 omni_attenuation = -0.64
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="Earth"]
-transform = Transform3D(0.142857, 0, 0, 0, 0.13121, 0.0564996, 0, -0.0564996, 0.13121, 0.529912, -0.336687, 0.93483)
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.918468, 0.395496, 0, -0.395496, 0.918468, 8.47859, -5.38699, 14.9573)
 light_energy = 1.828
 omni_range = 9.236
 omni_attenuation = -0.64

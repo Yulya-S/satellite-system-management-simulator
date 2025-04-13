@@ -10,6 +10,7 @@ extends VBoxContainer
 @onready var StarActivity = $Star/VBoxContainer/Activity
 
 const page_name: String = "планетарная система"
+const presets = ["earth", "mars"]
 
 
 func _ready() -> void:
@@ -20,8 +21,10 @@ func _ready() -> void:
 
 
 # изменение присета планеты
-func _on_preset_planet_item_selected(_index: int) -> void:
-	pass
+func _on_preset_planet_item_selected(index: int) -> void:
+	Settings.Planet_preset = presets[index]
+	Settings.read_planet_file()
+	_on_planet_button_down()
 
 
 # изменение значения гравитации планеты
@@ -68,8 +71,9 @@ func _on_star_activity_text_set() -> void:
 
 # сброс настроек планеты
 func _on_planet_button_down() -> void:
-	PlanetGravitation.set_text("1.0")
-	PlanetWeight.set_text("1.0")
+	Settings.read_planet_file()
+	PlanetGravitation.set_text(str(Settings.SystemPlanet_gravitation))
+	PlanetWeight.set_text(str(Settings.SystemPlanet_weight))
 
 
 # сброс настроек звезды

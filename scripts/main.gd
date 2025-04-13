@@ -3,18 +3,24 @@ extends Node2D
 @onready var FPS = $CanvasLayer/FPS
 @onready var PageName = $CanvasLayer/Interface/PageName/Label
 @onready var InterfaceContainer = $CanvasLayer/Interface/InterfaceContainer
+@onready var DayCounter = $CanvasLayer/DayCounter
 
 # страницы настроек
 const pages = ["video_options", "adding_objects", "planetary_system_options"]
 var page_index: int = 0
 
 
-func _ready() -> void: PageName.set_text(InterfaceContainer.get_child(0).page_name.to_upper())
+func _ready() -> void:
+	Settings.create_dir() # создание папки с данными
+	
+	InterfaceContainer.add_child(load("res://scenes/interface/" + pages[page_index] + ".tscn").instantiate())
+	PageName.set_text(InterfaceContainer.get_child(0).page_name.to_upper())
 
 
 func _process(_delta: float) -> void:
 	# отображение количества кадров в секунду
 	FPS.set_text("FPS: " + str(Performance.get_monitor(Performance.TIME_FPS)))
+	DayCounter.set_text("День: " + str(Settings.Day_counter))
 	
 	# обработка запука консоли разработчика
 	if Input.is_action_just_pressed("developer_console"):

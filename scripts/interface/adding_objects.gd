@@ -60,7 +60,7 @@ func _on_unit_button_down() -> void:
 	if not radius.is_valid_int() or int(radius) < min_r:
 		Settings.set_error(UnitError, "Радиус должен быть числом больше " + str(min_r))
 	else:
-		const objects = ["cubsat", "oneWeb"]
+		const objects = ["cubsat", "oneWeb", "moon"]
 		add_object(UnitError, objects[UnitType.selected], radius, UnitPositionOnCircle, UnitY)
 		
 # Нужно сюда внести отслеживание наличия такого объекта в системе

@@ -13,19 +13,19 @@ func set_tracker_owner(new_owner):
 	TrackerLabel.set_text(str(tracker_owner.get_instance_id()).left(5))
 	
 	# получение типа объекта
-	var color = Color.BROWN
+	var marker_color = Color.BROWN
 	var type = tracker_owner.scene_file_path.split("/")[-1].split(".")[0]
 	if type == "satelite_group":
 		type = tracker_owner.get_child(0).scene_file_path.split("/")[-1].split(".")[0]
 	
 	# смена названия объекта
 	match type:
-		"cubsat": color = Color.AQUA
-		"lemur": color = Color.DARK_BLUE
-		"mks": color = Color.DIM_GRAY
-		"oneWeb": color = Color.DARK_GOLDENROD
-		"starlink": color = Color.DARK_GREEN
-	Marker.color = color # установка цветового маркера
+		"cubsat": marker_color = Color.AQUA
+		"lemur": marker_color = Color.DARK_BLUE
+		"mks": marker_color = Color.DIM_GRAY
+		"oneWeb": marker_color = Color.DARK_GOLDENROD
+		"starlink": marker_color = Color.DARK_GREEN
+	Marker.color = marker_color # установка цветового маркера
 	
 
 func _process(_delta: float) -> void:

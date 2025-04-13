@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://1frjmu1tihff"]
+
+[ext_resource type="Script" uid="uid://ybikdypdqaem" path="res://scripts/objects/sphere.gd" id="2_o5iu8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_fjdrf"]
+radial_segments = 20
+rings = 10
+
+[node name="Sphere" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_fjdrf")
+script = ExtResource("2_o5iu8")
