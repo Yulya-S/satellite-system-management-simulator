@@ -79,7 +79,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "20"
+text = "300"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Unit/VBoxContainer/Radius"]
@@ -257,7 +257,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "60"
+text = "1000"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Unique/VBoxContainer/Radius"]
@@ -436,7 +436,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "20"
+text = "300"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Pack/VBoxContainer/Start"]
@@ -459,7 +459,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "10"
+text = "5000"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Pack/VBoxContainer/Step"]
@@ -538,7 +538,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "20"
+text = "300"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Net/VBoxContainer/Start"]

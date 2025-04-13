@@ -55,7 +55,7 @@ func add_object(error, obj_name: String, radius: String, position_on_circle, y):
 # добавление единичного объекта
 func _on_unit_button_down() -> void:
 	var radius: String = $Unit/VBoxContainer/Radius.get_text()
-	const min_r: int = 20
+	const min_r: int = 300
 	
 	if not radius.is_valid_int() or int(radius) < min_r:
 		Settings.set_error(UnitError, "Радиус должен быть числом больше " + str(min_r))
@@ -67,7 +67,7 @@ func _on_unit_button_down() -> void:
 # добавление уникального объекта
 func _on_unique_button_down() -> void:
 	var radius: String = $Unique/VBoxContainer/Radius.get_text()
-	const min_r: int = 60
+	const min_r: int = 1000
 	
 	if not radius.is_valid_int() or int(radius) < min_r:
 		Settings.set_error(UnitError, "Радиус должен быть числом больше " + str(min_r))
@@ -81,8 +81,8 @@ func _on_pack_button_down() -> void:
 	var count: String = $Pack/VBoxContainer/Count.get_text()
 	var start: String = $Pack/VBoxContainer/Start.get_text()
 	var step: String = $Pack/VBoxContainer/Step.get_text()
-	const min_start: int = 20
-	const min_step: int = 5
+	const min_start: int = 300
+	const min_step: int = 10
 	
 	if not count.is_valid_int() or not start.is_valid_int() or not step.is_valid_int():
 		Settings.set_error(PackError, "Значения должны быть целыми числами")
@@ -101,7 +101,7 @@ func _on_pack_button_down() -> void:
 # добавление сетки starlink
 func _on_net_button_down() -> void:
 	var start: String = $Net/VBoxContainer/Start.get_text()
-	const min_start: int = 20
+	const min_start: int = 300
 	if not start.is_valid_int() or int(start) < min_start:
 		Settings.set_error(NetError, "Отступ от центра должен быть числом больше " + str(min_start))
 	else:

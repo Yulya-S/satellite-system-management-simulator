@@ -20,7 +20,6 @@ func calculation_parameters(new_radius: int, new_t: float, y: float):
 	start_t = deg_to_rad(new_t)
 	sphere_pos_y = deg_to_rad(y)
 	speed = 0.1
-	#update_speed()
 	update_rotation()
 
 
@@ -55,8 +54,8 @@ func update_rotation():
 
 # скорость движения объекта
 func update_speed():
-	var s = sqrt(2 * ((Settings.SystemPlanet_gravitation * Settings.SystemPlanet_weight) / get_real_r() + Settings.e)) #/ 16.
-	speed = s / Settings.Unit_distance / radius / 130
+	var s = sqrt(2 * ((Settings.SystemPlanet_gravitation * Settings.SystemPlanet_weight) / get_real_r() + Settings.e))
+	speed = s * Settings.Unit_distance / (10 ** 10 - 10 ** 9 * 4)
 
 # изменение радиуса
 func update_radius(): pass
