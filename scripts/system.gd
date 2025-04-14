@@ -28,8 +28,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	Count.set_text(str(System.get_child_count())) # пометка количества объектов в системе
 	if Settings.Changing_day_count:
-		for i in System.get_children():
-			i.save_data()
+		for i in System.get_children(): i.save_data()
 		Settings.Changing_day_count = false
 
 

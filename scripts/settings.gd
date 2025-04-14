@@ -16,7 +16,7 @@ signal add_net(radius: int, step: int)
 
 
 # константы
-const e: float = 1.
+const G: float = 6.67 * (10. ** -11)
 var saturation = {} # Насыщенность воздуха химическими элементами
 var Environment_array = ["environment_1.jpg", "environment_2.jpg", "environment_3.jpg"]
 var Planet_preset = "earth"
@@ -51,9 +51,9 @@ var SystemStar_activity: float = 1.
 
 
 # получить плотность воздуха в зависимости от растояния до объекта
-func EarthAirDensity(height: float) -> float:
-	const AtmosphereAltitude: float = 1.
-	return SystemStar_activity * e ** (-height / AtmosphereAltitude)
+#func EarthAirDensity(height: float) -> float:
+	#const AtmosphereAltitude: float = 1.
+	#return SystemStar_activity * e ** (-height / AtmosphereAltitude)
 
 
 # Применение текста при ошибке ввода
@@ -85,7 +85,7 @@ func create_dir():
 		file_name = dir.get_next()
 	
 	# чтение настроек
-	read_config_file("Image")
+	read_config_file()
 	read_planet_file()
 	read_saturation_file()
 
@@ -134,8 +134,7 @@ func read_config_file(chapter: String = ""):
 	for i in data.keys():
 		if i not in variables: continue
 		if "color" in i: data[i] = Color(data[i])
-		if chapter in i: set(i, data[i])
-
+		if chapter in i or chapter == "": set(i, data[i])
 
 # загрузка настроек планеты
 func read_planet_file():

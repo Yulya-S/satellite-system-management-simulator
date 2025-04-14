@@ -27,6 +27,8 @@ func _ready() -> void:
 	VideoSpeed.value = Settings.Video_speed
 	VideoScale.value = Settings.Video_scale
 	VideoImage.selected = Settings.Video_image_idx
+	_on_video_image_item_selected(Settings.Video_image_idx)
+	
 	VideoSaturation.button_pressed = Settings.Video_show_saturation
 	
 	CameraX.value = Settings.VideoCamera_x

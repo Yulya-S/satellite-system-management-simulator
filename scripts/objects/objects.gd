@@ -19,7 +19,7 @@ func calculation_parameters(new_radius: int, new_t: float, y: float):
 	t = deg_to_rad(new_t)
 	start_t = deg_to_rad(new_t)
 	sphere_pos_y = deg_to_rad(y)
-	speed = 0.1
+	speed = (sqrt((Settings.G*Settings.SystemPlanet_weight) / (get_real_r() ** 2)) * Settings.Unit_distance)
 	update_rotation()
 
 
@@ -33,46 +33,44 @@ func _process(_delta: float) -> void:
 	if Settings.Video_speed > 0:
 		# изменение параметров
 		update_rotation()
-		#if ceil(radius) < 450: update_speed_with_atmospheric_braking()
-		update_speed()
-		#update_radius()
+		speed += get_delta_speed() * Settings.Unit_distance
+		radius += get_delta_radius() * Settings.Unit_distance
 		
 		# следующий шаг
 		t += speed * (1.3 ** (Settings.Video_speed - 1))
-		while t - start_t > 2 * PI:
-			t -= 2 * PI
-			circle_count += 1
-			average_speed += speed
-			
-			
+		if t - start_t > 2. * PI:
+			circle_count += floor(t / (2. * PI))
+			average_speed += speed * floor(t / (2. * PI))
+			t -= (2 * PI) * floor(t - start_t / (2. * PI))
+				
 
 # поворот объекта к планете	
 func update_rotation():
 	get_child(0).rotation_degrees.y = -rad_to_deg(t) + 90
 	get_child(0).rotation_degrees.x = rad_to_deg(sphere_pos_y) + 90
-	
 
-# скорость движения объекта
-func update_speed():
-	var s = sqrt(2 * ((Settings.SystemPlanet_gravitation * Settings.SystemPlanet_weight) / get_real_r() + Settings.e))
-	speed = s * Settings.Unit_distance / (10 ** 10 - 10 ** 9 * 4)
-
-# изменение радиуса
-func update_radius(): pass
-	#var r = (Settings.SystemPlanet_gravitation * Settings.SystemPlanet_weight) / (85 * (speed ** 2) - Settings.e)
-	#radius += r * (1.3 ** (Settings.Video_speed - 1)) / distance_multiplier
-	
-	
-func get_real_r():
+# получение приведенного радиуса
+func get_real_r() -> float:
 	return radius / Settings.Unit_distance - Settings.SystemPlanet_radius
-	
 
-# скорость движения объекта с учетом атмосферы Земли
-func update_speed_with_atmospheric_braking():
-	#var acceleration: float = Settings.SystemPlanet_acceleration - (1. / 2. * weight) * \
-		#Settings.saturation[ceil(radius)] / distance_multiplier * drag_coefficient * cross_sectional_area * (speed ** 2)
-	#speed -= acceleration / 1000000000 * Settings.Video_speed
-	if speed <= 0: speed = 0.000000001
+# получение приведенной скорости
+func get_real_speed() -> float:
+	return speed / Settings.Unit_distance
+
+# получение силы трения
+func get_F() -> float:
+	var p = 0.
+	if round(get_real_r()) in Settings.saturation.keys():
+		p = Settings.saturation[round(get_real_r())]
+	return 2.5 * (p * (get_real_speed() ** 2) / 2.) / 1E14
+
+# значение изменения скорости движения объекта
+func get_delta_speed() -> float:
+	return (2. * PI * get_F() * get_real_r()) / (weight * get_real_speed())
+
+# значение изменения радиуса
+func get_delta_radius() -> float:
+	return - (2. * get_real_r() * get_delta_speed()) / get_real_speed()
 
 
 # сохранение данных за день в файл
