@@ -1,9 +1,14 @@
 extends Node3D
 @export var object_name: String = "starlink"
-@export var model_name: String = object_name
 @export var color_marker: Color = Color.DARK_GREEN
+@export var unique: bool = false
+var model_name: String = ""
+
 
 var obj = load("res://scenes/objects/starlink.tscn")
+
+
+func _ready() -> void: model_name = get_child(0).scene_file_path.split("/")[-1].split(".")[0]
 
 
 # расчет сетки

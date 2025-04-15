@@ -5,6 +5,8 @@
 
 [node name="Lemur" type="Node3D"]
 script = ExtResource("1_roscl")
+object_name = "лемур"
 color_marker = Color(0, 0, 0.545098, 1)
+unique = true
 
 [node name="lemur" parent="." instance=ExtResource("2_roscl")]

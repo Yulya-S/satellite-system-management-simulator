@@ -1,8 +1,9 @@
 extends Node3D
 
 @export var object_name: String = "кубсат"
-@export var model_name: String = "cubsat"
 @export var color_marker: Color = Color.AQUA
+@export var unique: bool = false
+var model_name: String = ""
 
 @export var drag_coefficient: float = 1.05
 @export var cross_sectional_area: float = 100. / 100.
@@ -16,6 +17,8 @@ var speed: float = 0. # скорость движения объекта
 var start_t: float = deg_to_rad(90)
 var circle_count: int = 0
 var average_speed: float = 0.
+
+func _ready() -> void: model_name = scene_file_path.split("/")[-1].split(".")[0]
 
 # расчеты параметров
 func calculation_parameters(new_radius: int, new_t: float, y: float):

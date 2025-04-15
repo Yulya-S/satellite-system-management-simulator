@@ -1,5 +1,7 @@
 extends VBoxContainer
 
+@onready var System = $"../../../../TextureRect/SubViewport/System"
+
 @onready var UnitError = $Unit/Error
 @onready var UnitType = $Unit/VBoxContainer/Type
 @onready var UnitPositionOnCircle = $Unit/VBoxContainer/PositionOnCircle
@@ -60,7 +62,7 @@ func _on_unit_button_down() -> void:
 	if not radius.is_valid_int() or int(radius) < min_r:
 		Settings.set_error(UnitError, "Радиус должен быть числом больше " + str(min_r))
 	else:
-		const objects = ["cubsat", "oneWeb", "moon"]
+		const objects = ["cubsat", "oneWeb"]
 		add_object(UnitError, objects[UnitType.selected], radius, UnitPositionOnCircle, UnitY)
 		
 # Нужно сюда внести отслеживание наличия такого объекта в системе
@@ -68,11 +70,16 @@ func _on_unit_button_down() -> void:
 func _on_unique_button_down() -> void:
 	var radius: String = $Unique/VBoxContainer/Radius.get_text()
 	const min_r: int = 1000
+	const objects = ["mks", "lemur"]
+	var unique_objects = []
+	for i in System.System.get_children():
+		if i.unique: unique_objects.push_back(i.model_name)
 	
 	if not radius.is_valid_int() or int(radius) < min_r:
-		Settings.set_error(UnitError, "Радиус должен быть числом больше " + str(min_r))
+		Settings.set_error(UniqueError, "Радиус должен быть числом больше " + str(min_r))
+	elif objects[UniqueType.selected] in unique_objects:
+		Settings.set_error(UniqueError, "Объект выбранного типа уже существует в системе")
 	else:
-		const objects = ["mks", "lemur"]
 		add_object(UniqueError, objects[UniqueType.selected], radius, UniquePositionOnCircle, UniqueY)
 
 

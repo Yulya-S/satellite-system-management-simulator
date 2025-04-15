@@ -5,6 +5,7 @@
 
 [node name="OneWeb" type="Node3D"]
 script = ExtResource("1_co3km")
+object_name = "OneWeb"
 color_marker = Color(0.721569, 0.52549, 0.0431373, 1)
 
 [node name="oneWeb" parent="." instance=ExtResource("2_co3km")]
