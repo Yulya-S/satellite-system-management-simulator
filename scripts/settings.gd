@@ -14,12 +14,16 @@ signal changing_SystemStar_activity(value: float)
 signal add_object(object: String, radius: int, t: int, y: int)
 signal add_net(radius: int, step: int)
 
+signal add_tracker(object)
+signal remove_tracker(object)
+
+
+# список состояний
+enum TrackerStates {NORMAL, HOVER, ACTIVE}
 
 # константы
 const G: float = 6.67 * (10. ** -11)
 var saturation = {} # Насыщенность воздуха химическими элементами
-var Environment_array = ["environment_1.jpg", "environment_2.jpg", "environment_3.jpg"]
-var Planet_preset = "earth"
 
 # данные системы
 var Unit_distance: float = 1. # приведение растояния (пиксели) к реальному значению (км)
@@ -41,19 +45,22 @@ var VideoImage_brightness: float = 1.
 var VideoImage_fog: float = 0.
 var VideoImage_color: Color = Color.WHITE
 
-# настройки планетарной системы
-var SystemPlanet_radius: float = 6378.
-var SystemPlanet_gravitation: float = 1. #6.674 * (10 ** -11)
-var SystemPlanet_weight: float = 1. # 5.972 * (10 ** 24)
-# var EarthAirDensity: float = 1.225 # плотность воздуха
 
+# настройки планетарной системы
+var Planet_preset = "earth" # выбранный шаблон планеты
+# настройки планеты
+var SystemPlanet_radius: float = 6378.
+var SystemPlanet_gravitation: float = 1.
+var SystemPlanet_weight: float = 1.
+
+# настройки звезду планетарной системы
 var SystemStar_activity: float = 1.
 
 
-# получить плотность воздуха в зависимости от растояния до объекта
-#func EarthAirDensity(height: float) -> float:
-	#const AtmosphereAltitude: float = 1.
-	#return SystemStar_activity * e ** (-height / AtmosphereAltitude)
+# вычисление значения единицы растояния
+func calculation_unit_distance(planet_scene):
+	var sphare_radius = planet_scene.get_child(0).get_child(0).get_aabb().size[0] * planet_scene.get_child(0).scale[0]
+	Settings.Unit_distance = sphare_radius / (Settings.SystemPlanet_radius * 2)
 
 
 # Применение текста при ошибке ввода
@@ -74,6 +81,7 @@ func create_dir():
 	# создание стандартных настроек
 	create_config_file()
 	create_planet_presets()
+	create_air_saturation_file()
 	
 	# очистка результатов расчетов
 	var path = "res://data/objects/"
@@ -95,7 +103,6 @@ func create_config_file():
 	if FileAccess.file_exists(file): return
 	file = FileAccess.open(file, FileAccess.WRITE)
 	var data = {
-		"Environment_array" = ["environment_1.jpg", "environment_2.jpg", "environment_3.jpg"],
 		"Planet_preset" = "earth",
 		"Video_speed" = 1,
 		"Video_scale" = 150,
@@ -120,6 +127,19 @@ func create_planet_presets():
 			"SystemPlanet_weight" = 5.972E24
 		}
 		file.store_line(JSON.stringify(data))
+
+# создание файла с данными по плотности воздуха (от 0 км до 20 км)
+func create_air_saturation_file():
+	var file = "res://data/air_saturation.txt"
+	if FileAccess.file_exists(file): return
+	file = FileAccess.open(file, FileAccess.WRITE)
+	file.store_line("3.0733778923463335e-134 0.0\n2.1081135682369468e-134 1.0
+1.4077175289960447e-134 2.0\n9.256722711838169e-135 3.0\n6.05036200323462e-135 4.0
+3.959759194749001e-135 5.0\n2.5998469431297575e-135 6.0\n1.692062600349413e-135 7.0
+1.0779062307772853e-135 8.0\n6.6561054522095284e-136 9.0\n3.956389739735531e-136 10.0
+2.2588969388092237e-136 11.0\n1.2515806741938476e-136 12.0\n6.807634137968026e-137 13.0
+3.6713785255297746e-137 14.0\n1.980106826452151e-137 15.0\n1.0740878086003172e-137 16.0
+5.845420215542337e-138 17.0\n3.1791181607573224e-138 18.0\n1.721980704674219e-138 19.0")
 
 
 # загрузка системных настроек

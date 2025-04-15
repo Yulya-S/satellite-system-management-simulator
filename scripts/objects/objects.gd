@@ -1,32 +1,35 @@
 extends Node3D
 
+# изменяемые данные
 @export var object_name: String = "кубсат"
 @export var color_marker: Color = Color.AQUA
 @export var unique: bool = false
 var model_name: String = ""
-
-@export var drag_coefficient: float = 1.05
-@export var cross_sectional_area: float = 100. / 100.
 @export var weight: float = 1.
 
+# параметры
 var radius: float = 100. # растояние от центра
 var t: float = deg_to_rad(90) # текущий поворот
 var sphere_pos_y: float = deg_to_rad(90) # высота расположения объекта вокруг сферы
 var speed: float = 0. # скорость движения объекта
 
+# данные для записи
 var start_t: float = deg_to_rad(90)
-var circle_count: int = 0
-var average_speed: float = 0.
+var circle_count: int = 0	# количество кругов за день
+var average_speed: float = 0. # средняя скорость за день
+var first_circle: bool = true
+
 
 func _ready() -> void: model_name = scene_file_path.split("/")[-1].split(".")[0]
 
-# расчеты параметров
+
+# применение начальной озиции объекта
 func calculation_parameters(new_radius: int, new_t: float, y: float):
 	radius = (float(new_radius) + Settings.SystemPlanet_radius) * Settings.Unit_distance
 	t = deg_to_rad(new_t)
 	start_t = deg_to_rad(new_t)
 	sphere_pos_y = deg_to_rad(y)
-	speed = (sqrt((Settings.G*Settings.SystemPlanet_weight) / (get_real_r() ** 2)) * Settings.Unit_distance) / 50
+	speed = (sqrt((Settings.G*Settings.SystemPlanet_weight) / (get_real_r() ** 2)) * Settings.Unit_distance)
 	update_rotation()
 
 
@@ -43,11 +46,11 @@ func _process(_delta: float) -> void:
 		radius += get_delta_radius() * Settings.Unit_distance
 		
 		# следующий шаг
-		t += speed * (1.3 ** (Settings.Video_speed - 1))
+		t += (speed / (360 + Performance.get_monitor(Performance.TIME_FPS))) * (1.3 ** (Settings.Video_speed - 1))
 		if t - start_t > 2. * PI:
 			circle_count += floor(t / (2. * PI))
 			average_speed += speed * floor(t / (2. * PI))
-			t -= (2 * PI) * floor(t - start_t / (2. * PI))
+			t -= (2 * PI) * floor(t / (2. * PI))
 				
 
 # поворот объекта к планете	
@@ -65,6 +68,7 @@ func get_real_speed() -> float:
 
 # получение силы трения
 func get_F() -> float:
+	# поиск насыщености воздуха на определенной высоте
 	var p = 0.
 	if round(get_real_r()) in Settings.saturation.keys():
 		p = Settings.saturation[round(get_real_r())]
@@ -81,11 +85,16 @@ func get_delta_radius() -> float:
 
 # сохранение данных за день в файл
 func save_data():
-	var file = "res://data/objects/" + scene_file_path.split("/")[-1].split(".")[0] + str(get_instance_id())+ ".txt"
-	if FileAccess.file_exists(file):
-		file = FileAccess.open(file, FileAccess.READ_WRITE)
-	else:
-		file = FileAccess.open(file, FileAccess.WRITE)
+	# обнуление данных при первом круге
+	if first_circle:
+		first_circle = false
+		circle_count = 0
+		average_speed = 0.
+		return
+	
+	var file = "res://data/objects/" + model_name + str(get_instance_id())+ ".txt"
+	if FileAccess.file_exists(file): file = FileAccess.open(file, FileAccess.READ_WRITE)
+	else: file = FileAccess.open(file, FileAccess.WRITE)
 	file.seek_end()
 	file.store_line(str(Settings.Day_counter) + " " + str(circle_count) + " " \
 					+ str(average_speed  / circle_count) + " " +  str(get_real_r()))

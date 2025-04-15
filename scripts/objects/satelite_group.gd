@@ -1,14 +1,25 @@
 extends Node3D
+
+# изменяемые данные
 @export var object_name: String = "starlink"
 @export var color_marker: Color = Color.DARK_GREEN
 @export var unique: bool = false
 var model_name: String = ""
 
-
+# объекты в группе
 var obj = load("res://scenes/objects/starlink.tscn")
+
+# количество пройденых кругов первого объекта в группе
+var circle_count: int = 0
 
 
 func _ready() -> void: model_name = get_child(0).scene_file_path.split("/")[-1].split(".")[0]
+
+
+# получение данных о количестве пройденых кругов первого объекта в группе
+func _process(_delta: float) -> void:
+	if get_child_count() > 0:
+		circle_count = get_child(0).circle_count
 
 
 # расчет сетки
@@ -31,6 +42,18 @@ func _add_ring(radius: int, count: int, t_step: float, y: float = 0):
 		add_child(obj.instantiate())
 		get_child(-1).calculation_parameters(radius, t, 90 + y)
 		t += t_step
-		
 
-func save_data(): if get_child_count() > 0: get_child(0).save_data
+
+func get_real_r():
+	if get_child_count() > 0:
+		return get_child(0).get_real_r()
+
+
+func get_real_speed():
+	if get_child_count() > 0:
+		return get_child(0).get_real_speed()
+
+
+# сохранение данных за день в файл
+func save_data():
+	if get_child_count() > 0: get_child(0).save_data

@@ -457,7 +457,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "5000"
+text = "1000"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Pack/VBoxContainer/Step"]

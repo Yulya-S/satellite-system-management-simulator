@@ -1,50 +1,45 @@
-extends ColorRect
+extends Button
 
-@onready var TrackerLabel = $Label
-@onready var Marker = $ColorRect/Marker
+@onready var Marker = $Marker
+@onready var Active = $Active
 
-var tracker_owner = null
+var tracker_owner = null # владелец трекера
+var state = Settings.TrackerStates.NORMAL # состояние трекера
 
 
+# создание свзи между трекером и объектом
 func set_tracker_owner(new_owner):
-	# сохраняем ссылку на объект
-	tracker_owner = new_owner
-	TrackerLabel.set_text(str(tracker_owner.get_instance_id()).left(5))
-	
-	var type = tracker_owner.model_name # получение типа объекта
-	var marker_color = tracker_owner.color_marker # получение цветового маркера
-	Marker.color = marker_color # установка цветового маркера
+	tracker_owner = new_owner # сохраняем ссылку на объект
+	set_text(str(tracker_owner.get_instance_id())) # устанавливаем id объекта
+	Marker.color = tracker_owner.color_marker # изменяем цвемовой маркер объекта
 	
 
 func _process(_delta: float) -> void:
-	# обновление данных
-	if not tracker_owner: Marker.color = Color.BROWN
-	elif get_child_count() > 3:
-		var parent = tracker_owner
-		if Marker.color == Color.DARK_GREEN: parent = tracker_owner.get_child(0)
-		get_child(-1).set_text(parent)
+	if not tracker_owner: Marker.color = Color.BROWN # обновление данных
 
 
+# наведение курсора на трекер
 func _on_mouse_entered() -> void:
+	if state == Settings.TrackerStates.ACTIVE: return
+	state = Settings.TrackerStates.HOVER
 	if tracker_owner:
-		# добавляем окно информации
-		add_child(load("res://scenes/interface/message.tscn").instantiate())
-		get_child(-1).set_data(tracker_owner)
+		Settings.emit_signal("add_tracker", tracker_owner) # привязываем окно информации
 		# добавление выделения объекта
-		tracker_owner.add_child(load("res://scenes/objects/torus.tscn").instantiate())
+		tracker_owner.add_child(load("res://scenes/objects/tracker_marker.tscn").instantiate())
 
 
+# курсор убран с трекера
 func _on_mouse_exited() -> void:
-	# удаляем окно информации
-	if get_child_count() > 3:
-		get_child(-1).queue_free()
-		remove_child(get_child(-1))
-	# удаление выделения объекта
-	if tracker_owner:
-		tracker_owner.get_child(-1).queue_free()
-		tracker_owner.remove_child(tracker_owner.get_child(-1))
+	if state == Settings.TrackerStates.HOVER:
+		Settings.emit_signal("remove_tracker", tracker_owner) # удаляеем связь с окном информации
+		# удаление выделения объекта
+		if tracker_owner:
+			tracker_owner.get_child(-1).queue_free()
+			tracker_owner.remove_child(tracker_owner.get_child(-1))
+		state = Settings.TrackerStates.NORMAL
 
 
+# удаление объекта и  трекера
 func delete_object():
 	if tracker_owner:
 		tracker_owner.queue_free()
@@ -52,5 +47,20 @@ func delete_object():
 	queue_free()
 	get_parent().remove_child(self)
 
-func _on_button_down() -> void: delete_object()
+# нажатие кнопки удаления
+func _on_delete_button_down() -> void:
+	if state == Settings.TrackerStates.ACTIVE:
+		state = Settings.TrackerStates.HOVER
+		_on_mouse_exited()
+	delete_object()
+
+
+# фиксация трекера
+func _on_button_down() -> void:
+	for i in get_parent().get_children():
+		if i == self: continue
+		if i.state == Settings.TrackerStates.ACTIVE: return
+	if state == Settings.TrackerStates.HOVER: state = Settings.TrackerStates.ACTIVE
+	else: state = Settings.TrackerStates.HOVER
+	Active.visible = state == Settings.TrackerStates.ACTIVE
 	

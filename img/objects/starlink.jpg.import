@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cts4wj5o5a2sv"
-path="res://.godot/imported/mks.jpg-8512affdd18020676d97428db1e61021.ctex"
+uid="uid://rawy5ivdh74s"
+path="res://.godot/imported/starlink.jpg-9ecc4cc8030d48ea08544acd3be32c40.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/mks.jpg"
-dest_files=["res://.godot/imported/mks.jpg-8512affdd18020676d97428db1e61021.ctex"]
+source_file="res://img/objects/starlink.jpg"
+dest_files=["res://.godot/imported/starlink.jpg-9ecc4cc8030d48ea08544acd3be32c40.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@onready var star = $"../../../../TextureRect/SubViewport/System/SpotLight3D"
+@onready var Planet = $"../../../../TextureRect/SubViewport/System/Planet"
 
 @onready var PlanetError = $Planet/Error
 @onready var PlanetGravitation = $Planet/VBoxContainer/Gravitation
@@ -24,6 +24,7 @@ func _ready() -> void:
 func _on_preset_planet_item_selected(index: int) -> void:
 	Settings.Planet_preset = presets[index]
 	Settings.read_planet_file()
+	Settings.calculation_unit_distance(Planet)
 	_on_planet_button_down()
 
 

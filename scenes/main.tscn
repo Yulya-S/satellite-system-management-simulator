@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl17otaftrv5k"]
+[gd_scene load_steps=6 format=3 uid="uid://dl17otaftrv5k"]
 
 [ext_resource type="Script" uid="uid://b37wsovxwu6km" path="res://scripts/main.gd" id="1_8ddfb"]
 [ext_resource type="PackedScene" uid="uid://douqqili8ko0o" path="res://scenes/system.tscn" id="2_rqwli"]
+[ext_resource type="PackedScene" uid="uid://d2qxxdmdwwtib" path="res://scenes/interface/object_information.tscn" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://dk1xcwu67bdpt" path="res://scripts/objects/saturation.gd" id="4_tbgi4"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ha4fm"]
 viewport_path = NodePath("TextureRect/SubViewport")
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_8ddfb")
 
@@ -126,6 +127,9 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 40
 text = "день:"
+
+[node name="ObjectInformation" parent="CanvasLayer" instance=ExtResource("4_jyhfs")]
+position = Vector2(242, 501)
 
 [connection signal="button_down" from="CanvasLayer/Interface/PageName/Left" to="." method="_on_left_button_down"]
 [connection signal="button_down" from="CanvasLayer/Interface/PageName/Right" to="." method="_on_right_button_down"]

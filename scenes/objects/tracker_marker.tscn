@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds1oj4sxpjqjk"]
+
+[ext_resource type="Script" uid="uid://b2xqwlppfr2x2" path="res://scripts/objects/tracker_marker.gd" id="1_oa5uq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yx3io"]
+albedo_color = Color(1, 0.0941176, 0.0431373, 1)
+emission_enabled = true
+emission = Color(1, 0.0924628, 0.0427979, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_4nuub"]
+material = SubResource("StandardMaterial3D_yx3io")
+inner_radius = 1.009
+outer_radius = 0.626
+rings = 18
+ring_segments = 9
+
+[node name="TrackerMarker" type="Node3D"]
+script = ExtResource("1_oa5uq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("TorusMesh_4nuub")

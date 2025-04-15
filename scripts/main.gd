@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var Planet = $TextureRect/SubViewport/System/Planet
+
 @onready var FPS = $CanvasLayer/FPS
 @onready var PageName = $CanvasLayer/Interface/PageName/Label
 @onready var InterfaceContainer = $CanvasLayer/Interface/InterfaceContainer
@@ -12,6 +14,8 @@ var page_index: int = 0
 
 func _ready() -> void:
 	Settings.create_dir() # создание папки с данными
+	Settings.calculation_unit_distance(Planet)
+	Settings.emit_signal("changing_Video_image_idx", Settings.Video_image_idx)
 	InterfaceContainer.add_child(load("res://scenes/interface/" + pages[page_index] + ".tscn").instantiate())
 	PageName.set_text(InterfaceContainer.get_child(0).page_name.to_upper())
 

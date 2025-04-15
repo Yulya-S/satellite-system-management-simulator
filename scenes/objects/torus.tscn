@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds1oj4sxpjqjk"]
-
-[ext_resource type="PackedScene" uid="uid://cgxn4cvys8u1i" path="res://models/torus.glb" id="1_j67of"]
-[ext_resource type="Script" uid="uid://b2xqwlppfr2x2" path="res://scripts/objects/torus.gd" id="2_cq5ct"]
-
-[node name="Torus" type="Node3D"]
-script = ExtResource("2_cq5ct")
-
-[node name="torus" parent="." instance=ExtResource("1_j67of")]

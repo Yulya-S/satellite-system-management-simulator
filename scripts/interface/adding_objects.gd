@@ -64,8 +64,8 @@ func _on_unit_button_down() -> void:
 	else:
 		const objects = ["cubsat", "oneWeb"]
 		add_object(UnitError, objects[UnitType.selected], radius, UnitPositionOnCircle, UnitY)
-		
-# Нужно сюда внести отслеживание наличия такого объекта в системе
+
+
 # добавление уникального объекта
 func _on_unique_button_down() -> void:
 	var radius: String = $Unique/VBoxContainer/Radius.get_text()
