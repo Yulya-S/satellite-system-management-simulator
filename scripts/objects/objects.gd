@@ -1,5 +1,9 @@
 extends Node3D
 
+@export var object_name: String = "кубсат"
+@export var model_name: String = "cubsat"
+@export var color_marker: Color = Color.AQUA
+
 @export var drag_coefficient: float = 1.05
 @export var cross_sectional_area: float = 100. / 100.
 @export var weight: float = 1.
@@ -19,7 +23,7 @@ func calculation_parameters(new_radius: int, new_t: float, y: float):
 	t = deg_to_rad(new_t)
 	start_t = deg_to_rad(new_t)
 	sphere_pos_y = deg_to_rad(y)
-	speed = (sqrt((Settings.G*Settings.SystemPlanet_weight) / (get_real_r() ** 2)) * Settings.Unit_distance)
+	speed = (sqrt((Settings.G*Settings.SystemPlanet_weight) / (get_real_r() ** 2)) * Settings.Unit_distance) / 50
 	update_rotation()
 
 
@@ -29,10 +33,9 @@ func _process(_delta: float) -> void:
 	var y = radius * cos(sphere_pos_y)
 	var z = radius * sin(sphere_pos_y) * sin(t)
 	position = Vector3(x, y, z)
-	
+	update_rotation()
 	if Settings.Video_speed > 0:
 		# изменение параметров
-		update_rotation()
 		speed += get_delta_speed() * Settings.Unit_distance
 		radius += get_delta_radius() * Settings.Unit_distance
 		

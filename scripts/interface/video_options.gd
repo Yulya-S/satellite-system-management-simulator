@@ -12,7 +12,7 @@ extends VBoxContainer
 @onready var ImageFog = $Image/VBoxContainer/Fog
 @onready var ImageColor = $Image/VBoxContainer/Color
 
-const page_name: String = "Основное"
+const page_name: String = "Основное⚙"
 const factor: int = 5
 
 func _ready() -> void:

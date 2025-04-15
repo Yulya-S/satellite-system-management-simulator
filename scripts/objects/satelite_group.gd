@@ -1,4 +1,8 @@
 extends Node3D
+@export var object_name: String = "starlink"
+@export var model_name: String = object_name
+@export var color_marker: Color = Color.DARK_GREEN
+
 var obj = load("res://scenes/objects/starlink.tscn")
 
 

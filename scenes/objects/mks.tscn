@@ -5,5 +5,6 @@
 
 [node name="MKS" type="Node3D"]
 script = ExtResource("1_k48j2")
+color_marker = Color(0.411765, 0.411765, 0.411765, 1)
 
 [node name="MKS" parent="." instance=ExtResource("2_k48j2")]

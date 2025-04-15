@@ -9,7 +9,7 @@ extends VBoxContainer
 @onready var StarError = $Star/Error
 @onready var StarActivity = $Star/VBoxContainer/Activity
 
-const page_name: String = "планетарная система"
+const page_name: String = "планетарная система🌌"
 const presets = ["earth", "mars"]
 
 

@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var System = $"../TextureRect/SubViewport/System/System"
+@onready var Trackers = $"../CanvasLayer/Tracking/ScrollContainer/Tracking"
 @onready var Text = $TextEdit
 @onready var Message = $Message
 
@@ -28,7 +29,5 @@ func run_command(command):
 
 # команда удаления всех объектов системы
 func clear_system():
-	for i in System.get_children():
-		i.queue_free()
-		System.remove_child(i)
+	for i in Trackers.get_children(): i.delete_object()
 	Message.text += "Орбитальная система была очищена\n"

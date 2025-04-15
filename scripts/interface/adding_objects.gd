@@ -15,7 +15,7 @@ extends VBoxContainer
 @onready var NetError = $Net/Error
 @onready var NetStep = $Net/VBoxContainer/Step
 
-const page_name: String = "добавление объектов"
+const page_name: String = "добавление объектов🛰"
 
 
 func _ready() -> void:
