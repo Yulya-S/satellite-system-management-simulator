@@ -119,17 +119,25 @@ text = "0"
 horizontal_alignment = 2
 
 [node name="DayCounter" type="Label" parent="CanvasLayer"]
-offset_left = 8.0
-offset_top = 596.0
-offset_right = 270.0
-offset_bottom = 651.0
+offset_left = 5.0
+offset_top = 591.0
+offset_right = 267.0
+offset_bottom = 646.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 40
 text = "день:"
+
+[node name="Pause" type="Button" parent="CanvasLayer/DayCounter"]
+layout_mode = 0
+offset_top = -30.0
+offset_right = 109.0
+offset_bottom = 1.0
+text = "ПАУЗА"
 
 [node name="ObjectInformation" parent="CanvasLayer" instance=ExtResource("4_jyhfs")]
 position = Vector2(242, 501)
 
 [connection signal="button_down" from="CanvasLayer/Interface/PageName/Left" to="." method="_on_left_button_down"]
 [connection signal="button_down" from="CanvasLayer/Interface/PageName/Right" to="." method="_on_right_button_down"]
+[connection signal="button_down" from="CanvasLayer/DayCounter/Pause" to="." method="_on_button_button_down"]

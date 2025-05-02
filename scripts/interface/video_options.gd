@@ -24,7 +24,7 @@ func _ready() -> void:
 	CameraY.step = factor
 	
 	# получение значений из файла настроек
-	VideoSpeed.value = Settings.Video_speed
+	VideoSpeed.selected = Settings.Video_speed_idx
 	VideoScale.value = Settings.Video_scale
 	VideoImage.selected = Settings.Video_image_idx
 	_on_video_image_item_selected(Settings.Video_image_idx)
@@ -39,7 +39,7 @@ func _ready() -> void:
 	ImageColor.color = Settings.VideoImage_color
 	
 	# Изменение текстовых значений параметров
-	for i in [VideoSpeed, VideoScale, CameraX, CameraY, ImageBrightness, ImageFog]:
+	for i in [VideoScale, CameraX, CameraY, ImageBrightness, ImageFog]:
 		i.get_child(0).set_text(str(int(i.value)))
 
 
@@ -54,9 +54,8 @@ func _set_picker():
 
 
 # изменение скорости симуляции
-func _on_video_speed_value_changed(value: int) -> void:
-	VideoSpeed.get_child(0).set_text(str(value))
-	Settings.Video_speed = value
+func _on_video_speed_item_selected(index: int) -> void:
+	Settings.Video_speed_idx = index
 
 # изменение масштаба
 func _on_video_scale_value_changed(value: int) -> void:
@@ -66,7 +65,8 @@ func _on_video_scale_value_changed(value: int) -> void:
 	Settings.emit_signal("changing_Video_show_saturation")
 
 # изменение изображения окружения
-func _on_video_image_item_selected(index: int) -> void: Settings.emit_signal("changing_Video_image_idx", index)
+func _on_video_image_item_selected(index: int) -> void:
+	Settings.emit_signal("changing_Video_image_idx", index)
 
 # изменение видимости плотности воздуха
 func _on_video_saturation_toggled(toggled_on: bool) -> void:

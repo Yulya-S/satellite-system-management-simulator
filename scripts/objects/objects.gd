@@ -8,96 +8,71 @@ var model_name: String = ""
 @export var weight: float = 1.
 
 # параметры
-var radius: float = 100. # растояние от центра
-var t: float = deg_to_rad(90) # текущий поворот
-var sphere_pos_y: float = deg_to_rad(90) # высота расположения объекта вокруг сферы
+var h: float = 100. # растояние от центра
+var angle: float = deg_to_rad(90.) # текущий поворот
+
+var sphere_pos_y: float = deg_to_rad(90.) # высота расположения объекта вокруг сферы
 var speed: float = 0. # скорость движения объекта
 
 # данные для записи
-var start_t: float = deg_to_rad(90)
+var start_angle: float = deg_to_rad(90)
 var circle_count: int = 0	# количество кругов за день
 var average_speed: float = 0. # средняя скорость за день
 var first_circle: bool = true
 
 
-func _ready() -> void: model_name = scene_file_path.split("/")[-1].split(".")[0]
+func _ready() -> void:
+	model_name = scene_file_path.split("/")[-1].split(".")[0]
 
 
 # применение начальной озиции объекта
-func calculation_parameters(new_radius: int, new_t: float, y: float):
-	radius = (float(new_radius) + Settings.SystemPlanet_radius) * Settings.Unit_distance
-	t = deg_to_rad(new_t)
-	start_t = deg_to_rad(new_t)
+func calculation_parameters(new_radius: int, new_angle: float, y: float):
+	h = (float(new_radius) + Settings.SystemPlanet_radius) * Settings.Unit_distance
+	angle = deg_to_rad(new_angle)
+	start_angle = deg_to_rad(new_angle)
 	sphere_pos_y = deg_to_rad(y)
-	speed = (sqrt((Settings.G*Settings.SystemPlanet_weight) / (get_real_r() ** 2)) * Settings.Unit_distance)
+	update_pos()
 	update_rotation()
+	#speed = (sqrt((Settings.G*Settings.SystemPlanet_weight) / (get_real_r() ** 2)) * Settings.Unit_distance)
 
 
-func _process(_delta: float) -> void:
-	# расчеты по формулам
-	var x = radius * sin(sphere_pos_y) * cos(t)
-	var y = radius * cos(sphere_pos_y)
-	var z = radius * sin(sphere_pos_y) * sin(t)
+func _process(delta: float) -> void:
+	# изменение параметров
+	if not Settings.Video_stop_system:
+		update_rotation()
+		update_pos()
+		angle += deg_to_rad((360. * delta) / get_t())
+		# увеличесние счетчика количества оборотов
+		if angle > 2. * PI + start_angle:
+			circle_count += floor(angle / (2. * PI))
+			average_speed += get_real_speed()
+			angle -= (2. * PI) * floor(angle / (2. * PI))
+
+
+# Изменение расположения объекта на окружности
+func update_pos():
+	var x = h * sin(sphere_pos_y) * cos(angle)
+	var y = h * cos(sphere_pos_y)
+	var z = h * sin(sphere_pos_y) * sin(angle)
 	position = Vector3(x, y, z)
-	update_rotation()
-	if Settings.Video_speed > 0:
-		# изменение параметров
-		speed += get_delta_speed() * Settings.Unit_distance
-		radius += get_delta_radius() * Settings.Unit_distance
-		
-		# следующий шаг
-		t += (speed / (360 + Performance.get_monitor(Performance.TIME_FPS))) * (1.3 ** (Settings.Video_speed - 1))
-		if t - start_t > 2. * PI:
-			circle_count += floor(t / (2. * PI))
-			average_speed += speed * floor(t / (2. * PI))
-			t -= (2 * PI) * floor(t / (2. * PI))
-				
+	
 
 # поворот объекта к планете	
 func update_rotation():
-	get_child(0).rotation_degrees.y = -rad_to_deg(t) + 90
-	get_child(0).rotation_degrees.x = rad_to_deg(sphere_pos_y) + 90
+	get_child(0).rotation_degrees.y = -rad_to_deg(angle) + 90
+	get_child(0).rotation_degrees.x = rad_to_deg(sphere_pos_y) + 90 + 180
 
 # получение приведенного радиуса
-func get_real_r() -> float:
-	return radius / Settings.Unit_distance - Settings.SystemPlanet_radius
+func get_real_h() -> float:
+	return h / Settings.Unit_distance - Settings.SystemPlanet_radius
 
 # получение приведенной скорости
 func get_real_speed() -> float:
-	return speed / Settings.Unit_distance
-
-# получение силы трения
-func get_F() -> float:
-	# поиск насыщености воздуха на определенной высоте
-	var p = 0.
-	if round(get_real_r()) in Settings.saturation.keys():
-		p = Settings.saturation[round(get_real_r())]
-	return 2.5 * (p * (get_real_speed() ** 2) / 2.) / 1E14
-
-# значение изменения скорости движения объекта
-func get_delta_speed() -> float:
-	return (2. * PI * get_F() * get_real_r()) / (weight * get_real_speed())
-
-# значение изменения радиуса
-func get_delta_radius() -> float:
-	return - (2. * get_real_r() * get_delta_speed()) / get_real_speed()
-
-
-# сохранение данных за день в файл
-func save_data():
-	# обнуление данных при первом круге
-	if first_circle:
-		first_circle = false
-		circle_count = 0
-		average_speed = 0.
-		return
+	return ((2. * PI * (Settings.SystemPlanet_radius + get_real_h())) / get_real_t())
 	
-	var file = "res://data/objects/" + model_name + str(get_instance_id())+ ".txt"
-	if FileAccess.file_exists(file): file = FileAccess.open(file, FileAccess.READ_WRITE)
-	else: file = FileAccess.open(file, FileAccess.WRITE)
-	file.seek_end()
-	file.store_line(str(Settings.Day_counter) + " " + str(circle_count) + " " \
-					+ str(average_speed  / circle_count) + " " +  str(get_real_r()))
-	file.close()
-	circle_count = 0
-	average_speed = 0.
+func get_real_t():
+	var t: float = (Settings.SystemPlanet_radius + get_real_h()) / (Settings.SystemPlanet_radius + Settings.Geostationary_orbit)
+	return Settings.SystemPlanet_turnover_period * (t ** (3. / 2.))
+	
+func get_t() -> float:
+	return (get_real_t() * [60., 30., 1., 0.5][Settings.Video_speed_idx]) / Settings.SystemPlanet_turnover_period

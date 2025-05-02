@@ -90,15 +90,16 @@ func _on_pack_button_down() -> void:
 	var step: String = $Pack/VBoxContainer/Step.get_text()
 	const min_start: int = 300
 	const min_step: int = 10
+	const min_count: int = 2
 	
 	if not count.is_valid_int() or not start.is_valid_int() or not step.is_valid_int():
 		Settings.set_error(PackError, "Значения должны быть целыми числами")
-	elif int(count) <= 0 or int(start) <= 0 or int(step) <= 0:
-		Settings.set_error(PackError, "Значения должны быть больше нуля")
 	elif int(start) < min_start:
 		Settings.set_error(PackError, "Отступ от центра должен быть больше " + str(min_start))
 	elif int(step) < min_step:
 		Settings.set_error(PackError, "Шаг должен быть больше " + str(min_step))
+	elif int(count) < min_count:
+		Settings.set_error(PackError, "Количество объектов должно быть больше " + str(min_count))
 	else:
 		Settings.set_error(PackError)
 		for i in int(count):

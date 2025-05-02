@@ -19,8 +19,8 @@ func _ready() -> void:
 # изменение информации
 func _process(_delta: float) -> void:
 	if information_owner:
-		Radius.set_text("радиус:    " + str(round(information_owner.get_real_r() * 100) / 100) + " км")
-		Speed.set_text("скорость:  " + str(round(information_owner.get_real_speed() / 360 * 100) / 100) + "  км/ч")
+		Radius.set_text("радиус:    " + str(round(information_owner.get_real_h() * 100) / 100) + " км")
+		Speed.set_text("скорость:  " + str(round(information_owner.get_real_speed() * 100) / 100) + "  км/ч")
 		CircleCount.set_text("кол-во кругов:  " + str(information_owner.circle_count))
 
 

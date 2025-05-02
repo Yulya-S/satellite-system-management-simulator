@@ -22,11 +22,12 @@ signal remove_tracker(object)
 enum TrackerStates {NORMAL, HOVER, ACTIVE}
 
 # константы
-const G: float = 6.67 * (10. ** -11)
+const G: float = 6.67430E-11 # гравитационная постоянная
 var saturation = {} # Насыщенность воздуха химическими элементами
 
 # данные системы
 var Unit_distance: float = 1. # приведение растояния (пиксели) к реальному значению (км)
+var Geostationary_orbit: float = 0. # высота геостационарной орбиты
 var Day_counter: int = 0
 var Changing_day_count: bool = false
 
@@ -34,9 +35,11 @@ var Changing_day_count: bool = false
 # изменяемые значения
 # настройки видео
 var Video_speed: int = 1
+var Video_speed_idx: int = 2
 var Video_scale: int = 150
 var Video_image_idx: int = 0
 var Video_show_saturation: bool = true
+var Video_stop_system: bool = false
 
 var VideoCamera_x: int = 270
 var VideoCamera_y: int = 0
@@ -52,6 +55,7 @@ var Planet_preset = "earth" # выбранный шаблон планеты
 var SystemPlanet_radius: float = 6378.
 var SystemPlanet_gravitation: float = 1.
 var SystemPlanet_weight: float = 1.
+var SystemPlanet_turnover_period: float = 86400.
 
 # настройки звезду планетарной системы
 var SystemStar_activity: float = 1.
@@ -61,6 +65,12 @@ var SystemStar_activity: float = 1.
 func calculation_unit_distance(planet_scene):
 	var sphare_radius = planet_scene.get_child(0).get_child(0).get_aabb().size[0] * planet_scene.get_child(0).scale[0]
 	Settings.Unit_distance = sphare_radius / (Settings.SystemPlanet_radius * 2)
+
+# вычисление геостационарной орбиты
+func calculation_geostationary_orbit():
+	var m: float = Settings.G * Settings.SystemPlanet_weight
+	Settings.Geostationary_orbit = ((m * (Settings.SystemPlanet_turnover_period ** 2.)) / (4. * (PI ** 2.))) ** (1. / 3.)
+	Settings.Geostationary_orbit /= 1000
 
 
 # Применение текста при ошибке ввода
@@ -75,22 +85,12 @@ func create_dir():
 	var dir = DirAccess.open("res://")
 	dir.make_dir("data")
 	dir = DirAccess.open("res://data")
-	dir.make_dir("objects") # результаты расчетов
 	dir.make_dir("planet_presets") # настройки планет
 	
 	# создание стандартных настроек
 	create_config_file()
 	create_planet_presets()
 	create_air_saturation_file()
-	
-	# очистка результатов расчетов
-	var path = "res://data/objects/"
-	dir = DirAccess.open(path)
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
-		OS.move_to_trash(ProjectSettings.globalize_path(path + file_name))
-		file_name = dir.get_next()
 	
 	# чтение настроек
 	read_config_file()
@@ -104,10 +104,11 @@ func create_config_file():
 	file = FileAccess.open(file, FileAccess.WRITE)
 	var data = {
 		"Planet_preset" = "earth",
-		"Video_speed" = 1,
+		"Video_speed_idx" = 2,
 		"Video_scale" = 150,
 		"Video_image_idx" = 0,
 		"Video_show_saturation" = true,
+		"Video_stop_system" = false,
 		"VideoCamera_x" = 270,
 		"VideoCamera_y" = 0,
 		"VideoImage_brightness" = 1.,
@@ -122,9 +123,10 @@ func create_planet_presets():
 	if not FileAccess.file_exists(file):
 		file = FileAccess.open(file, FileAccess.WRITE)
 		var data = {
-			"Planet_radius" = 6378.,
+			"SystemPlanet_radius" = 6378.,
 			"SystemPlanet_gravitation" = 9.807,
-			"SystemPlanet_weight" = 5.972E24
+			"SystemPlanet_weight" = 5.972E24,
+			"SystemPlanet_turnover_period" = 86400.0,
 		}
 		file.store_line(JSON.stringify(data))
 
@@ -133,13 +135,13 @@ func create_air_saturation_file():
 	var file = "res://data/air_saturation.txt"
 	if FileAccess.file_exists(file): return
 	file = FileAccess.open(file, FileAccess.WRITE)
-	file.store_line("3.0733778923463335e-134 0.0\n2.1081135682369468e-134 1.0
-1.4077175289960447e-134 2.0\n9.256722711838169e-135 3.0\n6.05036200323462e-135 4.0
-3.959759194749001e-135 5.0\n2.5998469431297575e-135 6.0\n1.692062600349413e-135 7.0
-1.0779062307772853e-135 8.0\n6.6561054522095284e-136 9.0\n3.956389739735531e-136 10.0
-2.2588969388092237e-136 11.0\n1.2515806741938476e-136 12.0\n6.807634137968026e-137 13.0
-3.6713785255297746e-137 14.0\n1.980106826452151e-137 15.0\n1.0740878086003172e-137 16.0
-5.845420215542337e-138 17.0\n3.1791181607573224e-138 18.0\n1.721980704674219e-138 19.0")
+	file.store_line("251204241917707.6 0.0\n228610658524441.88 1.0\n206657824318504.03 2.0
+186096106492082.88 3.0\n167327880526692.12 4.0\n150501268062597.9 5.0
+135475234991135.34 6.0\n121682205371253.05 7.0\n108709677235090.6 8.0
+96366928180965.05 9.0\n84615073116823.6 10.0\n73552436492303.7 11.0
+63458191685639.484 12.0\n54496928240198.5 13.0\n46701437395733.805 14.0
+40021661494524.89 15.0\n34346534008737.004 16.0\n29500331718313.508 17.0
+25333758190339.168 18.0\n21733518526801.78 19.0\n18612866225994.195 20.0")
 
 
 # загрузка системных настроек

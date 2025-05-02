@@ -10,3 +10,4 @@ color_marker = Color(0.411765, 0.411765, 0.411765, 1)
 unique = true
 
 [node name="MKS" parent="." instance=ExtResource("2_k48j2")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
