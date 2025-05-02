@@ -29,7 +29,6 @@ var saturation = {} # Насыщенность воздуха химически
 var Unit_distance: float = 1. # приведение растояния (пиксели) к реальному значению (км)
 var Geostationary_orbit: float = 0. # высота геостационарной орбиты
 var Day_counter: int = 0
-var Changing_day_count: bool = false
 
 
 # изменяемые значения

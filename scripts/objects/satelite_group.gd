@@ -15,7 +15,7 @@ var circle_count: int = 0
 
 # получение данных о количестве пройденых кругов первого объекта в группе
 func _process(_delta: float) -> void:
-	if model_name == "": get_child(0).scene_file_path.split("/")[-1].split(".")[0]
+	if not model_name: get_child(0).scene_file_path.split("/")[-1].split(".")[0]
 	if get_child_count() > 0:
 		circle_count = get_child(0).circle_count
 
@@ -42,9 +42,16 @@ func _add_ring(radius: int, count: int, t_step: float, y: float = 0):
 		t += t_step
 
 
+func get_model_size():
+	if get_child_count() > 0: return Vector3(get_child(0).h + 5,  get_child(0).h + 5,  get_child(0).h + 5)
+	return Vector3(1., 1., 1.)
+
+
 func get_real_h():
 	if get_child_count() > 0: return get_child(0).get_real_h()
+	return 0.
 
 
 func get_real_speed():
 	if get_child_count() > 0: return get_child(0).get_real_speed()
+	return 0.

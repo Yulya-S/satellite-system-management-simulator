@@ -18,11 +18,12 @@ var speed: float = 0. # скорость движения объекта
 var start_angle: float = deg_to_rad(90)
 var circle_count: int = 0	# количество кругов за день
 var average_speed: float = 0. # средняя скорость за день
-var first_circle: bool = true
+var previous_day: int = 0
 
 
 func _ready() -> void:
 	model_name = scene_file_path.split("/")[-1].split(".")[0]
+	previous_day = Settings.Day_counter
 
 
 # применение начальной озиции объекта
@@ -33,8 +34,7 @@ func calculation_parameters(new_radius: int, new_angle: float, y: float):
 	sphere_pos_y = deg_to_rad(y)
 	update_pos()
 	update_rotation()
-	#speed = (sqrt((Settings.G*Settings.SystemPlanet_weight) / (get_real_r() ** 2)) * Settings.Unit_distance)
-
+	
 
 func _process(delta: float) -> void:
 	# изменение параметров
@@ -47,6 +47,9 @@ func _process(delta: float) -> void:
 			circle_count += floor(angle / (2. * PI))
 			average_speed += get_real_speed()
 			angle -= (2. * PI) * floor(angle / (2. * PI))
+	if previous_day != Settings.Day_counter:
+		circle_count = 0
+		previous_day = Settings.Day_counter
 
 
 # Изменение расположения объекта на окружности
@@ -55,12 +58,15 @@ func update_pos():
 	var y = h * cos(sphere_pos_y)
 	var z = h * sin(sphere_pos_y) * sin(angle)
 	position = Vector3(x, y, z)
-	
+
 
 # поворот объекта к планете	
 func update_rotation():
 	get_child(0).rotation_degrees.y = -rad_to_deg(angle) + 90
 	get_child(0).rotation_degrees.x = rad_to_deg(sphere_pos_y) + 90 + 180
+
+# возврат размера трехмерной модели (для отображения маркера объекта)
+func get_model_size(): return get_child(0).get_child(0).get_aabb().size * get_child(0).scale
 
 # получение приведенного радиуса
 func get_real_h() -> float:
@@ -73,6 +79,6 @@ func get_real_speed() -> float:
 func get_real_t():
 	var t: float = (Settings.SystemPlanet_radius + get_real_h()) / (Settings.SystemPlanet_radius + Settings.Geostationary_orbit)
 	return Settings.SystemPlanet_turnover_period * (t ** (3. / 2.))
-	
+
 func get_t() -> float:
 	return (get_real_t() * [60., 30., 1., 0.5][Settings.Video_speed_idx]) / Settings.SystemPlanet_turnover_period
