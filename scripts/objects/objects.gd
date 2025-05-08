@@ -81,4 +81,4 @@ func get_real_t():
 	return Settings.SystemPlanet_turnover_period * (t ** (3. / 2.))
 
 func get_t() -> float:
-	return (get_real_t() * [60., 30., 1., 0.5][Settings.Video_speed_idx]) / Settings.SystemPlanet_turnover_period
+	return (get_real_t() * Settings.Video_speed) / Settings.SystemPlanet_turnover_period
