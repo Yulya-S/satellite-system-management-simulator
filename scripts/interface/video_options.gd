@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+@onready var VideoError = $Video/Error
 @onready var VideoSpeed = $Video/VBoxContainer/Speed
 @onready var VideoScale = $Video/VBoxContainer/Scale
 @onready var VideoImage = $Video/VBoxContainer/Image
@@ -24,7 +25,7 @@ func _ready() -> void:
 	CameraY.step = factor
 	
 	# получение значений из файла настроек
-	VideoSpeed.selected = Settings.Video_speed_idx
+	VideoSpeed.set_text(str(Settings.Video_speed))
 	VideoScale.value = Settings.Video_scale
 	VideoImage.selected = Settings.Video_image_idx
 	_on_video_image_item_selected(Settings.Video_image_idx)
@@ -56,6 +57,19 @@ func _set_picker():
 # изменение скорости симуляции
 func _on_video_speed_item_selected(index: int) -> void:
 	Settings.Video_speed_idx = index
+	
+# изменение скорости симуляции
+func _on_video_speed_text_changed() -> void:
+	if len(VideoSpeed.get_text()) > 0 and "\n" in VideoSpeed.get_text():
+		VideoSpeed.set_text(VideoSpeed.get_text().replace("\n", ""))
+		VideoSpeed.release_focus()
+
+func _on_video_speed_text_set() -> void:
+	if not VideoSpeed.get_text().is_valid_float() or float(VideoSpeed.get_text()) <= 0:
+		Settings.set_error(VideoError, "Скорость симуляции должна быть числом больше 0")
+	else:
+		Settings.set_error(VideoError)
+		Settings.Video_speed = float(VideoSpeed.get_text())
 
 # изменение масштаба
 func _on_video_scale_value_changed(value: int) -> void:

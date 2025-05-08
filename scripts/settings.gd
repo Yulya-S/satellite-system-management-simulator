@@ -33,8 +33,7 @@ var Day_counter: int = 0
 
 # изменяемые значения
 # настройки видео
-var Video_speed: int = 1
-var Video_speed_idx: int = 2
+var Video_speed: float = 1.
 var Video_scale: int = 150
 var Video_image_idx: int = 0
 var Video_show_saturation: bool = true
@@ -103,7 +102,7 @@ func create_config_file():
 	file = FileAccess.open(file, FileAccess.WRITE)
 	var data = {
 		"Planet_preset" = "earth",
-		"Video_speed_idx" = 2,
+		"Video_speed" = 1.,
 		"Video_scale" = 150,
 		"Video_image_idx" = 0,
 		"Video_show_saturation" = true,
