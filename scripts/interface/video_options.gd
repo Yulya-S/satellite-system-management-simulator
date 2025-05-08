@@ -40,8 +40,11 @@ func _ready() -> void:
 	ImageColor.color = Settings.VideoImage_color
 	
 	# Изменение текстовых значений параметров
-	for i in [VideoScale, CameraX, CameraY, ImageBrightness, ImageFog]:
+	for i in [VideoScale, ImageBrightness, ImageFog]:
 		i.get_child(0).set_text(str(int(i.value)))
+		
+	CameraX.get_child(0).set_text(str(int(CameraX.value)) + "°")
+	CameraY.get_child(0).set_text(str(int(CameraY.value)) + "°")
 
 
 # настройка окна выбора цвета
@@ -90,13 +93,13 @@ func _on_video_saturation_toggled(toggled_on: bool) -> void:
 
 # изменение поворота камеры по X
 func _on_camera_x_value_changed(value: int) -> void:
-	CameraX.get_child(0).set_text(str(value))
+	CameraX.get_child(0).set_text(str(int(value)) + "°")
 	Settings.VideoCamera_x = value
 	Settings.emit_signal("changing_VideoCamera_x", value)
 
 # изменение поворота камеры по Y
 func _on_camera_y_value_changed(value: int) -> void:
-	CameraY.get_child(0).set_text(str(value))
+	CameraY.get_child(0).set_text(str(int(value)) + "°")
 	Settings.VideoCamera_y = value
 	Settings.emit_signal("changing_VideoCamera_y", value)
 

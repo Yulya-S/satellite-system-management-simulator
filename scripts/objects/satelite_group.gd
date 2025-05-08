@@ -38,7 +38,7 @@ func _add_ring(radius: int, count: int, t_step: float, y: float = 0):
 	var t: float = 0.
 	for i in range(count):
 		add_child(obj.instantiate())
-		get_child(-1).calculation_parameters(radius, t, 90 + y)
+		get_child(-1).calculation_parameters(radius, 0, t, 90 + y)
 		t += t_step
 
 

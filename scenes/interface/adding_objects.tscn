@@ -10,7 +10,7 @@ theme_override_constants/separation = 20
 script = ExtResource("1_e2b3v")
 
 [node name="Unit" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 210)
 layout_mode = 2
 color = Color(0.877616, 0.877616, 0.877616, 1)
 
@@ -43,21 +43,25 @@ vertical_alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Unit"]
 layout_mode = 0
-offset_left = 117.0
+offset_left = 138.0
 offset_top = 32.0
 offset_right = 290.0
-offset_bottom = 113.0
+offset_bottom = 180.0
 theme_override_constants/separation = 15
 
 [node name="Type" type="OptionButton" parent="Unit/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 selected = 0
-item_count = 2
+item_count = 4
 popup/item_0/text = "Кубсат"
 popup/item_0/id = 0
 popup/item_1/text = "OneWeb"
 popup/item_1/id = 1
+popup/item_2/text = "Лемур"
+popup/item_2/id = 2
+popup/item_3/text = "МКС"
+popup/item_3/id = 3
 
 [node name="Label" type="Label" parent="Unit/VBoxContainer/Type"]
 layout_mode = 0
@@ -77,7 +81,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "500"
+text = "300"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Unit/VBoxContainer/Radius"]
@@ -89,18 +93,17 @@ offset_bottom = 22.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "расстояние до планеты"
+text = "отступ от центра (км)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="PositionOnCircle" type="HSlider" parent="Unit/VBoxContainer"]
+[node name="Inclination" type="HSlider" parent="Unit/VBoxContainer"]
 modulate = Color(0.368627, 0.156863, 0.109804, 1)
 layout_mode = 2
 max_value = 360.0
-value = 90.0
 
-[node name="value" type="Label" parent="Unit/VBoxContainer/PositionOnCircle"]
+[node name="value" type="Label" parent="Unit/VBoxContainer/Inclination"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -118,7 +121,7 @@ theme_override_font_sizes/font_size = 10
 text = "10"
 vertical_alignment = 1
 
-[node name="name" type="Label" parent="Unit/VBoxContainer/PositionOnCircle"]
+[node name="name" type="Label" parent="Unit/VBoxContainer/Inclination"]
 layout_mode = 0
 offset_left = -101.0
 offset_top = -6.0
@@ -127,19 +130,17 @@ offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "положение на окружности"
+text = "наклонение (i)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Y" type="HSlider" parent="Unit/VBoxContainer"]
+[node name="AscendingNode" type="HSlider" parent="Unit/VBoxContainer"]
 modulate = Color(0.368627, 0.156863, 0.109804, 1)
 layout_mode = 2
-min_value = 10.0
-max_value = 350.0
-value = 90.0
+max_value = 360.0
 
-[node name="value" type="Label" parent="Unit/VBoxContainer/Y"]
+[node name="value" type="Label" parent="Unit/VBoxContainer/AscendingNode"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -157,199 +158,21 @@ theme_override_font_sizes/font_size = 10
 text = "10"
 vertical_alignment = 1
 
-[node name="name" type="Label" parent="Unit/VBoxContainer/Y"]
+[node name="name" type="Label" parent="Unit/VBoxContainer/AscendingNode"]
 layout_mode = 0
-offset_left = -101.0
+offset_left = -133.0
 offset_top = -6.0
 offset_right = -3.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "положение по Y"
+text = "долгота восходящего узла (Ω)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Button" type="Button" parent="Unit"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -114.0
-offset_top = -33.0
-offset_right = 115.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 12
-text = "Добавить"
-
-[node name="Unique" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-color = Color(0.877616, 0.877616, 0.877616, 1)
-
-[node name="Label" type="Label" parent="Unique"]
-layout_mode = 0
-offset_left = 3.0
-offset_right = 180.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 16
-text = "уникальный объект"
-
-[node name="Error" type="Label" parent="Unique"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -142.5
-offset_top = -47.0
-offset_right = 145.5
-offset_bottom = -33.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.592157, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Unique"]
-layout_mode = 0
-offset_left = 117.0
-offset_top = 32.0
-offset_right = 290.0
-offset_bottom = 113.0
-theme_override_constants/separation = 15
-
-[node name="Type" type="OptionButton" parent="Unique/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-selected = 0
-item_count = 2
-popup/item_0/text = "МКС"
-popup/item_0/id = 0
-popup/item_1/text = "Лемур"
-popup/item_1/id = 1
-
-[node name="Label" type="Label" parent="Unique/VBoxContainer/Type"]
-layout_mode = 0
-offset_left = -101.0
-offset_top = 2.0
-offset_right = -3.0
-offset_bottom = 19.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 12
-text = "вид спутника"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Radius" type="TextEdit" parent="Unique/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(0, 17)
-layout_mode = 2
-theme_override_constants/line_spacing = 0
-theme_override_font_sizes/font_size = 10
-text = "1000"
-scroll_past_end_of_file = true
-
-[node name="Label" type="Label" parent="Unique/VBoxContainer/Radius"]
-layout_mode = 0
-offset_left = -101.0
-offset_top = -5.0
-offset_right = -3.0
-offset_bottom = 22.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -5
-theme_override_font_sizes/font_size = 12
-text = "расстояние до планеты"
-horizontal_alignment = 2
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="PositionOnCircle" type="HSlider" parent="Unique/VBoxContainer"]
-modulate = Color(0.368627, 0.156863, 0.109804, 1)
-layout_mode = 2
-max_value = 360.0
-value = 90.0
-
-[node name="value" type="Label" parent="Unique/VBoxContainer/PositionOnCircle"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -7.0
-offset_right = 40.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = "10"
-vertical_alignment = 1
-
-[node name="name" type="Label" parent="Unique/VBoxContainer/PositionOnCircle"]
-layout_mode = 0
-offset_left = -101.0
-offset_top = -6.0
-offset_right = -3.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -5
-theme_override_font_sizes/font_size = 12
-text = "положение на окружности"
-horizontal_alignment = 2
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="Y" type="HSlider" parent="Unique/VBoxContainer"]
-modulate = Color(0.368627, 0.156863, 0.109804, 1)
-layout_mode = 2
-min_value = 10.0
-max_value = 350.0
-value = 90.0
-
-[node name="value" type="Label" parent="Unique/VBoxContainer/Y"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -7.0
-offset_right = 40.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = "10"
-vertical_alignment = 1
-
-[node name="name" type="Label" parent="Unique/VBoxContainer/Y"]
-layout_mode = 0
-offset_left = -101.0
-offset_top = -6.0
-offset_right = -3.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -5
-theme_override_font_sizes/font_size = 12
-text = "положение по Y"
-horizontal_alignment = 2
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="Button" type="Button" parent="Unique"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -439,14 +262,14 @@ scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Pack/VBoxContainer/Start"]
 layout_mode = 0
-offset_left = -120.0
-offset_top = -4.0
-offset_right = -3.0
-offset_bottom = 19.0
+offset_left = -119.0
+offset_top = -7.0
+offset_right = -2.0
+offset_bottom = 22.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "отступ от центра"
+text = "отступ от центра (км)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -462,14 +285,14 @@ scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Pack/VBoxContainer/Step"]
 layout_mode = 0
-offset_left = -51.0
+offset_left = -88.0
 offset_top = -6.0
 offset_right = -3.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "шаг"
+text = "шаг (км)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -541,14 +364,14 @@ scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Net/VBoxContainer/Start"]
 layout_mode = 0
-offset_left = -115.0
-offset_top = -4.0
-offset_right = -3.0
-offset_bottom = 19.0
+offset_left = -116.0
+offset_top = -7.0
+offset_right = -4.0
+offset_bottom = 22.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "отступ от центра"
+text = "отступ от центра (км)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -608,12 +431,9 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 12
 text = "Добавить"
 
-[connection signal="value_changed" from="Unit/VBoxContainer/PositionOnCircle" to="." method="_on_unit_position_on_circle_value_changed"]
-[connection signal="value_changed" from="Unit/VBoxContainer/Y" to="." method="_on_unit_y_value_changed"]
+[connection signal="value_changed" from="Unit/VBoxContainer/Inclination" to="." method="_on_unit_inclination_value_changed"]
+[connection signal="value_changed" from="Unit/VBoxContainer/AscendingNode" to="." method="_on_unit_ascending_node_value_changed"]
 [connection signal="button_down" from="Unit/Button" to="." method="_on_unit_button_down"]
-[connection signal="value_changed" from="Unique/VBoxContainer/PositionOnCircle" to="." method="_on_unique_position_on_circle_value_changed"]
-[connection signal="value_changed" from="Unique/VBoxContainer/Y" to="." method="_on_unique_y_value_changed"]
-[connection signal="button_down" from="Unique/Button" to="." method="_on_unique_button_down"]
 [connection signal="button_down" from="Pack/Button" to="." method="_on_pack_button_down"]
 [connection signal="value_changed" from="Net/VBoxContainer/Step" to="." method="_on_net_step_value_changed"]
 [connection signal="button_down" from="Net/Button" to="." method="_on_net_button_down"]
