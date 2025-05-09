@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	rotation_degrees.x = Settings.VideoCamera_x
+	if get_parent().get_child_count() > 2: rotation_degrees.x += 90
 	rotation_degrees.y = Settings.VideoCamera_y
 	position.x = get_parent().get_child(0).position.x
 	position.y = get_parent().get_child(0).position.y

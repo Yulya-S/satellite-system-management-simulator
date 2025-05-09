@@ -13,7 +13,9 @@ var inclination: float = deg_to_rad(90.) # наклонение
 var ascending_node: float = deg_to_rad(90.) # долгота восходящего узла
 
 var speed: float = 0. # скорость движения объекта
-var angle: float = deg_to_rad(90.)
+var angle: float = deg_to_rad(0.)
+
+const per: float = deg_to_rad(45.)
 
 # данные для записи
 var start_angle: float = deg_to_rad(90.)
@@ -59,19 +61,19 @@ func update_pos():
 	var t_s = h * sin(angle)
 	var t_c = h * cos(angle)
 	
-	var x = t_c * ((cos(ascending_node) * cos(deg_to_rad(0.))) - (sin(ascending_node) * sin(deg_to_rad(0.)) * cos(inclination))) - \
-			t_s * ((sin(ascending_node) * cos(deg_to_rad(0.))) + (cos(ascending_node) * sin(deg_to_rad(0.)) * cos(inclination))) 
-	var y = t_c * ((sin(ascending_node) * cos(deg_to_rad(0.))) + (cos(ascending_node) * sin(deg_to_rad(0.)) * cos(inclination))) + \
-			t_s * ((cos(ascending_node) * cos(deg_to_rad(0.))) - (sin(ascending_node) * sin(deg_to_rad(0.)) * cos(inclination))) 
-	var z = h * (sin(inclination) * sin(angle))
+	var x = (t_c * ((cos(ascending_node) * cos(per)) - (sin(ascending_node) * sin(per) * cos(inclination)))) - \
+			(t_s * ((sin(ascending_node) * cos(per)) + (cos(ascending_node) * sin(per) * cos(inclination)))) 
+	var y = (t_c * ((sin(ascending_node) * cos(per)) + (cos(ascending_node) * sin(per) * cos(inclination)))) + \
+			(t_s * ((cos(ascending_node) * cos(per)) - (sin(ascending_node) * sin(per) * cos(inclination)))) 
+	var z = t_s * sin(inclination)
 	
-	get_child(0).position = Vector3(y, x, z)
+	get_child(0).position = Vector3(x, y, z)
 
 
 # поворот объекта к планете	
 func update_rotation():
-	get_child(0).rotation_degrees.y = rad_to_deg(angle) + 90
-	get_child(0).rotation_degrees.z = rad_to_deg(angle) + 90 + 180
+	get_child(0).rotation_degrees.y = rad_to_deg(angle) + 90.
+	get_child(0).rotation_degrees.z = rad_to_deg(angle) + 90. + 180.
 
 # возврат размера трехмерной модели (для отображения маркера объекта)
 func get_model_size(): return get_child(0).get_child(0).get_aabb().size * get_child(0).scale
