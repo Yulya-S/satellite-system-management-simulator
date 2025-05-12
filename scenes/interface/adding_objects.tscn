@@ -10,7 +10,7 @@ theme_override_constants/separation = 20
 script = ExtResource("1_e2b3v")
 
 [node name="Unit" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 210)
+custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 color = Color(0.877616, 0.877616, 0.877616, 1)
 
@@ -96,6 +96,28 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
 text = "высота (км)"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Weight" type="TextEdit" parent="Unit/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Unit/VBoxContainer/Weight"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -5.0
+offset_right = -3.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 12
+text = "масса (кг)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3

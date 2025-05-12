@@ -5,6 +5,7 @@ extends Node3D
 @export var color_marker: Color = Color.AQUA
 var model_name: String = ""
 @export var weight: float = 1.
+@export var cross_sectional_area: float = 1.
 
 # параметры
 var h: float = 100.
@@ -31,10 +32,11 @@ func _ready() -> void:
 
 
 # применение начальной озиции объекта
-func calculation_parameters(new_radius: float, new_inclination: float, new_ascending_node: float):
+func calculation_parameters(new_radius: float, new_weight: float, new_inclination: float, new_ascending_node: float):
 	h = (float(new_radius) + Settings.SystemPlanet_radius) * Settings.Unit_distance
 	inclination = deg_to_rad(new_inclination)
 	ascending_node = deg_to_rad(new_ascending_node)
+	if new_weight != 0.: weight = new_weight
 	update_pos()
 	#update_rotation()
 	
@@ -44,6 +46,7 @@ func _process(delta: float) -> void:
 	if not Settings.Video_stop_system:
 		#update_rotation()
 		update_pos()
+		update_h(delta)
 		angle += deg_to_rad((360. * delta) / get_t())
 		# увеличесние счетчика количества оборотов
 		if angle > 2. * PI + start_angle:
@@ -67,14 +70,25 @@ func update_pos():
 	get_child(0).position = Vector3(x, y, z)
 
 
+func update_h(delta: float):
+	var p: float = Settings.saturation[Settings.saturation.keys()[-1]]
+	if round(get_real_h()) in Settings.saturation.keys():
+		p = Settings.saturation[round(get_real_h())]
+	var delta_R = 4. * PI * p * (get_real_speed() ** 2.) * cross_sectional_area * Settings.SystemPlanet_radius
+	
+	delta_R /= (weight * Settings.SystemPlanet_gravitation)
+	delta_R = (delta_R * Settings.Video_speed) / Settings.SystemPlanet_turnover_period
+	h -= (360. * delta) / delta_R
+
+
 # поворот объекта к планете	
 func update_rotation():
 	get_child(0).rotation_degrees.y = rad_to_deg(angle) + 90.
 	get_child(0).rotation_degrees.z = rad_to_deg(angle) + 90. + 180.
 
+
 # возврат размера трехмерной модели (для отображения маркера объекта)
 func get_model_size(): return get_child(0).get_child(0).get_aabb().size * get_child(0).scale
-	
 
 # получение приведенного радиуса
 func get_real_h() -> float:

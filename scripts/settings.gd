@@ -11,8 +11,8 @@ signal changing_VideoImage_fog(value: float)
 signal changing_VideoImage_color(value: Color)
 signal changing_SystemStar_activity(value: float)
 
-signal add_object(object: String, radius: int, t: int, y: int)
-signal add_net(radius: int, step: int)
+signal add_object(object: String, radius: float, weight: float, t: float, y: float)
+signal add_net(radius: float, step: int)
 
 signal add_tracker(object)
 signal remove_tracker(object)

@@ -24,25 +24,31 @@ func _on_net_step_value_changed(value: int) -> void:
 
 
 # вызов сигнала добавления объекта
-func add_object(error, obj_name: String, radius: String, inclination: String, ascending_node: String):
+func add_object(error, obj_name: String, radius: String, weight: String, inclination: String, ascending_node: String):
 	Settings.set_error(error)
 	Settings.emit_signal("add_object", "res://scenes/objects/" + obj_name + ".tscn",
-						 float(radius), float(inclination), float(ascending_node))
+						 float(radius), float(weight), float(inclination), float(ascending_node))
 
 
 # добавление единичного объекта
 func _on_unit_button_down() -> void:
 	var radius: String = $Unit/VBoxContainer/Radius.get_text()
+	var weight: String = $Unit/VBoxContainer/Radius.get_text()
 	var inclination: String = $Unit/VBoxContainer/Inclination.get_text()
 	var ascending_node: String = $Unit/VBoxContainer/AscendingNode.get_text()
-	const min_r: float = 300.
+	const min_r: float = 150.
+	const min_w: float = 0.
 	const min_i: float = 0.
 	const max_i: float = 180.
 	const min_a: float = 0.
 	const max_a: float = 360.
 	
-	if not radius.is_valid_float() or not inclination.is_valid_float() or not ascending_node.is_valid_float():
+	if weight == "": weight = "0."
+	
+	if not weight.is_valid_float() or not radius.is_valid_float() or not inclination.is_valid_float() or not ascending_node.is_valid_float():
 		Settings.set_error(UnitError, "все переменные должен быть числами")
+	elif float(weight) <= min_w:
+		Settings.set_error(UnitError, "вес спутника должен быть числом больше " + str(min_w))
 	elif float(radius) < min_r:
 		Settings.set_error(UnitError, "радиус должен быть числом больше " + str(min_r))
 	elif float(inclination) < min_i or float(inclination) > max_i:
@@ -51,7 +57,7 @@ func _on_unit_button_down() -> void:
 		Settings.set_error(UnitError, "долгота восходящего узла должна находиться в диаппазоне от " + str(min_a) + " до " + str(max_a))
 	else:
 		const objects = ["cubsat", "oneWeb", "lemur", "MKS"]
-		add_object(UnitError, objects[UnitType.selected], radius, inclination, ascending_node)
+		add_object(UnitError, objects[UnitType.selected], radius, weight, inclination, ascending_node)
 
 # добавление последовательности объектов
 func _on_pack_button_down() -> void:
@@ -73,7 +79,7 @@ func _on_pack_button_down() -> void:
 	else:
 		Settings.set_error(PackError)
 		for i in int(count):
-			Settings.emit_signal("add_object", "res://scenes/objects/cubsat.tscn", int(start) + i * int(step), 0, 90)
+			Settings.emit_signal("add_object", "res://scenes/objects/cubsat.tscn", int(start) + i * int(step), 0., 0., 90.)
 
 
 # добавление сетки starlink
