@@ -28,17 +28,20 @@ func calculate_group(radius: int, cube_size: int):
 	var ring_count = floor((count - 1) / 2.)
 	
 	# раставление колец по всей высоте планеты
-	for i in range(ring_count):
+	for i in range(1, ring_count, 1):
 		_add_ring(radius, count, 360. / count, i * (90. / ring_count))
 		_add_ring(radius, count, 360. / count, -(i * (90. / ring_count)))
 	
 
 # создание кольца
-func _add_ring(radius: int, count: int, t_step: float, y: float = 0):
+func _add_ring(radius: int, count: int, t_step: float, y: float = 0.):
 	var t: float = 0.
 	for i in range(count):
 		add_child(obj.instantiate())
-		get_child(-1).calculation_parameters(radius, t, 90 + y)
+		get_child(-1).calculation_parameters(radius, y, 0.)
+		get_child(-1).angle = deg_to_rad(t)
+		get_child(-1).start_angle = deg_to_rad(t)
+		get_child(-1).update_pos()
 		t += t_step
 
 

@@ -11,5 +11,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	rotation_degrees.x = Settings.VideoCamera_x - 90
-	rotation_degrees.y = Settings.VideoCamera_y
+	rotation.x = -get_parent().rotation.x
+	rotation.y = -get_parent().rotation.y
+	rotation.z = -get_parent().rotation.z
+	rotation_degrees.x += Settings.VideoCamera_x +90
+	position.x = get_parent().get_child(0).position.x
+	position.y = get_parent().get_child(0).position.y
+	position.z = get_parent().get_child(0).position.z

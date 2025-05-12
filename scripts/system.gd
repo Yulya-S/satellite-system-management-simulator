@@ -63,9 +63,9 @@ func _add_tracker():
 
 
 # добавление нового объекта
-func _add_object(object: String, radius: int, t: int, y: int):
+func _add_object(object: String, radius: float, inclination: float, ascending_node: float):
 	System.add_child(load(object).instantiate())
-	System.get_child(-1).calculation_parameters(radius, t, y)
+	System.get_child(-1).calculation_parameters(radius, inclination, ascending_node)
 	_add_tracker()
 
 	

@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+@onready var VideoError = $Video/Error
 @onready var VideoSpeed = $Video/VBoxContainer/Speed
 @onready var VideoScale = $Video/VBoxContainer/Scale
 @onready var VideoImage = $Video/VBoxContainer/Image
@@ -24,7 +25,7 @@ func _ready() -> void:
 	CameraY.step = factor
 	
 	# получение значений из файла настроек
-	VideoSpeed.selected = Settings.Video_speed_idx
+	VideoSpeed.set_text(str(Settings.Video_speed))
 	VideoScale.value = Settings.Video_scale
 	VideoImage.selected = Settings.Video_image_idx
 	_on_video_image_item_selected(Settings.Video_image_idx)
@@ -39,8 +40,11 @@ func _ready() -> void:
 	ImageColor.color = Settings.VideoImage_color
 	
 	# Изменение текстовых значений параметров
-	for i in [VideoScale, CameraX, CameraY, ImageBrightness, ImageFog]:
+	for i in [VideoScale, ImageBrightness, ImageFog]:
 		i.get_child(0).set_text(str(int(i.value)))
+		
+	CameraX.get_child(0).set_text(str(int(CameraX.value)) + "°")
+	CameraY.get_child(0).set_text(str(int(CameraY.value)) + "°")
 
 
 # настройка окна выбора цвета
@@ -56,6 +60,19 @@ func _set_picker():
 # изменение скорости симуляции
 func _on_video_speed_item_selected(index: int) -> void:
 	Settings.Video_speed_idx = index
+	
+# изменение скорости симуляции
+func _on_video_speed_text_changed() -> void:
+	if len(VideoSpeed.get_text()) > 0 and "\n" in VideoSpeed.get_text():
+		VideoSpeed.set_text(VideoSpeed.get_text().replace("\n", ""))
+		VideoSpeed.release_focus()
+
+func _on_video_speed_text_set() -> void:
+	if not VideoSpeed.get_text().is_valid_float() or float(VideoSpeed.get_text()) <= 0:
+		Settings.set_error(VideoError, "Скорость симуляции должна быть числом больше 0")
+	else:
+		Settings.set_error(VideoError)
+		Settings.Video_speed = float(VideoSpeed.get_text())
 
 # изменение масштаба
 func _on_video_scale_value_changed(value: int) -> void:
@@ -76,13 +93,13 @@ func _on_video_saturation_toggled(toggled_on: bool) -> void:
 
 # изменение поворота камеры по X
 func _on_camera_x_value_changed(value: int) -> void:
-	CameraX.get_child(0).set_text(str(value))
+	CameraX.get_child(0).set_text(str(int(value)) + "°")
 	Settings.VideoCamera_x = value
 	Settings.emit_signal("changing_VideoCamera_x", value)
 
 # изменение поворота камеры по Y
 func _on_camera_y_value_changed(value: int) -> void:
-	CameraY.get_child(0).set_text(str(value))
+	CameraY.get_child(0).set_text(str(int(value)) + "°")
 	Settings.VideoCamera_y = value
 	Settings.emit_signal("changing_VideoCamera_y", value)
 
