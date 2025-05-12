@@ -1,13 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://8spdcfr48xg2"]
+[gd_scene load_steps=5 format=3 uid="uid://8spdcfr48xg2"]
 
 [ext_resource type="Script" uid="uid://o07jqs1b03by" path="res://scripts/objects/planet.gd" id="1_ake5w"]
 [ext_resource type="PackedScene" uid="uid://1frjmu1tihff" path="res://scenes/objects/sphere.tscn" id="2_om6qb"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ake5w"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ake5w"]
+material = SubResource("StandardMaterial3D_ake5w")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 1.2
+
 [node name="Planet" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_ake5w")
 
 [node name="Sphere" parent="." instance=ExtResource("2_om6qb")]
+transform = Transform3D(32, 0, 0, 0, -32, 2.79753e-06, 0, -2.79753e-06, -32, 0, 0, 0)
+
+[node name="WindRose" type="Node3D" parent="."]
 transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, 0, 0, 0)
+
+[node name="NorthSouth" type="MeshInstance3D" parent="WindRose"]
+mesh = SubResource("CylinderMesh_ake5w")
+
+[node name="North" type="Label3D" parent="WindRose/NorthSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.715, 0)
+text = "N"
+
+[node name="South" type="Label3D" parent="WindRose/NorthSouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.715, 0)
+text = "S"
+
+[node name="WestEast" type="MeshInstance3D" parent="WindRose"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ake5w")
+
+[node name="West" type="Label3D" parent="WindRose/WestEast"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0.715, 0)
+text = "W"
+
+[node name="East" type="Label3D" parent="WindRose/WestEast"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1.68839e-10, -0.711137, -0.000192404)
+text = "E"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.60163, 11.5795, -9.7207)

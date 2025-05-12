@@ -30,16 +30,18 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -143.0
-offset_top = -46.0
-offset_right = 145.0
+offset_left = -173.5
+offset_top = -63.0
+offset_right = 173.5
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.592157, 0, 0, 1)
+theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 10
 horizontal_alignment = 1
 vertical_alignment = 2
+autowrap_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Unit"]
 layout_mode = 0
@@ -93,81 +95,53 @@ offset_bottom = 22.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "отступ от центра (км)"
+text = "высота (км)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Inclination" type="HSlider" parent="Unit/VBoxContainer"]
-modulate = Color(0.368627, 0.156863, 0.109804, 1)
+[node name="Inclination" type="TextEdit" parent="Unit/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
-max_value = 360.0
-
-[node name="value" type="Label" parent="Unit/VBoxContainer/Inclination"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -7.0
-offset_right = 40.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "10"
-vertical_alignment = 1
+text = "0"
+scroll_past_end_of_file = true
 
-[node name="name" type="Label" parent="Unit/VBoxContainer/Inclination"]
+[node name="Label" type="Label" parent="Unit/VBoxContainer/Inclination"]
 layout_mode = 0
-offset_left = -101.0
-offset_top = -6.0
+offset_left = -136.0
+offset_top = -8.0
 offset_right = -3.0
-offset_bottom = 23.0
+offset_bottom = 21.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "наклонение (i)"
+text = "наклонение (i) (градусы)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="AscendingNode" type="HSlider" parent="Unit/VBoxContainer"]
-modulate = Color(0.368627, 0.156863, 0.109804, 1)
+[node name="AscendingNode" type="TextEdit" parent="Unit/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
-max_value = 360.0
-
-[node name="value" type="Label" parent="Unit/VBoxContainer/AscendingNode"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -7.0
-offset_right = 40.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
-text = "10"
-vertical_alignment = 1
+text = "0"
+scroll_past_end_of_file = true
 
-[node name="name" type="Label" parent="Unit/VBoxContainer/AscendingNode"]
+[node name="Label" type="Label" parent="Unit/VBoxContainer/AscendingNode"]
 layout_mode = 0
-offset_left = -133.0
-offset_top = -6.0
+offset_left = -138.0
+offset_top = -7.0
 offset_right = -3.0
-offset_bottom = 23.0
+offset_bottom = 22.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -5
 theme_override_font_sizes/font_size = 12
-text = "долгота восходящего узла (Ω)"
+text = "долгота восходящего узла (Ω) (градусы)"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -431,8 +405,6 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 12
 text = "Добавить"
 
-[connection signal="value_changed" from="Unit/VBoxContainer/Inclination" to="." method="_on_unit_inclination_value_changed"]
-[connection signal="value_changed" from="Unit/VBoxContainer/AscendingNode" to="." method="_on_unit_ascending_node_value_changed"]
 [connection signal="button_down" from="Unit/Button" to="." method="_on_unit_button_down"]
 [connection signal="button_down" from="Pack/Button" to="." method="_on_pack_button_down"]
 [connection signal="value_changed" from="Net/VBoxContainer/Step" to="." method="_on_net_step_value_changed"]

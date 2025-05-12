@@ -4,8 +4,6 @@ extends VBoxContainer
 
 @onready var UnitError = $Unit/Error
 @onready var UnitType = $Unit/VBoxContainer/Type
-@onready var UnitInclination = $Unit/VBoxContainer/Inclination
-@onready var UnitAscendingNode = $Unit/VBoxContainer/AscendingNode
 
 @onready var PackError = $Pack/Error
 
@@ -17,19 +15,8 @@ const page_name: String = "добавление объектов🛰"
 
 func _ready() -> void:
 	# Изменение текстовых значений параметров
-	for i in [UnitInclination, UnitAscendingNode]:
-		i.get_child(0).set_text(str(int(i.value)) + "°")
-		
 	NetStep.get_child(0).set_text(str(int(NetStep.value)) + "км")
 
-
-# изменение значения положения на окружности для единичного
-func _on_unit_inclination_value_changed(value: int) -> void:
-	UnitInclination.get_child(0).set_text(str(value) + "°")
-
-# изменение значения высоты для единичного
-func _on_unit_ascending_node_value_changed(value: int) -> void:
-	UnitAscendingNode.get_child(0).set_text(str(value) + "°")
 
 # изменение значения шага для сетки
 func _on_net_step_value_changed(value: int) -> void:
@@ -37,22 +24,34 @@ func _on_net_step_value_changed(value: int) -> void:
 
 
 # вызов сигнала добавления объекта
-func add_object(error, obj_name: String, radius: String, inclination, ascending_node):
+func add_object(error, obj_name: String, radius: String, inclination: String, ascending_node: String):
 	Settings.set_error(error)
 	Settings.emit_signal("add_object", "res://scenes/objects/" + obj_name + ".tscn",
-						 int(radius), inclination.value, ascending_node.value)
+						 float(radius), float(inclination), float(ascending_node))
 
 
 # добавление единичного объекта
 func _on_unit_button_down() -> void:
 	var radius: String = $Unit/VBoxContainer/Radius.get_text()
-	const min_r: int = 300
+	var inclination: String = $Unit/VBoxContainer/Inclination.get_text()
+	var ascending_node: String = $Unit/VBoxContainer/AscendingNode.get_text()
+	const min_r: float = 300.
+	const min_i: float = 0.
+	const max_i: float = 180.
+	const min_a: float = 0.
+	const max_a: float = 360.
 	
-	if not radius.is_valid_int() or int(radius) < min_r:
+	if not radius.is_valid_float() or not inclination.is_valid_float() or not ascending_node.is_valid_float():
+		Settings.set_error(UnitError, "все переменные должен быть числами")
+	elif float(radius) < min_r:
 		Settings.set_error(UnitError, "радиус должен быть числом больше " + str(min_r))
+	elif float(inclination) < min_i or float(inclination) > max_i:
+		Settings.set_error(UnitError, "наклонение должно находиться в диаппазоне от " + str(min_i) + " до " + str(max_i))
+	elif float(ascending_node) < min_a or float(ascending_node) > max_a:
+		Settings.set_error(UnitError, "долгота восходящего узла должна находиться в диаппазоне от " + str(min_a) + " до " + str(max_a))
 	else:
 		const objects = ["cubsat", "oneWeb", "lemur", "MKS"]
-		add_object(UnitError, objects[UnitType.selected], radius, UnitInclination, UnitAscendingNode)
+		add_object(UnitError, objects[UnitType.selected], radius, inclination, ascending_node)
 
 # добавление последовательности объектов
 func _on_pack_button_down() -> void:

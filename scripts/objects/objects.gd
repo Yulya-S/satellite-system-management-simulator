@@ -15,7 +15,7 @@ var ascending_node: float = deg_to_rad(90.) # долгота восходяще�
 var speed: float = 0. # скорость движения объекта
 var angle: float = deg_to_rad(0.)
 
-const per: float = deg_to_rad(45.)
+const per: float = deg_to_rad(0.)
 
 # данные для записи
 var start_angle: float = deg_to_rad(90.)
@@ -27,8 +27,7 @@ var previous_day: int = 0
 func _ready() -> void:
 	model_name = scene_file_path.split("/")[-1].split(".")[0]
 	previous_day = Settings.Day_counter
-	rotate_x(deg_to_rad(-90.))
-	get_child(0).rotation_degrees.x = 90
+	rotate_x(deg_to_rad(90.))
 
 
 # применение начальной озиции объекта
@@ -61,11 +60,9 @@ func update_pos():
 	var t_s = h * sin(angle)
 	var t_c = h * cos(angle)
 	
-	var x = (t_c * ((cos(ascending_node) * cos(per)) - (sin(ascending_node) * sin(per) * cos(inclination)))) - \
-			(t_s * ((sin(ascending_node) * cos(per)) + (cos(ascending_node) * sin(per) * cos(inclination)))) 
-	var y = (t_c * ((sin(ascending_node) * cos(per)) + (cos(ascending_node) * sin(per) * cos(inclination)))) + \
-			(t_s * ((cos(ascending_node) * cos(per)) - (sin(ascending_node) * sin(per) * cos(inclination)))) 
-	var z = t_s * sin(inclination)
+	var x: float = h * ((cos(ascending_node) * cos(per + angle)) - (sin(ascending_node) * sin(per + angle) * cos(inclination)))
+	var y: float = h * ((sin(ascending_node) * cos(per + angle)) + (cos(ascending_node) * sin(per + angle) * cos(inclination)))
+	var z: float = h * sin(per + angle) * sin(inclination)
 	
 	get_child(0).position = Vector3(x, y, z)
 
