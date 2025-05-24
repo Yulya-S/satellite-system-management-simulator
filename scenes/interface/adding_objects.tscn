@@ -10,7 +10,7 @@ theme_override_constants/separation = 20
 script = ExtResource("1_e2b3v")
 
 [node name="Unit" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 240)
+custom_minimum_size = Vector2(0, 270)
 layout_mode = 2
 color = Color(0.877616, 0.877616, 0.877616, 1)
 
@@ -45,10 +45,10 @@ autowrap_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Unit"]
 layout_mode = 0
-offset_left = 138.0
-offset_top = 32.0
-offset_right = 290.0
-offset_bottom = 180.0
+offset_left = 174.0
+offset_top = 23.0
+offset_right = 326.0
+offset_bottom = 205.0
 theme_override_constants/separation = 15
 
 [node name="Type" type="OptionButton" parent="Unit/VBoxContainer"]
@@ -106,6 +106,7 @@ custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 10
+text = "1.5"
 scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Unit/VBoxContainer/Weight"]
@@ -122,6 +123,29 @@ horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="CrossSectionalArea" type="TextEdit" parent="Unit/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 10
+text = "0.25"
+scroll_past_end_of_file = true
+
+[node name="Label" type="Label" parent="Unit/VBoxContainer/CrossSectionalArea"]
+layout_mode = 0
+offset_left = -173.0
+offset_top = -12.0
+offset_right = -3.0
+offset_bottom = 29.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 12
+text = "площадь поперечного сечения (м²)"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="Inclination" type="TextEdit" parent="Unit/VBoxContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 17)
@@ -133,7 +157,7 @@ scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Unit/VBoxContainer/Inclination"]
 layout_mode = 0
-offset_left = -136.0
+offset_left = -175.0
 offset_top = -8.0
 offset_right = -3.0
 offset_bottom = 21.0
@@ -156,7 +180,7 @@ scroll_past_end_of_file = true
 
 [node name="Label" type="Label" parent="Unit/VBoxContainer/AscendingNode"]
 layout_mode = 0
-offset_left = -138.0
+offset_left = -174.0
 offset_top = -7.0
 offset_right = -3.0
 offset_bottom = 22.0
@@ -427,6 +451,7 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 12
 text = "Добавить"
 
+[connection signal="item_selected" from="Unit/VBoxContainer/Type" to="." method="_on_unit_type_item_selected"]
 [connection signal="button_down" from="Unit/Button" to="." method="_on_unit_button_down"]
 [connection signal="button_down" from="Pack/Button" to="." method="_on_pack_button_down"]
 [connection signal="value_changed" from="Net/VBoxContainer/Step" to="." method="_on_net_step_value_changed"]

@@ -9,7 +9,7 @@ extends Node3D
 
 func _ready() -> void:
 	# добавление сигналов
-	Settings.connect("changing_Video_image_idx", Callable(self, "_changing_image_id"))
+	Settings.connect("changing_Video_image_idx", Callable(self, "_changing_image_idx"))
 	Settings.connect("changing_VideoImage_brightness", Callable(self, "_changing_image_brightness"))
 	Settings.connect("changing_VideoImage_fog", Callable(self, "_changing_image_fog"))
 	Settings.connect("changing_VideoImage_color", Callable(self, "_changing_image_color"))
@@ -18,7 +18,7 @@ func _ready() -> void:
 	Settings.connect("add_net", Callable(self, "_add_net"))
 	
 	# применение стандартных значений
-	_changing_image_id(Settings.Video_image_idx)
+	_changing_image_idx(Settings.Video_image_idx)
 	_changing_image_brightness(Settings.VideoImage_brightness)
 	_changing_image_fog(Settings.VideoImage_fog)
 	_changing_image_color(Settings.VideoImage_color)
@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 
 
 # изменение фона окужения
-func _changing_image_id(idx: int):
+func _changing_image_idx(idx: int):
 	environment.sky.sky_material.panorama = load("res://img/environments/" + str(idx + 1) + ".jpg")
 	Settings.Video_image_idx = idx
 
@@ -63,9 +63,10 @@ func _add_tracker():
 
 
 # добавление нового объекта
-func _add_object(object: String, radius: float, weight: float, inclination: float, ascending_node: float):
+func _add_object(object: String, radius: float, weight: float, cross_sectional_area: float,
+				inclination: float, ascending_node: float):
 	System.add_child(load(object).instantiate())
-	System.get_child(-1).calculation_parameters(radius, weight, inclination, ascending_node)
+	System.get_child(-1).calculation_parameters(radius, weight, cross_sectional_area, inclination, ascending_node)
 	_add_tracker()
 
 	

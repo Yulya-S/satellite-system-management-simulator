@@ -11,7 +11,7 @@ signal changing_VideoImage_fog(value: float)
 signal changing_VideoImage_color(value: Color)
 signal changing_SystemStar_activity(value: float)
 
-signal add_object(object: String, radius: float, weight: float, t: float, y: float)
+signal add_object(object: String, radius: float, weight: float, cross_sectional_area: float, t: float, y: float)
 signal add_net(radius: float, step: int)
 
 signal add_tracker(object)
@@ -20,8 +20,13 @@ signal remove_tracker(object)
 
 # список состояний
 enum TrackerStates {NORMAL, HOVER, ACTIVE}
+enum ObjectsStates {NORMAL, DESTROYED, FELL}
 
 # константы
+const satelites_info = {"Кубсат": {"weight": 1.5, "cross_sectional_area": 0.25},
+						"МКС": {"weight": 420000.0, "cross_sectional_area": 300.},
+						"OneWeb": {"weight": 1.5, "cross_sectional_area": 7.},
+						"Лемур": {"weight": 6.0, "cross_sectional_area": 6.25}}
 const G: float = 6.67430E-11 # гравитационная постоянная
 var saturation = {} # Насыщенность воздуха химическими элементами
 
@@ -121,7 +126,7 @@ func create_planet_presets():
 	if not FileAccess.file_exists(file):
 		file = FileAccess.open(file, FileAccess.WRITE)
 		var data = {
-			"SystemPlanet_radius" = 6378.,
+			"SystemPlanet_radius" = 6371.,
 			"SystemPlanet_gravitation" = 9.807,
 			"SystemPlanet_weight" = 5.972E24,
 			"SystemPlanet_turnover_period" = 86400.0,
@@ -133,13 +138,12 @@ func create_air_saturation_file():
 	var file = "res://data/air_saturation.txt"
 	if FileAccess.file_exists(file): return
 	file = FileAccess.open(file, FileAccess.WRITE)
-	file.store_line("251204241917707.6 0.0\n228610658524441.88 1.0\n206657824318504.03 2.0
-186096106492082.88 3.0\n167327880526692.12 4.0\n150501268062597.9 5.0
-135475234991135.34 6.0\n121682205371253.05 7.0\n108709677235090.6 8.0
-96366928180965.05 9.0\n84615073116823.6 10.0\n73552436492303.7 11.0
-63458191685639.484 12.0\n54496928240198.5 13.0\n46701437395733.805 14.0
-40021661494524.89 15.0\n34346534008737.004 16.0\n29500331718313.508 17.0
-25333758190339.168 18.0\n21733518526801.78 19.0\n18612866225994.195 20.0")
+	file.store_line("1.2080026865005493 0.0\n1.0993537902832031 1.0\n0.9937858581542969 2.0
+0.8949077725410461 3.0\n0.8046541810035706 4.0\n0.7237375974655151 5.0\n0.6514797210693359 6.0
+0.5851511359214783 7.0\n0.5227681994438171 8.0\n0.463413804769516 9.0\n0.40690097212791443 10.0
+0.3537024259567261 11.0\n0.3051607310771942 12.0\n0.26206737756729126 13.0\n0.2245800793170929 14.0
+0.19245804846286774 15.0\n0.16516722738742828 16.0\n0.14186258614063263 17.0\n0.121826171875 18.0
+0.10451316833496094 19.0\n0.08950643241405487 20.0\n0.07649438828229904 21.0\n0.06527828425168991 22.0")
 
 
 # загрузка системных настроек

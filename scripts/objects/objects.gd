@@ -5,7 +5,7 @@ extends Node3D
 @export var color_marker: Color = Color.AQUA
 var model_name: String = ""
 @export var weight: float = 1.
-@export var cross_sectional_area: float = 1.
+@export var cross_sectional_area: float = 0.25
 
 # параметры
 var h: float = 100.
@@ -13,16 +13,15 @@ var h: float = 100.
 var inclination: float = deg_to_rad(90.) # наклонение
 var ascending_node: float = deg_to_rad(90.) # долгота восходящего узла
 
-var speed: float = 0. # скорость движения объекта
 var angle: float = deg_to_rad(0.)
-
 const per: float = deg_to_rad(0.)
 
 # данные для записи
 var start_angle: float = deg_to_rad(90.)
 var circle_count: int = 0	# количество кругов за день
-var average_speed: float = 0. # средняя скорость за день
 var previous_day: int = 0
+
+var tracker = null
 
 
 func _ready() -> void:
@@ -32,11 +31,13 @@ func _ready() -> void:
 
 
 # применение начальной озиции объекта
-func calculation_parameters(new_radius: float, new_weight: float, new_inclination: float, new_ascending_node: float):
+func calculation_parameters(new_radius: float, new_weight: float, new_cross_sectional_area: float,
+							new_inclination: float, new_ascending_node: float):
 	h = (float(new_radius) + Settings.SystemPlanet_radius) * Settings.Unit_distance
 	inclination = deg_to_rad(new_inclination)
 	ascending_node = deg_to_rad(new_ascending_node)
 	if new_weight != 0.: weight = new_weight
+	if new_cross_sectional_area != 0.: cross_sectional_area = new_cross_sectional_area
 	update_pos()
 	#update_rotation()
 	
@@ -51,11 +52,15 @@ func _process(delta: float) -> void:
 		# увеличесние счетчика количества оборотов
 		if angle > 2. * PI + start_angle:
 			circle_count += floor(angle / (2. * PI))
-			average_speed += get_real_speed()
 			angle -= (2. * PI) * floor(angle / (2. * PI))
 	if previous_day != Settings.Day_counter:
 		circle_count = 0
 		previous_day = Settings.Day_counter
+	if tracker and get_real_h() < 0:
+		tracker.obj_state = Settings.ObjectsStates.FELL
+		self.queue_free()
+		get_parent().remove_child(self)
+		
 
 
 # Изменение расположения объекта на окружности
@@ -63,9 +68,9 @@ func update_pos():
 	var t_s = h * sin(angle)
 	var t_c = h * cos(angle)
 	
-	var x: float = h * ((cos(ascending_node) * cos(per + angle)) - (sin(ascending_node) * sin(per + angle) * cos(inclination)))
-	var y: float = h * ((sin(ascending_node) * cos(per + angle)) + (cos(ascending_node) * sin(per + angle) * cos(inclination)))
-	var z: float = h * sin(per + angle) * sin(inclination)
+	var x: float = h * ((cos(ascending_node) * cos(per - angle)) - (sin(ascending_node) * sin(per - angle) * cos(inclination)))
+	var y: float = h * ((sin(ascending_node) * cos(per - angle)) + (cos(ascending_node) * sin(per - angle) * cos(inclination)))
+	var z: float = h * sin(per - angle) * sin(inclination)
 	
 	get_child(0).position = Vector3(x, y, z)
 
@@ -74,11 +79,11 @@ func update_h(delta: float):
 	var p: float = Settings.saturation[Settings.saturation.keys()[-1]]
 	if round(get_real_h()) in Settings.saturation.keys():
 		p = Settings.saturation[round(get_real_h())]
-	var delta_R = 4. * PI * p * (get_real_speed() ** 2.) * cross_sectional_area * Settings.SystemPlanet_radius
-	
-	delta_R /= (weight * Settings.SystemPlanet_gravitation)
-	delta_R = (delta_R * Settings.Video_speed) / Settings.SystemPlanet_turnover_period
-	h -= (360. * delta) / delta_R
+		
+	var delta_R = 4. * PI * p * (get_real_speed() ** 2.) * cross_sectional_area * (get_real_h() * 1000.)
+	delta_R /= (Settings.SystemPlanet_gravitation * weight)
+	delta_R *= Settings.Unit_distance
+	h -= (delta_R * delta) / 360.
 
 
 # поворот объекта к планете	
@@ -96,7 +101,8 @@ func get_real_h() -> float:
 
 # получение приведенной скорости
 func get_real_speed() -> float:
-	return ((2. * PI * (Settings.SystemPlanet_radius + get_real_h())) / get_real_t())
+	var s = sqrt((Settings.SystemPlanet_weight * Settings.G) / ((Settings.SystemPlanet_radius * 1000.) + (get_real_h() * 1000.)))
+	return s
 	
 func get_real_t():
 	var t: float = (Settings.SystemPlanet_radius + get_real_h()) / (Settings.SystemPlanet_radius + Settings.Geostationary_orbit)
