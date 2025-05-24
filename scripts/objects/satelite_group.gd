@@ -3,11 +3,11 @@ extends Node3D
 # изменяемые данные
 @export var object_name: String = "starlink"
 @export var color_marker: Color = Color.DARK_GREEN
-@export var unique: bool = false
 var model_name: String = ""
 
 # объекты в группе
 var obj = load("res://scenes/objects/starlink.tscn")
+var tracker = null
 
 # количество пройденых кругов первого объекта в группе
 var circle_count: int = 0
@@ -15,9 +15,13 @@ var circle_count: int = 0
 
 # получение данных о количестве пройденых кругов первого объекта в группе
 func _process(_delta: float) -> void:
-	if not model_name: get_child(0).scene_file_path.split("/")[-1].split(".")[0]
-	if get_child_count() > 0:
-		circle_count = get_child(0).circle_count
+	if not model_name: get_child(0).get_child(0).scene_file_path.split("/")[-1].split(".")[0]
+	if get_child(0).get_child_count() > 0:
+		circle_count = get_child(0).get_child(0).circle_count
+	if get_child(0).get_child_count() < 0:
+		tracker.obj_state = Settings.ObjectsStates.FELL
+		self.queue_free()
+		get_parent().remove_child(self)
 
 
 # расчет сетки
@@ -26,6 +30,7 @@ func calculate_group(radius: int, cube_size: int):
 	var count: int = floor(360. / cube_size)
 	_add_ring(radius, count, 360. / count)
 	var ring_count = floor((count - 1) / 2.)
+	_add_ring(radius, count, 360. / count, ring_count * (90. / ring_count))
 	
 	# раставление колец по всей высоте планеты
 	for i in range(1, ring_count, 1):
@@ -37,24 +42,26 @@ func calculate_group(radius: int, cube_size: int):
 func _add_ring(radius: int, count: int, t_step: float, y: float = 0.):
 	var t: float = 0.
 	for i in range(count):
-		add_child(obj.instantiate())
-		get_child(-1).calculation_parameters(radius, y, 0.)
-		get_child(-1).angle = deg_to_rad(t)
-		get_child(-1).start_angle = deg_to_rad(t)
-		get_child(-1).update_pos()
+		get_child(0).add_child(obj.instantiate())
+		get_child(0).get_child(-1).calculation_parameters(radius, 0., 0., y, 0.)
+		get_child(0).get_child(-1).angle = deg_to_rad(t)
+		get_child(0).get_child(-1).start_angle = deg_to_rad(t)
+		get_child(0).get_child(-1).update_pos()
 		t += t_step
 
 
-func get_model_size():
-	if get_child_count() > 0: return Vector3(get_child(0).h + 5,  get_child(0).h + 5,  get_child(0).h + 5)
+func get_model_size() -> Vector3:
+	if get_child(0).get_child_count() > 0: return Vector3(get_child(0).get_child(0).h + 5, 
+											 			  get_child(0).get_child(0).h + 5, 
+														  get_child(0).get_child(0).h + 5)
 	return Vector3(1., 1., 1.)
 
 
-func get_real_h():
-	if get_child_count() > 0: return get_child(0).get_real_h()
+func get_real_h() -> float:
+	if get_child(0).get_child_count() > 0: return get_child(0).get_child(0).get_real_h()
 	return 0.
 
 
-func get_real_speed():
-	if get_child_count() > 0: return get_child(0).get_real_speed()
+func get_real_speed() -> float:
+	if get_child(0).get_child_count() > 0: return get_child(0).get_child(0).get_real_speed()
 	return 0.

@@ -5,6 +5,7 @@
 
 [node name="Starlink" type="Node3D"]
 script = ExtResource("1_3lolr")
+weight = 260.0
 
 [node name="starlink" parent="." instance=ExtResource("1_41jbm")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

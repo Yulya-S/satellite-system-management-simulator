@@ -56,10 +56,6 @@ func _set_picker():
 	picker.sliders_visible = false
 	picker.presets_visible = false
 
-
-# изменение скорости симуляции
-func _on_video_speed_item_selected(index: int) -> void:
-	Settings.Video_speed_idx = index
 	
 # изменение скорости симуляции
 func _on_video_speed_text_changed() -> void:
