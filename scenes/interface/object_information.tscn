@@ -1,31 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2qxxdmdwwtib"]
+[gd_scene load_steps=5 format=3 uid="uid://dos477ylrtwiv"]
 
-[ext_resource type="Script" uid="uid://r2ggef3hoch8" path="res://scripts/interface/object_information.gd" id="1_fil47"]
-[ext_resource type="Texture2D" uid="uid://dypit1abalt4f" path="res://img/objects/cubsat.jpg" id="1_m6i3o"]
+[ext_resource type="Script" uid="uid://r2ggef3hoch8" path="res://scripts/interface/object_information.gd" id="1_2uh21"]
+[ext_resource type="Texture2D" uid="uid://dypit1abalt4f" path="res://img/objects/cubsat.jpg" id="2_2uh21"]
+[ext_resource type="PackedScene" uid="uid://blmhjmu3f37vb" path="res://scenes/interface/schedule.tscn" id="3_84ruo"]
 
-[sub_resource type="SystemFont" id="SystemFont_fil47"]
+[sub_resource type="SystemFont" id="SystemFont_beg5q"]
 font_names = PackedStringArray("Sans-Serif")
 font_weight = 700
+subpixel_positioning = 0
 
-[node name="ObjectInformation" type="Node2D"]
-script = ExtResource("1_fil47")
+[node name="ObjectInformation" type="VBoxContainer"]
+custom_minimum_size = Vector2(402, 0)
+offset_right = 402.0
+offset_bottom = 1055.0
+theme_override_constants/separation = 20
+script = ExtResource("1_2uh21")
 
-[node name="Border" type="ColorRect" parent="."]
-clip_contents = true
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 398.0
-offset_bottom = 144.0
-color = Color(0, 0, 0, 1)
+[node name="Label" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(347, 35)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.877616, 0.877616, 0.877616, 1)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-clip_contents = true
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 2
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 396.0
-offset_bottom = 142.0
+offset_right = 235.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "ИНФОРМАЦИЯ О СПУТНИКЕ"
 
-[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+[node name="Button" type="Button" parent="Label"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.457
+anchor_right = 1.0
+anchor_bottom = 0.457
+offset_left = -37.0
+offset_top = -12.995
+offset_right = -9.0
+offset_bottom = 13.005
+grow_horizontal = 0
+grow_vertical = 2
+tooltip_text = "Закрыть окно инофрмации"
+theme_override_font_sizes/font_size = 13
+text = "x"
+
+[node name="Main" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Main"]
 clip_contents = true
 layout_mode = 0
 offset_left = 15.0
@@ -34,26 +64,26 @@ offset_right = 176.0
 offset_bottom = 127.0
 color = Color(0.303233, 0.303233, 0.303233, 1)
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/ColorRect"]
+[node name="TextureRect" type="TextureRect" parent="Main/ColorRect"]
 layout_mode = 0
 offset_right = 161.0
 offset_bottom = 114.0
-texture = ExtResource("1_m6i3o")
+texture = ExtResource("2_2uh21")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Type" type="Label" parent="ColorRect"]
+[node name="Type" type="Label" parent="Main"]
 layout_mode = 0
 offset_left = 184.0
 offset_top = 8.0
 offset_right = 346.0
 offset_bottom = 43.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_fil47")
+theme_override_fonts/font = SubResource("SystemFont_beg5q")
 theme_override_font_sizes/font_size = 30
 text = "Кубсат"
 
-[node name="ID" type="Label" parent="ColorRect"]
+[node name="State" type="Label" parent="Main"]
 layout_mode = 0
 offset_left = 185.0
 offset_top = 43.0
@@ -61,9 +91,19 @@ offset_right = 380.0
 offset_bottom = 63.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
-text = "Id:"
+text = "состояние:"
 
-[node name="Information" type="VBoxContainer" parent="ColorRect"]
+[node name="Label" type="Label" parent="Main/State"]
+layout_mode = 0
+offset_left = 79.0
+offset_right = 211.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "состояние:"
+horizontal_alignment = 2
+
+[node name="Information" type="VBoxContainer" parent="Main"]
 layout_mode = 0
 offset_left = 185.0
 offset_top = 69.0
@@ -71,14 +111,98 @@ offset_right = 375.0
 offset_bottom = 207.0
 theme_override_constants/separation = -4
 
-[node name="Radius" type="Label" parent="ColorRect/Information"]
+[node name="Radius" type="Label" parent="Main/Information"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
-text = "радиус:      1"
+text = "высота:      1"
 
-[node name="CircleCount" type="Label" parent="ColorRect/Information"]
+[node name="Speed" type="Label" parent="Main/Information"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
-text = "Кол-во кругов:  1"
+text = "скорость:      1"
+
+[node name="CircleCount" type="Label" parent="Main/Information"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "кол-во кругов:  1"
+
+[node name="Measurements" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 820)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.877616, 0.877616, 0.877616, 1)
+
+[node name="Label" type="Label" parent="Measurements"]
+layout_mode = 2
+offset_left = 3.0
+offset_right = 350.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "изменения со временем"
+
+[node name="Error" type="Label" parent="Measurements"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -145.5
+offset_top = -48.0
+offset_right = 142.5
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.592157, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Measurements"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 30.0
+offset_right = 389.0
+offset_bottom = 719.0
+scale = Vector2(0.98, 1)
+
+[node name="H" type="Label" parent="Measurements/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "ИЗМЕНЕНИЕ ВЫСОТЫ"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="HSchedule" parent="Measurements/VBoxContainer" instance=ExtResource("3_84ruo")]
+layout_mode = 2
+
+[node name="Speed" type="Label" parent="Measurements/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "ИЗМЕНЕНИЕ СКОРОСТИ"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SpeedSchedule" parent="Measurements/VBoxContainer" instance=ExtResource("3_84ruo")]
+layout_mode = 2
+
+[node name="Circle" type="Label" parent="Measurements/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "ИЗМЕНЕНИЕ КОЛИЧЕСТВА ОБОРОТОВ"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="CircleSchedule" parent="Measurements/VBoxContainer" instance=ExtResource("3_84ruo")]
+layout_mode = 2
+
+[connection signal="button_down" from="Label/Button" to="." method="_on_close_button_down"]

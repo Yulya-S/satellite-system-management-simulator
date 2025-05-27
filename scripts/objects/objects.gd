@@ -54,13 +54,28 @@ func _process(delta: float) -> void:
 			circle_count += floor(angle / (2. * PI))
 			angle -= (2. * PI) * floor(angle / (2. * PI))
 	if previous_day != Settings.Day_counter:
+		if tracker:
+			if len(tracker.h_measurements) >= 366:
+				tracker.speed_measurements.pop_front()
+				tracker.h_measurements.pop_front()
+				tracker.circle_measurements.pop_front()
+			tracker.speed_measurements.append(get_real_speed())
+			tracker.h_measurements.append(get_real_h())
+			tracker.circle_measurements.append(circle_count)
 		circle_count = 0
 		previous_day = Settings.Day_counter
-	if tracker and get_real_h() < 0:
-		tracker.obj_state = Settings.ObjectsStates.FELL
+	if get_real_h() < 0:
+		if tracker:
+			tracker.obj_state = Settings.ObjectsStates.FELL
+			if len(tracker.h_measurements) >= 366:
+				tracker.speed_measurements.pop_front()
+				tracker.h_measurements.pop_front()
+				tracker.circle_measurements.pop_front()
+			tracker.speed_measurements.append(0)
+			tracker.h_measurements.append(0)
+			tracker.circle_measurements.append(circle_count)
 		self.queue_free()
 		get_parent().remove_child(self)
-		
 
 
 # Изменение расположения объекта на окружности

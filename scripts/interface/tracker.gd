@@ -11,6 +11,7 @@ var obj_state = Settings.ObjectsStates.NORMAL
 
 var speed_measurements = []
 var h_measurements = []
+var circle_measurements = []
 
 # создание свзи между трекером и объектом
 func set_tracker_owner(new_owner):

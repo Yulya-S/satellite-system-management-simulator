@@ -7,12 +7,21 @@ extends VBoxContainer
 @onready var Speed = $Main/Information/Speed
 @onready var CircleCount = $Main/Information/CircleCount
 
+@onready var HSchedule = $Measurements/VBoxContainer/HSchedule
+@onready var SpeedSchedule = $Measurements/VBoxContainer/SpeedSchedule
+@onready var CircleSchedule = $Measurements/VBoxContainer/CircleSchedule
+
 var information_owner = null
 var tracker = null
 
 
 func _ready() -> void:
-	visible = false
+	get_parent().visible = false
+	
+	HSchedule.set_labels("высота орбиты, км", "давность данных, день")
+	SpeedSchedule.set_labels("скорость движения, м/с", "давность данных, день")
+	CircleSchedule.set_labels("количество оборотов", "давность данных, день")
+	
 	Settings.connect("add_tracker", Callable(self, "set_data"))
 	Settings.connect("remove_tracker", Callable(self, "remove_information_owner"))
 
@@ -28,9 +37,12 @@ func _process(_delta: float) -> void:
 		Speed.set_text("")
 		CircleCount.set_text("")
 	if tracker:	
+		HSchedule.update_values(tracker.h_measurements)
+		SpeedSchedule.update_values(tracker.speed_measurements)
+		CircleSchedule.update_values(tracker.circle_measurements)
 		match tracker.obj_state:
 			Settings.ObjectsStates.NORMAL: State.set_text("функционирует".to_upper())
-			Settings.ObjectsStates.DESTROYED: State.set_text("разрушен".to_upper())
+			Settings.ObjectsStates.DESTROYED: State.set_text("не функционирует".to_upper())
 			Settings.ObjectsStates.FELL: State.set_text("упал на планету".to_upper())
 
 
@@ -49,8 +61,8 @@ func set_data(object):
 	# смена названия объекта
 	tracker.owner_main_data[0][0] = tracker.owner_main_data[0][0].to_upper()
 	Type.set_text(tracker.owner_main_data[0])
-	visible = true
-	get_parent().get_child(0).visible = false
+	get_parent().visible = true
+	get_parent().get_parent().get_child(0).visible = false
 	
 
 # удаление связи с трекером
@@ -58,8 +70,8 @@ func remove_information_owner(object):
 	if object != tracker: return
 	information_owner = null
 	tracker = null
-	visible = false
-	get_parent().get_child(0).visible = true
+	get_parent().visible = false
+	get_parent().get_parent().get_child(0).visible = true
 
 
 func _on_close_button_down() -> void:

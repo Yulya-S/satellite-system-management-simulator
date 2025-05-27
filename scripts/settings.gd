@@ -25,7 +25,7 @@ enum ObjectsStates {NORMAL, DESTROYED, FELL}
 # константы
 const satelites_info = {"Кубсат": {"weight": 1.5, "cross_sectional_area": 0.25},
 						"МКС": {"weight": 420000.0, "cross_sectional_area": 300.},
-						"OneWeb": {"weight": 1.5, "cross_sectional_area": 7.},
+						"OneWeb": {"weight": 150., "cross_sectional_area": 7.},
 						"Лемур": {"weight": 6.0, "cross_sectional_area": 6.25}}
 const G: float = 6.67430E-11 # гравитационная постоянная
 var saturation = {} # Насыщенность воздуха химическими элементами

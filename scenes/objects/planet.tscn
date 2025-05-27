@@ -15,7 +15,6 @@ bottom_radius = 0.01
 height = 1.2
 
 [node name="Planet" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_ake5w")
 
 [node name="Sphere" parent="." instance=ExtResource("2_om6qb")]
@@ -46,33 +45,3 @@ text = "W"
 [node name="East" type="Label3D" parent="WindRose/WestEast"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1.68839e-10, -0.711137, -0.000192404)
 text = "E"
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.60163, 11.5795, -9.7207)
-light_energy = 1.828
-omni_range = 10.206
-omni_attenuation = -0.64
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.918468, 0.395496, 0, -0.395496, 0.918468, -7.74885, 10.9559, -11.769)
-light_energy = 1.828
-omni_range = 13.904
-omni_attenuation = -0.64
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.918468, 0.395496, 0, -0.395496, 0.918468, 11.6035, -3.2309, -13.1106)
-light_energy = 1.828
-omni_range = 8.627
-omni_attenuation = -0.64
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.918468, 0.395496, 0, -0.395496, 0.918468, -3.81397, 13.7946, 12.1607)
-light_energy = 1.828
-omni_range = 9.236
-omni_attenuation = -0.64
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.918468, 0.395496, 0, -0.395496, 0.918468, 8.47859, -5.38699, 14.9573)
-light_energy = 1.828
-omni_range = 9.236
-omni_attenuation = -0.64
