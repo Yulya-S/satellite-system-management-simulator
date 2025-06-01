@@ -11,15 +11,24 @@ var tracker = null
 
 # количество пройденых кругов первого объекта в группе
 var circle_count: int = 0
+var previous_day: int = 0
 
+
+func _ready() -> void: previous_day = Settings.Day_counter
 
 # получение данных о количестве пройденых кругов первого объекта в группе
 func _process(_delta: float) -> void:
 	if not model_name: get_child(0).get_child(0).scene_file_path.split("/")[-1].split(".")[0]
 	if get_child(0).get_child_count() > 0:
-		circle_count = get_child(0).get_child(0).circle_count
+		if previous_day != Settings.Day_counter:
+			if tracker: tracker.h_measurements.append(get_real_h())
+			previous_day = Settings.Day_counter
+			circle_count = get_child(0).get_child(0).circle_count
 	if get_child(0).get_child_count() < 0:
-		tracker.obj_state = Settings.ObjectsStates.FELL
+		if tracker:
+			tracker.obj_state = Settings.ObjectsStates.DESTROYED
+			tracker.h_measurements.append(0)
+		Settings.Video_stop_system = Settings.Video_stop_after_fall
 		self.queue_free()
 		get_parent().remove_child(self)
 
@@ -58,6 +67,7 @@ func get_model_size() -> Vector3:
 
 
 func get_real_h() -> float:
+	print(get_child(0).get_child(0).get_real_h())
 	if get_child(0).get_child_count() > 0: return get_child(0).get_child(0).get_real_h()
 	return 0.
 

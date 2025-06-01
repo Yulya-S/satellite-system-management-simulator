@@ -41,6 +41,9 @@ func _process(_delta: float) -> void:
 		else:
 			get_child(-1).queue_free()
 			remove_child(get_child(-1))
+	
+	if Settings.Video_stop_system: Pause.text = "ЗАПУСК".to_upper()
+	else: Pause.text = "ПАУЗА".to_upper()
 
 
 # смена страницы настроек
@@ -66,5 +69,3 @@ func _on_right_button_down() -> void:
 
 func _on_pause_button_down() -> void:
 	Settings.Video_stop_system = !Settings.Video_stop_system
-	if Settings.Video_stop_system: Pause.text = "ЗАПУСК".to_upper()
-	else: Pause.text = "ПАУЗА".to_upper()

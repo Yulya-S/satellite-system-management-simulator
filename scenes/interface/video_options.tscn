@@ -10,7 +10,7 @@ theme_override_constants/separation = 20
 script = ExtResource("1_cvdff")
 
 [node name="Video" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 190)
 layout_mode = 2
 size_flags_vertical = 0
 color = Color(0.877616, 0.877616, 0.877616, 1)
@@ -150,6 +150,22 @@ theme_override_colors/font_focus_color = Color(0.368627, 0.188235, 0.145098, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 13
 text = "отобразить плотность воздуха"
+
+[node name="StopAfterFall" type="CheckButton" parent="Video"]
+layout_mode = 2
+offset_left = 66.0
+offset_top = 134.0
+offset_right = 318.0
+offset_bottom = 160.0
+theme_override_colors/font_hover_pressed_color = Color(0.368627, 0.188235, 0.145098, 1)
+theme_override_colors/font_hover_color = Color(0.368627, 0.188235, 0.145098, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.368627, 0.188235, 0.145098, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+theme_override_font_sizes/font_size = 13
+text = "остановить систему после падения спутника"
+autowrap_mode = 3
 
 [node name="Camera" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(0, 120)
@@ -417,6 +433,7 @@ text = "Сбросить настройки"
 [connection signal="value_changed" from="Video/VBoxContainer/Scale" to="." method="_on_video_scale_value_changed"]
 [connection signal="item_selected" from="Video/VBoxContainer/Image" to="." method="_on_video_image_item_selected"]
 [connection signal="toggled" from="Video/Saturation" to="." method="_on_video_saturation_toggled"]
+[connection signal="toggled" from="Video/StopAfterFall" to="." method="_on_video_stop_after_fall_toggled"]
 [connection signal="value_changed" from="Camera/VBoxContainer/X" to="." method="_on_camera_x_value_changed"]
 [connection signal="value_changed" from="Camera/VBoxContainer/Y" to="." method="_on_camera_y_value_changed"]
 [connection signal="button_down" from="Camera/reset" to="." method="_on_camera_button_down"]

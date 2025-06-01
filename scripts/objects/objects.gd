@@ -53,14 +53,18 @@ func _process(delta: float) -> void:
 		if angle > 2. * PI + start_angle:
 			circle_count += floor(angle / (2. * PI))
 			angle -= (2. * PI) * floor(angle / (2. * PI))
-	if previous_day != Settings.Day_counter:
-		circle_count = 0
-		previous_day = Settings.Day_counter
-	if tracker and get_real_h() < 0:
-		tracker.obj_state = Settings.ObjectsStates.FELL
+	if get_real_h() < 0 or h < 0:
+		if tracker:
+			tracker.obj_state = Settings.ObjectsStates.FELL
+			tracker.h_measurements.append(0)
+		Settings.Video_stop_system = Settings.Video_stop_after_fall
 		self.queue_free()
 		get_parent().remove_child(self)
-		
+		return
+	if previous_day != Settings.Day_counter:
+		if tracker: tracker.h_measurements.append(get_real_h())
+		circle_count = 0
+		previous_day = Settings.Day_counter
 
 
 # Изменение расположения объекта на окружности
@@ -83,7 +87,8 @@ func update_h(delta: float):
 	var delta_R = 4. * PI * p * (get_real_speed() ** 2.) * cross_sectional_area * (get_real_h() * 1000.)
 	delta_R /= (Settings.SystemPlanet_gravitation * weight)
 	delta_R *= Settings.Unit_distance
-	h -= (delta_R * delta) / 360.
+	h -= ((delta_R * delta / 360.) * Settings.SystemPlanet_turnover_period / Settings.Video_speed)
+	
 
 
 # поворот объекта к планете	

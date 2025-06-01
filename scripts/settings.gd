@@ -25,7 +25,7 @@ enum ObjectsStates {NORMAL, DESTROYED, FELL}
 # константы
 const satelites_info = {"Кубсат": {"weight": 1.5, "cross_sectional_area": 0.25},
 						"МКС": {"weight": 420000.0, "cross_sectional_area": 300.},
-						"OneWeb": {"weight": 1.5, "cross_sectional_area": 7.},
+						"OneWeb": {"weight": 150., "cross_sectional_area": 7.},
 						"Лемур": {"weight": 6.0, "cross_sectional_area": 6.25}}
 const G: float = 6.67430E-11 # гравитационная постоянная
 var saturation = {} # Насыщенность воздуха химическими элементами
@@ -43,6 +43,7 @@ var Video_scale: int = 150
 var Video_image_idx: int = 0
 var Video_show_saturation: bool = true
 var Video_stop_system: bool = false
+var Video_stop_after_fall: bool = true
 
 var VideoCamera_x: int = 270
 var VideoCamera_y: int = 0
@@ -112,6 +113,7 @@ func create_config_file():
 		"Video_image_idx" = 0,
 		"Video_show_saturation" = true,
 		"Video_stop_system" = false,
+		"Video_stop_after_fall" = true,
 		"VideoCamera_x" = 270,
 		"VideoCamera_y" = 0,
 		"VideoImage_brightness" = 1.,

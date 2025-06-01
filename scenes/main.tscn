@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b37wsovxwu6km" path="res://scripts/main.gd" id="1_8ddfb"]
 [ext_resource type="PackedScene" uid="uid://douqqili8ko0o" path="res://scenes/system.tscn" id="2_rqwli"]
 [ext_resource type="Script" uid="uid://dk1xcwu67bdpt" path="res://scripts/objects/saturation.gd" id="4_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://dos477ylrtwiv" path="res://scenes/interface/object_information_2.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://dos477ylrtwiv" path="res://scenes/interface/object_information.tscn" id="5_tbgi4"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ha4fm"]
 viewport_path = NodePath("TextureRect/SubViewport")
@@ -135,10 +135,13 @@ offset_right = 109.0
 offset_bottom = 1.0
 text = "ПАУЗА"
 
-[node name="Planetary_system_options" parent="CanvasLayer" instance=ExtResource("5_tbgi4")]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
 offset_left = 644.0
 offset_right = 1047.0
 offset_bottom = 648.0
+
+[node name="ObjectInformation" parent="CanvasLayer/ScrollContainer" instance=ExtResource("5_tbgi4")]
+layout_mode = 2
 
 [connection signal="button_down" from="CanvasLayer/Interface/PageName/Left" to="." method="_on_left_button_down"]
 [connection signal="button_down" from="CanvasLayer/Interface/PageName/Right" to="." method="_on_right_button_down"]

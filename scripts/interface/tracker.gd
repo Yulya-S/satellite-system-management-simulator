@@ -9,7 +9,6 @@ var owner_main_data = []
 var state = Settings.TrackerStates.NORMAL # состояние трекера
 var obj_state = Settings.ObjectsStates.NORMAL
 
-var speed_measurements = []
 var h_measurements = []
 
 # создание свзи между трекером и объектом
