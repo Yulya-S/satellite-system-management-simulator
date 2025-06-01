@@ -18,7 +18,9 @@ func _ready() -> void: previous_day = Settings.Day_counter
 
 # получение данных о количестве пройденых кругов первого объекта в группе
 func _process(_delta: float) -> void:
-	if not model_name: get_child(0).get_child(0).scene_file_path.split("/")[-1].split(".")[0]
+	if not model_name and get_child(0).get_child_count() > 0:
+		model_name = get_child(0).get_child(0).get_child(0).scene_file_path.split("/")[-1].split(".")[0]
+		tracker.owner_main_data[1] = model_name
 	if get_child(0).get_child_count() > 0:
 		if previous_day != Settings.Day_counter:
 			if tracker: tracker.h_measurements.append(get_real_h())
@@ -67,7 +69,6 @@ func get_model_size() -> Vector3:
 
 
 func get_real_h() -> float:
-	print(get_child(0).get_child(0).get_real_h())
 	if get_child(0).get_child_count() > 0: return get_child(0).get_child(0).get_real_h()
 	return 0.
 
