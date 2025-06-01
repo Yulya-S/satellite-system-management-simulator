@@ -8,8 +8,6 @@ extends VBoxContainer
 @onready var CircleCount = $Main/Information/CircleCount
 
 @onready var HSchedule = $Measurements/VBoxContainer/HSchedule
-@onready var SpeedSchedule = $Measurements/VBoxContainer/SpeedSchedule
-@onready var CircleSchedule = $Measurements/VBoxContainer/CircleSchedule
 
 var information_owner = null
 var tracker = null
@@ -18,9 +16,7 @@ var tracker = null
 func _ready() -> void:
 	get_parent().visible = false
 	
-	HSchedule.set_labels("высота орбиты, км", "давность данных, день")
-	SpeedSchedule.set_labels("скорость движения, м/с", "давность данных, день")
-	CircleSchedule.set_labels("количество оборотов", "давность данных, день")
+	HSchedule.set_labels("время на орбите, дни", "высота орбиты, км")
 	
 	Settings.connect("add_tracker", Callable(self, "set_data"))
 	Settings.connect("remove_tracker", Callable(self, "remove_information_owner"))
@@ -38,8 +34,6 @@ func _process(_delta: float) -> void:
 		CircleCount.set_text("")
 	if tracker:	
 		HSchedule.update_values(tracker.h_measurements)
-		SpeedSchedule.update_values(tracker.speed_measurements)
-		CircleSchedule.update_values(tracker.circle_measurements)
 		match tracker.obj_state:
 			Settings.ObjectsStates.NORMAL: State.set_text("функционирует".to_upper())
 			Settings.ObjectsStates.DESTROYED: State.set_text("не функционирует".to_upper())

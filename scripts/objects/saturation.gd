@@ -18,7 +18,7 @@ func _draw() -> void:
 	for i in Settings.saturation.keys():
 		var radius = (i + Settings.SystemPlanet_radius) * Settings.Unit_distance * video_scale * 1.85
 		if radius - last_value > 4. / video_scale:
-			draw_circle(center, radius, Color.from_rgba8((Settings.saturation[i] * 255.) / max_value, 255, 255, 100), false)
+			draw_circle(center, radius, Color.from_rgba8(255 - (Settings.saturation[i] * 255.) / max_value, 255, 255, 100), false)
 			last_value = radius
 
 

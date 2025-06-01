@@ -181,28 +181,4 @@ vertical_alignment = 2
 [node name="HSchedule" parent="Measurements/VBoxContainer" instance=ExtResource("3_84ruo")]
 layout_mode = 2
 
-[node name="Speed" type="Label" parent="Measurements/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 16
-text = "ИЗМЕНЕНИЕ СКОРОСТИ"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="SpeedSchedule" parent="Measurements/VBoxContainer" instance=ExtResource("3_84ruo")]
-layout_mode = 2
-
-[node name="Circle" type="Label" parent="Measurements/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 16
-text = "ИЗМЕНЕНИЕ КОЛИЧЕСТВА ОБОРОТОВ"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="CircleSchedule" parent="Measurements/VBoxContainer" instance=ExtResource("3_84ruo")]
-layout_mode = 2
-
 [connection signal="button_down" from="Label/Button" to="." method="_on_close_button_down"]

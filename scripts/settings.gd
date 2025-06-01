@@ -43,6 +43,7 @@ var Video_scale: int = 150
 var Video_image_idx: int = 0
 var Video_show_saturation: bool = true
 var Video_stop_system: bool = false
+var Video_stop_after_fall: bool = true
 
 var VideoCamera_x: int = 270
 var VideoCamera_y: int = 0
@@ -112,6 +113,7 @@ func create_config_file():
 		"Video_image_idx" = 0,
 		"Video_show_saturation" = true,
 		"Video_stop_system" = false,
+		"Video_stop_after_fall" = true,
 		"VideoCamera_x" = 270,
 		"VideoCamera_y" = 0,
 		"VideoImage_brightness" = 1.,

@@ -5,6 +5,7 @@ extends VBoxContainer
 @onready var VideoScale = $Video/VBoxContainer/Scale
 @onready var VideoImage = $Video/VBoxContainer/Image
 @onready var VideoSaturation = $Video/Saturation
+@onready var VideoStopAfterFall = $Video/StopAfterFall
 
 @onready var CameraX = $Camera/VBoxContainer/X
 @onready var CameraY = $Camera/VBoxContainer/Y
@@ -31,6 +32,7 @@ func _ready() -> void:
 	_on_video_image_item_selected(Settings.Video_image_idx)
 	
 	VideoSaturation.button_pressed = Settings.Video_show_saturation
+	VideoStopAfterFall.button_pressed = Settings.Video_stop_after_fall
 	
 	CameraX.value = Settings.VideoCamera_x
 	CameraY.value = Settings.VideoCamera_y
@@ -85,6 +87,10 @@ func _on_video_image_item_selected(index: int) -> void:
 func _on_video_saturation_toggled(toggled_on: bool) -> void:
 	Settings.Video_show_saturation = toggled_on
 	Settings.emit_signal("changing_Video_show_saturation")
+
+# изменение остановки системы после паданения спутника на поверхность палнеты
+func _on_video_stop_after_fall_toggled(toggled_on: bool) -> void:
+	Settings.Video_stop_after_fall = toggled_on
 
 
 # изменение поворота камеры по X

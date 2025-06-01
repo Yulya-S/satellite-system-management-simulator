@@ -53,29 +53,18 @@ func _process(delta: float) -> void:
 		if angle > 2. * PI + start_angle:
 			circle_count += floor(angle / (2. * PI))
 			angle -= (2. * PI) * floor(angle / (2. * PI))
-	if previous_day != Settings.Day_counter:
-		if tracker:
-			if len(tracker.h_measurements) >= 366:
-				tracker.speed_measurements.pop_front()
-				tracker.h_measurements.pop_front()
-				tracker.circle_measurements.pop_front()
-			tracker.speed_measurements.append(get_real_speed())
-			tracker.h_measurements.append(get_real_h())
-			tracker.circle_measurements.append(circle_count)
-		circle_count = 0
-		previous_day = Settings.Day_counter
-	if get_real_h() < 0:
+	if get_real_h() < 0 or h < 0:
 		if tracker:
 			tracker.obj_state = Settings.ObjectsStates.FELL
-			if len(tracker.h_measurements) >= 366:
-				tracker.speed_measurements.pop_front()
-				tracker.h_measurements.pop_front()
-				tracker.circle_measurements.pop_front()
-			tracker.speed_measurements.append(0)
 			tracker.h_measurements.append(0)
-			tracker.circle_measurements.append(circle_count)
+		Settings.Video_stop_system = Settings.Video_stop_after_fall
 		self.queue_free()
 		get_parent().remove_child(self)
+		return
+	if previous_day != Settings.Day_counter:
+		if tracker: tracker.h_measurements.append(get_real_h())
+		circle_count = 0
+		previous_day = Settings.Day_counter
 
 
 # Изменение расположения объекта на окружности
@@ -98,7 +87,8 @@ func update_h(delta: float):
 	var delta_R = 4. * PI * p * (get_real_speed() ** 2.) * cross_sectional_area * (get_real_h() * 1000.)
 	delta_R /= (Settings.SystemPlanet_gravitation * weight)
 	delta_R *= Settings.Unit_distance
-	h -= (delta_R * delta) / 360.
+	h -= ((delta_R * delta / 360.) * Settings.SystemPlanet_turnover_period / Settings.Video_speed)
+	
 
 
 # поворот объекта к планете	

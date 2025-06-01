@@ -21,26 +21,14 @@ func _process(_delta: float) -> void:
 	if not model_name: get_child(0).get_child(0).scene_file_path.split("/")[-1].split(".")[0]
 	if get_child(0).get_child_count() > 0:
 		if previous_day != Settings.Day_counter:
-			if tracker:
-				if len(tracker.h_measurements) >= 366:
-					tracker.speed_measurements.pop_front()
-					tracker.h_measurements.pop_front()
-					tracker.circle_measurements.pop_front()
-				tracker.speed_measurements.append(get_real_speed())
-				tracker.h_measurements.append(get_real_h())
-				tracker.circle_measurements.append(circle_count)
+			if tracker: tracker.h_measurements.append(get_real_h())
 			previous_day = Settings.Day_counter
 			circle_count = get_child(0).get_child(0).circle_count
 	if get_child(0).get_child_count() < 0:
 		if tracker:
 			tracker.obj_state = Settings.ObjectsStates.DESTROYED
-			if len(tracker.h_measurements) >= 366:
-				tracker.speed_measurements.pop_front()
-				tracker.h_measurements.pop_front()
-				tracker.circle_measurements.pop_front()
-			tracker.speed_measurements.append(0)
 			tracker.h_measurements.append(0)
-			tracker.circle_measurements.append(circle_count)
+		Settings.Video_stop_system = Settings.Video_stop_after_fall
 		self.queue_free()
 		get_parent().remove_child(self)
 
