@@ -87,7 +87,7 @@ func update_h(delta: float):
 	var delta_R = 4. * PI * p * (get_real_speed() ** 2.) * cross_sectional_area * (get_real_h() * 1000.)
 	delta_R /= (Settings.SystemPlanet_gravitation * weight)
 	delta_R *= Settings.Unit_distance
-	h -= ((delta_R * delta / 360.) * Settings.SystemPlanet_turnover_period / Settings.Video_speed)
+	h -= ((delta_R / 1000 * delta / 360.) * Settings.SystemPlanet_turnover_period / Settings.Video_speed)
 	
 
 

@@ -8,6 +8,7 @@ script = ExtResource("1_co3km")
 object_name = "OneWeb"
 color_marker = Color(0.721569, 0.52549, 0.0431373, 1)
 weight = 150.0
+cross_sectional_area = 7.0
 
 [node name="oneWeb" parent="." instance=ExtResource("2_co3km")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
